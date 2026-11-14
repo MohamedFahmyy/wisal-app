@@ -27,7 +27,8 @@ function LayoutWrapper() {
   const isInvitationRoute =
     location.pathname.startsWith('/invite/') ||
     location.pathname === '/mazen-farida' ||
-    location.pathname === '/mohamed-salma';
+    location.pathname === '/mohamed-salma' ||
+    location.pathname === '/mohamed-salma-v2';
 
   return (
     <div className="app-layout-container">
@@ -41,7 +42,9 @@ function LayoutWrapper() {
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/mazen-farida" element={<MazenFaridaPage />} />
         <Route path="/mohamed-salma" element={<MohamedSalmaPage />} />
+        <Route path="/mohamed-salma-v2" element={<MohamedSalmaPage version={2} />} />
         <Route path="/invite/mohamed-salma" element={<MohamedSalmaPage />} />
+        <Route path="/invite/mohamed-salma-v2" element={<MohamedSalmaPage version={2} />} />
         <Route path="/invite/:slug" element={<InvitationPage />} />
         <Route path="/guests" element={<GuestDashboardPage />} />
         <Route path="/admin" element={<GuestDashboardPage />} />

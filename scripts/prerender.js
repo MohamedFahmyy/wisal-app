@@ -188,9 +188,13 @@ function injectMetadata(html, {
   return modified;
 }
 
-// 1. Generate static HTML files for all 13 invitations
+// 1. Generate static HTML files for all 14 invitations
 for (const inv of invitations) {
-  const isMohamedSalma = inv.slug === 'mohamed-salma' || inv.id === 'inv_mohamed_salma';
+  const isMohamedSalma =
+    inv.slug === 'mohamed-salma' ||
+    inv.id === 'inv_mohamed_salma' ||
+    inv.slug === 'mohamed-salma-v2' ||
+    inv.id === 'inv_mohamed_salma_v2';
   let title;
   let description;
   let image;
@@ -280,6 +284,16 @@ const staticPages = [
     imageHeight: 576,
     imageAlt: 'حفل خطوبه محمد وسلمى.',
     url: 'https://wisal.app/mohamed-salma'
+  },
+  {
+    path: 'mohamed-salma-v2',
+    title: 'حفل خطوبه محمد وسلمى.',
+    description: 'يسعدنا مشاركتكم فرحتنا.',
+    image: '/images/og/mohamed-salma-engagement.png',
+    imageWidth: 1024,
+    imageHeight: 576,
+    imageAlt: 'حفل خطوبه محمد وسلمى.',
+    url: 'https://wisal.app/mohamed-salma-v2'
   },
   {
     path: 'guests',

@@ -177,6 +177,103 @@ export const invitations = [
       sealLetter: 'م & س'
     }
   },
+  {
+    id: 'inv_mohamed_salma_v2',
+    slug: 'mohamed-salma-v2',
+    template: 'mohamed-salma',
+    category: 'engagement',
+    categoryLabel: 'خطوبة',
+    categoryLabelEn: 'Engagement',
+    language: 'ar',
+    tag: 'تجربة الخطوبة التفاعلية (الوردي)',
+    tagEn: 'Interactive Engagement Experience (Blush Pink)',
+    titleAr: 'حفل خطوبه محمد وسلمى. (V2)',
+    titleEn: 'Mohamed & Salma Engagement Invitation (Pink V2) | Wisal',
+    description: 'يسعدنا مشاركتكم فرحتنا.',
+    descriptionEn: 'Join us in celebrating the engagement of Mohamed & Salma on Monday, November 30, 2026.',
+    
+    people: {
+      firstPerson: 'محمد',
+      secondPerson: 'سلمى',
+      firstPersonEn: 'Mohamed',
+      secondPersonEn: 'Salma',
+      relation: '&'
+    },
+
+    event: {
+      title: 'حفل خطوبة',
+      titleEn: 'Engagement Celebration',
+      subtitle: 'فرحتنا تكتمل بوجودكم معنا في يوم خطوبتنا',
+      subtitleEn: 'Our joy is made whole with your presence on our engagement day',
+      date: '2026-11-30',
+      time: '19:00',
+      dateFormatted: 'الإثنين، 30 نوفمبر 2026',
+      dateFormattedEn: 'Monday, November 30, 2026',
+      timeFormatted: '7:00 مساءً',
+      timeFormattedEn: '7:00 PM',
+      timezone: 'Africa/Cairo',
+      schedule: [
+        { time: '06:30 PM', timeEn: '06:30 PM', title: 'وصول الضيوف والأهل الكرام', titleEn: 'Guest Arrival' },
+        { time: '07:30 PM', timeEn: '07:30 PM', title: 'تلبيس الدبل وتبادل الخواتم', titleEn: 'Rings Ceremony' },
+        { time: '08:00 PM', timeEn: '08:00 PM', title: 'جلسة التصوير والذكريات', titleEn: 'Photoshoot & Memories' },
+        { time: '08:45 PM', timeEn: '08:45 PM', title: 'تقطيع تورتة الخطوبة والبوفيه', titleEn: 'Cake & Buffet' },
+        { time: '09:15 PM', timeEn: '09:15 PM', title: 'الحفلة والاحتفال بالخطيبين', titleEn: 'Party & Celebration' }
+      ]
+    },
+
+    venue: {
+      name: 'Joya',
+      nameAr: 'Joya',
+      address: 'Joya',
+      addressEn: 'Joya',
+      city: 'القاهرة، مصر',
+      mapUrl: 'https://maps.app.goo.gl/V8zopCkLW2ua231J9',
+      coordinates: '30.094501, 31.3441249'
+    },
+
+    media: {
+      coverImage: '/images/og/mohamed-salma-engagement.png',
+      ogImage: '/images/og/mohamed-salma-engagement.png',
+      ogImageWidth: 1024,
+      ogImageHeight: 576,
+      ogImageAlt: 'حفل خطوبه محمد وسلمى.',
+      gallery: [
+        '/images/og/mohamed-salma-engagement.png',
+        '/farha/B20D1599-6455-4B98-8EE9-8A5FB2ADE06F-crop.webp'
+      ],
+      music: 'https://www.youtube.com/watch?v=zs0sH8yIEEE&list=RDzs0sH8yIEEE&start_radio=1'
+    },
+
+    music: {
+      title: 'زينة شباب العيلة',
+      artist: 'دنيا سمير غانم',
+      youtubeUrl: 'https://www.youtube.com/watch?v=zs0sH8yIEEE&list=RDzs0sH8yIEEE&start_radio=1',
+      youtubeId: 'zs0sH8yIEEE'
+    },
+
+    closing: {
+      dua: 'وجودكم معنا ودعواتكم الصادقة هما سر سعادتنا.. ننتظركم بكل حب لنصنع معًا أجمل الذكريات.',
+      duaEn: 'Your presence and sincere prayers are the secret to our happiness.',
+      signoff: 'ننتظركم بكل حب 🤍',
+      signoffEn: 'Waiting for you with love'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#c96582',
+      secondaryAccent: '#db6d89',
+      bgMuted: '#fff0f3',
+      sealLetter: 'م & س'
+    }
+  },
 
   {
     id: 'inv_karim_hagar',

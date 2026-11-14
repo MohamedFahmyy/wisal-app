@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
 import '../styles/mazen-farida.css';
@@ -9,12 +9,13 @@ function toArabicDigits(num) {
   return String(num).padStart(2, '0').replace(/[0-9]/g, (w) => arabicDigits[+w]);
 }
 
-// Scratch-To-Reveal Card Component with DPR Retina Support & Sparkle Reveal
-function ScratchCard({ value, label, isMonth = false }) {
+// 1. Optimized Scratch-To-Reveal Card Component with Throttle & Rose Gold support
+const ScratchCard = memo(function ScratchCard({ value, label, isMonth = false, isPink = false }) {
   const canvasRef = useRef(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const isDrawing = useRef(false);
   const lastPoint = useRef({ x: 0, y: 0 });
+  const lastSampleTime = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,12 +30,19 @@ function ScratchCard({ value, label, isMonth = false }) {
     canvas.height = Math.round(rect.height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Render metallic gold gradient cover
+    // Render metallic gradient cover (Gold vs Rose Gold Pink)
     const grad = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    grad.addColorStop(0, '#fff9e8');
-    grad.addColorStop(0.3, '#f9eac8');
-    grad.addColorStop(0.65, '#efd29b');
-    grad.addColorStop(1, '#d4a765');
+    if (isPink) {
+      grad.addColorStop(0, '#fff0f4');
+      grad.addColorStop(0.3, '#fcd5df');
+      grad.addColorStop(0.65, '#f4a6bb');
+      grad.addColorStop(1, '#db6d89');
+    } else {
+      grad.addColorStop(0, '#fff9e8');
+      grad.addColorStop(0.3, '#f9eac8');
+      grad.addColorStop(0.65, '#efd29b');
+      grad.addColorStop(1, '#d4a765');
+    }
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, rect.width, rect.height);
 
@@ -50,7 +58,7 @@ function ScratchCard({ value, label, isMonth = false }) {
       ctx.stroke();
     }
     ctx.restore();
-  }, [isRevealed]);
+  }, [isRevealed, isPink]);
 
   const handlePointerDown = (e) => {
     if (isRevealed) return;
@@ -90,24 +98,28 @@ function ScratchCard({ value, label, isMonth = false }) {
 
     lastPoint.current = currentPoint;
 
-    // Check how much is scratched
-    try {
-      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imgData.data;
-      let clearPixels = 0;
-      const sampleStep = 32;
-      let sampled = 0;
+    // Optimization: Throttle pixel sampling to once every 120ms to prevent main thread blocking
+    const now = Date.now();
+    if (now - lastSampleTime.current > 120) {
+      lastSampleTime.current = now;
+      try {
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+        let clearPixels = 0;
+        const sampleStep = 32;
+        let sampled = 0;
 
-      for (let i = 3; i < data.length; i += 4 * sampleStep) {
-        sampled++;
-        if (data[i] === 0) clearPixels++;
-      }
+        for (let i = 3; i < data.length; i += 4 * sampleStep) {
+          sampled++;
+          if (data[i] === 0) clearPixels++;
+        }
 
-      if (clearPixels / sampled > 0.35) {
-        setIsRevealed(true);
+        if (clearPixels / sampled > 0.35) {
+          setIsRevealed(true);
+        }
+      } catch {
+        // Ignored if canvas read error
       }
-    } catch {
-      // Ignored if canvas read error
     }
   };
 
@@ -135,10 +147,10 @@ function ScratchCard({ value, label, isMonth = false }) {
       <span className="mf-scratch-label">{label}</span>
     </div>
   );
-}
+});
 
-// Arabic Ornamental Divider
-function ArabicDivider() {
+// 2. Arabic Ornamental Divider
+const ArabicDivider = memo(function ArabicDivider() {
   return (
     <div className="mf-divider" aria-hidden="true">
       <span className="mf-divider-line" />
@@ -151,12 +163,78 @@ function ArabicDivider() {
       <span className="mf-divider-line right" />
     </div>
   );
-}
+});
 
-export default function MohamedSalmaPage() {
+// 3. Isolated Live Countdown (Prevents re-rendering the whole page every 1 second)
+const LiveCountdown = memo(function LiveCountdown({ targetDateStr }) {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const diff = new Date(targetDateStr).getTime() - Date.now();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
+    };
+  });
+
+  useEffect(() => {
+    const targetDate = new Date(targetDateStr).getTime();
+    const updateTimer = () => {
+      const diff = targetDate - Date.now();
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, [targetDateStr]);
+
+  return (
+    <div className="mf-countdown-grid">
+      <div className="mf-countdown-box">
+        <span className="mf-countdown-num">{toArabicDigits(timeLeft.days)}</span>
+        <span className="mf-countdown-unit">يوم</span>
+      </div>
+      <div className="mf-countdown-box">
+        <span className="mf-countdown-num">{toArabicDigits(timeLeft.hours)}</span>
+        <span className="mf-countdown-unit">ساعة</span>
+      </div>
+      <div className="mf-countdown-box">
+        <span className="mf-countdown-num">{toArabicDigits(timeLeft.minutes)}</span>
+        <span className="mf-countdown-unit">دقيقة</span>
+      </div>
+      <div className="mf-countdown-box">
+        <span className="mf-countdown-num">{toArabicDigits(timeLeft.seconds)}</span>
+        <span className="mf-countdown-unit">ثانية</span>
+      </div>
+    </div>
+  );
+});
+
+export default function MohamedSalmaPage({ version: propVersion }) {
   const [searchParams] = useSearchParams();
   const guestName = searchParams.get('to');
   const wishDirect = searchParams.get('wish') === '1';
+  const vParam = searchParams.get('v');
+  const themeParam = searchParams.get('theme');
+
+  // Determine active version: 2 (Pink) if propVersion === 2 or ?v=2 or ?theme=pink; otherwise 1 (Gold)
+  const [version, setVersion] = useState(() => {
+    if (propVersion === 2 || vParam === '2' || themeParam === 'pink') return 2;
+    return 1;
+  });
+
+  const isPink = version === 2;
 
   // Intro & Audio State
   const [isIntroOpen, setIsIntroOpen] = useState(false);
@@ -165,14 +243,11 @@ export default function MohamedSalmaPage() {
   const [showMusicBadge, setShowMusicBadge] = useState(false);
   const [copiedLinkToast, setCopiedLinkToast] = useState(false);
 
-  // Audio Refs — Loaded directly from downloaded requested track
+  // Audio & Animation Refs
   const audioRef = useRef(null);
   const introVideoRef = useRef(null);
   const timelineTrackRef = useRef(null);
   const flowerRunnerRef = useRef(null);
-
-  // Countdown State for Engagement Date: 30 Nov 2026 19:00 Cairo Time (UTC+2)
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   // RSVP Form State
   const [attendance, setAttendance] = useState('attending');
@@ -190,7 +265,8 @@ export default function MohamedSalmaPage() {
 
   // Set Page Title & Social Meta Tags
   useEffect(() => {
-    document.title = 'حفل خطوبه محمد وسلمى. | وِصال';
+    const title = isPink ? 'حفل خطوبه محمد وسلمى. (V2) | وِصال' : 'حفل خطوبه محمد وسلمى. | وِصال';
+    document.title = title;
     const updateMeta = (selector, attr, value) => {
       let el = document.querySelector(selector);
       if (el) el.setAttribute(attr, value);
@@ -204,13 +280,13 @@ export default function MohamedSalmaPage() {
     updateMeta('meta[name="twitter:title"]', 'content', 'حفل خطوبه محمد وسلمى.');
     updateMeta('meta[name="twitter:description"]', 'content', 'يسعدنا مشاركتكم فرحتنا.');
     updateMeta('meta[name="twitter:image"]', 'content', 'https://wisal.app/images/og/mohamed-salma-engagement.png');
-  }, []);
+  }, [isPink]);
 
   // Initialize Audio Element directly with the requested song: "زينة شباب العيلة" (starts at second 21)
   useEffect(() => {
     const audio = new Audio('/audio/zeina.webm');
     audio.loop = true;
-    audio.preload = 'auto';
+    audio.preload = 'metadata';
 
     const setStartOffset = () => {
       try {
@@ -240,63 +316,52 @@ export default function MohamedSalmaPage() {
     };
   }, []);
 
-  // Countdown timer logic targeting Monday, 30 November 2026 at 19:00 Cairo Time (UTC+2)
-  useEffect(() => {
-    const targetDate = new Date('2026-11-30T19:00:00+02:00').getTime();
-
-    const updateTimer = () => {
-      const now = Date.now();
-      const diff = targetDate - now;
-
-      if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      setTimeLeft({ days, hours, minutes, seconds });
-    };
-
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Scroll Bound Flower / Ring Runner Calculation
+  // Performance Optimization: IntersectionObserver for Timeline Flower Runner
   useEffect(() => {
     if (!isIntroOpen) return;
+    const timeline = timelineTrackRef.current;
+    const runner = flowerRunnerRef.current;
+    if (!timeline || !runner) return;
 
+    let isIntersecting = false;
     let rafId = 0;
+
+    const updateRunner = () => {
+      if (!isIntersecting) return;
+      const rect = timeline.getBoundingClientRect();
+      const vh = window.innerHeight || 700;
+      const startGuide = vh * 0.68;
+      const endGuide = vh * 0.32;
+      const travelWindow = rect.height + startGuide - endGuide;
+
+      let progress = (startGuide - rect.top) / travelWindow;
+      progress = Math.max(0, Math.min(1, progress));
+      const y = progress * (rect.height - 20);
+
+      runner.style.transform = `translate3d(0, ${y}px, 0)`;
+    };
+
     const handleScroll = () => {
-      if (rafId) return;
+      if (!isIntersecting || rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
-        const timeline = timelineTrackRef.current;
-        const runner = flowerRunnerRef.current;
-        if (!timeline || !runner) return;
-
-        const rect = timeline.getBoundingClientRect();
-        const vh = window.innerHeight || 700;
-        const startGuide = vh * 0.68;
-        const endGuide = vh * 0.32;
-        const travelWindow = rect.height + startGuide - endGuide;
-
-        let progress = (startGuide - rect.top) / travelWindow;
-        progress = Math.max(0, Math.min(1, progress));
-        const y = progress * (rect.height - 20);
-
-        runner.style.transform = `translate3d(0, ${y}px, 0)`;
+        updateRunner();
       });
     };
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting) updateRunner();
+      },
+      { rootMargin: '100px 0px' }
+    );
+
+    observer.observe(timeline);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
@@ -372,7 +437,7 @@ export default function MohamedSalmaPage() {
     }
   };
 
-  // Auto-Scroll Feature
+  // Optimized Auto-Scroll Feature with Page Visibility API check
   useEffect(() => {
     if (!isAutoScrolling) return;
 
@@ -388,9 +453,16 @@ export default function MohamedSalmaPage() {
       setIsAutoScrolling(false);
     };
 
+    const handleVisibility = () => {
+      if (document.hidden) {
+        setIsAutoScrolling(false);
+      }
+    };
+
     window.addEventListener('wheel', userCancel, { passive: true });
     window.addEventListener('touchstart', userCancel, { passive: true });
     window.addEventListener('keydown', userCancel, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibility);
 
     const scrollFrame = (now) => {
       if (!lastTime) lastTime = now;
@@ -420,10 +492,11 @@ export default function MohamedSalmaPage() {
       window.removeEventListener('wheel', userCancel);
       window.removeEventListener('touchstart', userCancel);
       window.removeEventListener('keydown', userCancel);
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, [isAutoScrolling]);
 
-  // RSVP Submission Handler with Gold Sparkle Particle Burst
+  // RSVP Submission Handler with Particle Burst
   const handleRSVPSubmit = (e) => {
     e.preventDefault();
     if (!rsvpName.trim()) return;
@@ -435,10 +508,10 @@ export default function MohamedSalmaPage() {
         guests: attendance === 'attending' ? guestCount : 0,
         message: rsvpMsg.trim(),
         invitationId: 'inv_mohamed_salma',
-        slug: 'mohamed-salma'
+        slug: isPink ? 'mohamed-salma-v2' : 'mohamed-salma'
       });
 
-      // Trigger golden particles burst around seal
+      // Trigger sparkle particles burst around seal
       const bursts = [];
       for (let i = 0; i < 18; i++) {
         const angle = (i / 18) * Math.PI * 2;
@@ -467,7 +540,25 @@ export default function MohamedSalmaPage() {
   };
 
   return (
-    <div className="mf-page-container">
+    <div className={`mf-page-container ${isPink ? 'mf-theme-pink' : ''}`}>
+      {/* Version Switcher Pill (Gold V1 / Pink V2) */}
+      <div className="mf-version-switcher" role="navigation" aria-label="تبديل إصدار التصميم">
+        <button
+          type="button"
+          className={`mf-version-btn ${!isPink ? 'is-active' : ''}`}
+          onClick={() => setVersion(1)}
+        >
+          ✨ الذهبي (V1)
+        </button>
+        <button
+          type="button"
+          className={`mf-version-btn ${isPink ? 'is-active' : ''}`}
+          onClick={() => setVersion(2)}
+        >
+          🌸 الوردي (V2)
+        </button>
+      </div>
+
       {/* 1. Fullscreen Opening Screen with Video & Hidden Click Trigger over "بسم الله" */}
       <div
         className={`mf-intro-overlay ${isIntroOpen ? 'is-opened' : ''}`}
@@ -480,7 +571,7 @@ export default function MohamedSalmaPage() {
           poster="/farha/mf-intro-poster.jpg"
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
         />
         <button
           type="button"
@@ -505,14 +596,15 @@ export default function MohamedSalmaPage() {
             loop
             muted
             playsInline
+            preload="metadata"
           />
           <div className="mf-hero-typography">
             <div style={{
               display: 'inline-block',
-              background: 'rgba(255, 248, 235, 0.88)',
+              background: isPink ? 'rgba(255, 240, 245, 0.92)' : 'rgba(255, 248, 235, 0.88)',
               padding: '6px 20px',
               borderRadius: '50px',
-              color: '#8a6229',
+              color: isPink ? '#a84562' : '#8a6229',
               fontSize: '15px',
               fontWeight: '600',
               marginBottom: '10px',
@@ -542,9 +634,9 @@ export default function MohamedSalmaPage() {
           </p>
 
           <div className="mf-scratch-grid">
-            <ScratchCard value="30" label="اليوم" />
-            <ScratchCard value="نوفمبر" label="الشهر" isMonth={true} />
-            <ScratchCard value="2026" label="السنة" />
+            <ScratchCard value="30" label="اليوم" isPink={isPink} />
+            <ScratchCard value="نوفمبر" label="الشهر" isMonth={true} isPink={isPink} />
+            <ScratchCard value="2026" label="السنة" isPink={isPink} />
           </div>
         </section>
 
@@ -554,7 +646,7 @@ export default function MohamedSalmaPage() {
         <section className="mf-timeline-section">
           <div className="mf-timeline-header">
             <h2 className="mf-timeline-title">الجدول الزمني للخطوبة</h2>
-            <p style={{ color: '#8d7b68', fontSize: '15px', marginTop: '6px' }}>
+            <p style={{ color: isPink ? '#945367' : '#8d7b68', fontSize: '15px', marginTop: '6px' }}>
               محطات يومنا الجميل خطوة بخطوة
             </p>
           </div>
@@ -591,6 +683,7 @@ export default function MohamedSalmaPage() {
                   src="/farha/WhatsApp_Image_2026-09-08_at_4.01.35_AM-removebg-preview.webp"
                   alt="وصول الضيوف"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -602,6 +695,7 @@ export default function MohamedSalmaPage() {
                   src="/farha/WhatsApp_Image_2026-09-08_at_4.52.06_PM-removebg-preview.webp"
                   alt="تلبيس الدبل"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div />
@@ -623,6 +717,7 @@ export default function MohamedSalmaPage() {
                   src="/farha/WhatsApp_Image_2026-09-08_at_4.55.24_PM-removebg-preview.webp"
                   alt="التصوير والذكريات"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -634,6 +729,7 @@ export default function MohamedSalmaPage() {
                   src="/farha/WhatsApp_Image_2026-09-08_at_5.00.17_PM-removebg-preview.webp"
                   alt="تقطيع التورتة والبوفيه"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div />
@@ -655,6 +751,7 @@ export default function MohamedSalmaPage() {
                   src="/farha/WhatsApp_Image_2026-09-08_at_5.03.51_PM-removebg-preview.webp"
                   alt="الحفلة والاحتفال"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -663,29 +760,11 @@ export default function MohamedSalmaPage() {
 
         <ArabicDivider />
 
-        {/* 5. Live Countdown Timer targeting 30 Nov 2026 */}
+        {/* 5. Isolated Live Countdown targeting 30 Nov 2026 (No full page re-renders) */}
         <section className="mf-countdown-section">
           <h2 className="mf-countdown-title">العد التنازلي</h2>
           <p className="mf-countdown-sub">حتى نلتقي ونفرح معًا في يوم خطوبتنا 💍</p>
-
-          <div className="mf-countdown-grid">
-            <div className="mf-countdown-box">
-              <span className="mf-countdown-num">{toArabicDigits(timeLeft.days)}</span>
-              <span className="mf-countdown-unit">يوم</span>
-            </div>
-            <div className="mf-countdown-box">
-              <span className="mf-countdown-num">{toArabicDigits(timeLeft.hours)}</span>
-              <span className="mf-countdown-unit">ساعة</span>
-            </div>
-            <div className="mf-countdown-box">
-              <span className="mf-countdown-num">{toArabicDigits(timeLeft.minutes)}</span>
-              <span className="mf-countdown-unit">دقيقة</span>
-            </div>
-            <div className="mf-countdown-box">
-              <span className="mf-countdown-num">{toArabicDigits(timeLeft.seconds)}</span>
-              <span className="mf-countdown-unit">ثانية</span>
-            </div>
-          </div>
+          <LiveCountdown targetDateStr="2026-11-30T19:00:00+02:00" />
         </section>
 
         <ArabicDivider />
@@ -694,9 +773,7 @@ export default function MohamedSalmaPage() {
         <section className="mf-venue-section">
           <h2 className="mf-venue-title">مكان الاحتفال</h2>
           <h3 className="mf-venue-hall">قاعة Joya</h3>
-          <p className="mf-venue-address">
-            Joya
-          </p>
+          <p className="mf-venue-address">Joya</p>
 
           <div className="mf-venue-map-card">
             <iframe
@@ -725,15 +802,15 @@ export default function MohamedSalmaPage() {
           <div className="mf-rsvp-card">
             <div className="mf-rsvp-arch-crest" aria-hidden="true">
               <svg width="120" height="38" viewBox="0 0 120 40" fill="none">
-                <path d="M60 6l5 9-5 9-5-9z" fill="#b58a4a" />
+                <path d="M60 6l5 9-5 9-5-9z" fill={isPink ? '#d86a8a' : '#b58a4a'} />
                 <path
                   d="M60 15c-14-10-30-10-44-2 12 1 22 4 30 10M60 15c14-10 30-10 44-2-12 1-22 4-30 10"
-                  stroke="#b58a4a"
+                  stroke={isPink ? '#d86a8a' : '#b58a4a'}
                   strokeWidth="1.2"
                   strokeLinecap="round"
                 />
-                <circle cx="12" cy="13" r="1.8" fill="#b58a4a" />
-                <circle cx="108" cy="13" r="1.8" fill="#b58a4a" />
+                <circle cx="12" cy="13" r="1.8" fill={isPink ? '#d86a8a' : '#b58a4a'} />
+                <circle cx="108" cy="13" r="1.8" fill={isPink ? '#d86a8a' : '#b58a4a'} />
               </svg>
             </div>
 
@@ -742,11 +819,11 @@ export default function MohamedSalmaPage() {
 
             {rsvpSubmitted ? (
               <div className="mf-rsvp-success" style={{
-                background: 'rgba(238, 248, 238, 0.95)',
-                border: '1px solid #b8dfb8',
+                background: isPink ? 'rgba(253, 238, 242, 0.95)' : 'rgba(238, 248, 238, 0.95)',
+                border: isPink ? '1px solid #f4c2d0' : '1px solid #b8dfb8',
                 borderRadius: '16px',
                 padding: '24px',
-                color: '#285828',
+                color: isPink ? '#7a283e' : '#285828',
                 fontSize: '18px',
                 lineHeight: '1.8'
               }}>
@@ -834,17 +911,27 @@ export default function MohamedSalmaPage() {
                   <button type="submit" className="mf-seal-btn" title="اضغط لتأكيد الرد بالختم الملكي">
                     <svg className="mf-seal-svg" viewBox="0 0 100 100">
                       <defs>
-                        <radialGradient id="mfG_ms" cx="38%" cy="32%" r="75%">
-                          <stop offset="0" stopColor="#f1d9a0" />
-                          <stop offset="0.45" stopColor="#c79a52" />
-                          <stop offset="1" stopColor="#8a6128" />
+                        <radialGradient id={isPink ? 'mfG_ms_pink' : 'mfG_ms_gold'} cx="38%" cy="32%" r="75%">
+                          {isPink ? (
+                            <>
+                              <stop offset="0" stopColor="#fedae3" />
+                              <stop offset="0.45" stopColor="#d86a8a" />
+                              <stop offset="1" stopColor="#8f334d" />
+                            </>
+                          ) : (
+                            <>
+                              <stop offset="0" stopColor="#f1d9a0" />
+                              <stop offset="0.45" stopColor="#c79a52" />
+                              <stop offset="1" stopColor="#8a6128" />
+                            </>
+                          )}
                         </radialGradient>
                       </defs>
                       <path
                         d="M50 3c6 0 8 5 13 6s10-2 14 2 1 9 4 13 9 5 10 11-4 8-4 15 5 9 4 15-7 6-10 11-1 10-5 13-9 1-13 3-7 8-13 8-8-5-13-6-10 2-14-2-1-9-4-13-9-5-10-11 4-8 4-15-5-9-4-15 7-6 10-11 1-10 5-13 9-1 13-3 7-8 13-8z"
-                        fill="url(#mfG_ms)"
+                        fill={`url(#${isPink ? 'mfG_ms_pink' : 'mfG_ms_gold'})`}
                       />
-                      <circle cx="50" cy="50" r="31" fill="none" stroke="#fbe9bf" strokeOpacity="0.55" strokeWidth="1.3" />
+                      <circle cx="50" cy="50" r="31" fill="none" stroke={isPink ? '#ffe5ec' : '#fbe9bf'} strokeOpacity="0.55" strokeWidth="1.3" />
                     </svg>
                     <span className="mf-seal-text">تأكيد الرد</span>
                   </button>
@@ -857,7 +944,7 @@ export default function MohamedSalmaPage() {
                       style={{ '--x': `${b.x}px`, '--y': `${b.y}px` }}
                     />
                   ))}
-                  <small style={{ color: '#a08a6c', fontSize: '13px' }}>
+                  <small style={{ color: isPink ? '#ad5d73' : '#a08a6c', fontSize: '13px' }}>
                     اضغط على الختم لتأكيد ردك
                   </small>
                 </div>
@@ -942,10 +1029,10 @@ export default function MohamedSalmaPage() {
             bottom: 'calc(76px + env(safe-area-inset-bottom, 0px))',
             right: '18px',
             zIndex: 900,
-            background: 'rgba(44, 38, 32, 0.92)',
+            background: isPink ? 'rgba(54, 25, 36, 0.94)' : 'rgba(44, 38, 32, 0.92)',
             backdropFilter: 'blur(8px)',
             color: '#fff9ea',
-            border: '1px solid rgba(212, 175, 55, 0.5)',
+            border: isPink ? '1px solid rgba(216, 106, 138, 0.5)' : '1px solid rgba(212, 175, 55, 0.5)',
             padding: '8px 16px',
             borderRadius: '30px',
             fontSize: '13px',
