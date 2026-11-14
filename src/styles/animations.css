@@ -1,0 +1,91 @@
+/**
+ * Wisal Design System — Keyframe Animations
+ * Optimized for 60fps performance and respects prefers-reduced-motion
+ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+
+@keyframes shimmerGlow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes floatingPetal {
+  0% {
+    transform: translate(0, -10px) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(60px, 600px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confettiBurst {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-80px) scale(1.1) rotate(180deg);
+  }
+  100% {
+    transform: translateY(300px) scale(0.8) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes soundBarPulse {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+@keyframes twinkleStar {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

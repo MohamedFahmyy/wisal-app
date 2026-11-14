@@ -1,0 +1,39 @@
+import ClassicWaxTemplate from './ClassicWaxTemplate';
+import GardenGateTemplate from './GardenGateTemplate';
+import RoseArchTemplate from './RoseArchTemplate';
+import MidnightRoyalTemplate from './MidnightRoyalTemplate';
+import RingBoxTemplate from './RingBoxTemplate';
+import KatbKetabTemplate from './KatbKetabTemplate';
+import BirthdayGiftTemplate from './BirthdayGiftTemplate';
+import BlancTemplate from './BlancTemplate';
+import ProvenceTemplate from './ProvenceTemplate';
+import ElegantLetterTemplate from './ElegantLetterTemplate';
+import FloralDoorsTemplate from './FloralDoorsTemplate';
+import ModernPhotoTemplate from './ModernPhotoTemplate';
+import MazenFaridaTemplate from './MazenFaridaTemplate';
+import MohamedSalmaTemplate from './MohamedSalmaTemplate';
+
+export const templateRegistry = {
+  classic: ClassicWaxTemplate,
+  wax: ClassicWaxTemplate,
+  garden: GardenGateTemplate,
+  rose: RoseArchTemplate,
+  arch: RoseArchTemplate,
+  midnight: MidnightRoyalTemplate,
+  ring: RingBoxTemplate,
+  katbketab: KatbKetabTemplate,
+  birthday: BirthdayGiftTemplate,
+  party: BirthdayGiftTemplate,
+  blanc: BlancTemplate,
+  provence: ProvenceTemplate,
+  letter: ElegantLetterTemplate,
+  doors: FloralDoorsTemplate,
+  modern: ModernPhotoTemplate,
+  'mazen-farida': MazenFaridaTemplate,
+  'mohamed-salma': MohamedSalmaTemplate,
+  farha: MazenFaridaTemplate
+};
+
+export function getTemplateComponent(templateKey) {
+  return templateRegistry[templateKey] || ClassicWaxTemplate;
+}

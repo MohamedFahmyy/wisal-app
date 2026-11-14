@@ -1,0 +1,1362 @@
+/* ==========================================================================
+   Wisal x Ma3zoom — Mazen & Farida Luxury Interactive Experience Styles
+   ========================================================================== */
+
+.mf-page-container {
+  --bg: #fff1db;
+  --surface: #ffffff;
+  --text: #2c2620;
+  --muted: #7b6f62;
+  --accent: #b8914f;
+  --accent-soft: #e8d9be;
+  --gold: #b58a4a;
+  --gold-dark: #87602d;
+  --brown: #76532e;
+  --cream: #fff1db;
+  --card-cream: #f7ecd7;
+  --font-heading: 'Aref Ruqaa', 'Amiri', serif;
+  --font-body: 'Cairo', 'Tajawal', sans-serif;
+  --max-w: 720px;
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  direction: rtl;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   1. Opening Screen (Interactive Wax Seal Intro Video)
+   ========================================================================== */
+.mf-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.75s ease;
+}
+
+.mf-intro-overlay.is-opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.mf-intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mf-intro-trigger {
+  position: absolute;
+  top: 68%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.25s ease;
+}
+
+.mf-intro-trigger:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.mf-intro-wax-seal {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f6deb0, #c89c56 50%, #875c24 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(251, 233, 191, 0.7);
+  animation: mfSealPulse 2.8s ease-in-out infinite;
+}
+
+.mf-intro-wax-seal span {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff9ea;
+  text-shadow: 0 1px 2px rgba(60, 40, 10, 0.6);
+}
+
+.mf-intro-seal-invisible {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.mf-intro-label {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #3f2d0d;
+  background: rgba(255, 241, 219, 0.92);
+  backdrop-filter: blur(8px);
+  padding: 8px 24px;
+  border-radius: 100px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+@keyframes mfSealPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 12px 28px rgba(0,0,0,0.4); }
+  50% { transform: scale(1.06); box-shadow: 0 16px 36px rgba(184, 145, 79, 0.5); }
+}
+
+/* ==========================================================================
+   2. Main Stage & Hero Section
+   ========================================================================== */
+.mf-stage {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 0 80px;
+  position: relative;
+}
+
+.mf-hero-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 85vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.mf-hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mf-hero-typography {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 12%;
+  background: linear-gradient(to top, rgba(255, 241, 219, 0.95) 0%, rgba(255, 241, 219, 0.6) 28%, transparent 70%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.mf-hero-names {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: clamp(34px, 8.5cqw, 64px);
+  font-weight: 700;
+  color: #99670f;
+  margin: 0 0 6px;
+  line-height: 1.25;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+.mf-hero-names .mf-amp {
+  font-family: 'Gelasio', Georgia, serif;
+  font-size: 0.6em;
+  padding: 0 0.3em;
+  color: #7b5427;
+}
+
+.mf-hero-title {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: clamp(26px, 6.8cqw, 48px);
+  font-weight: 700;
+  color: #99670f;
+  margin: 0 0 8px;
+}
+
+.mf-hero-datetime {
+  font-family: 'Cairo', sans-serif;
+  font-size: clamp(15px, 3.8cqw, 24px);
+  font-weight: 600;
+  color: #7d5722;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   3. Arabic Ornamental Divider
+   ========================================================================== */
+.mf-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin: 28px auto;
+  pointer-events: none;
+}
+
+.mf-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(181, 138, 74, 0.7));
+}
+
+.mf-divider-line.right {
+  background: linear-gradient(90deg, rgba(181, 138, 74, 0.7), transparent);
+}
+
+.mf-divider-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.mf-divider-diamond-box {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.mf-divider-diamond-outer {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(181, 138, 74, 0.85);
+  transform: rotate(45deg);
+}
+
+.mf-divider-diamond-inner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   4. Scratch-To-Reveal Date Section
+   ========================================================================== */
+.mf-scratch-section {
+  padding: 24px 16px 12px;
+  text-align: center;
+}
+
+.mf-scratch-title {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #80663f;
+  margin: 0 0 4px;
+}
+
+.mf-scratch-subtitle {
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #9a7a45;
+  margin: 0 0 20px;
+}
+
+.mf-scratch-subtitle span {
+  color: var(--gold);
+  margin: 0 6px;
+}
+
+.mf-scratch-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.mf-scratch-card-col {
+  flex: 1;
+  max-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mf-scratch-card {
+  position: relative;
+  width: 100%;
+  height: 124px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #fffdf7 0%, #fbf1db 35%, #f2d8a7 70%, #d8ad6d 100%);
+  border: 1px solid rgba(188, 145, 78, 0.75);
+  box-shadow: inset 0 0 0 3px rgba(255, 250, 238, 0.75), 0 8px 22px rgba(132, 92, 36, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.mf-scratch-card.is-revealed {
+  animation: fadReveal 0.7s ease;
+  box-shadow: inset 0 0 0 3px rgba(255, 250, 238, 0.85), 0 10px 28px rgba(178, 133, 67, 0.25), 0 0 20px rgba(215, 177, 112, 0.3);
+}
+
+.mf-scratch-card.is-revealed::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -50%;
+  width: 36px;
+  height: 140%;
+  transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  animation: fadShine 0.85s ease forwards;
+  pointer-events: none;
+}
+
+.mf-scratch-value {
+  position: relative;
+  z-index: 1;
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #7b5427;
+  user-select: none;
+}
+
+.mf-scratch-value.is-month {
+  font-size: 24px;
+}
+
+.mf-scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  border-radius: 17px;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  transition: opacity 0.35s ease;
+}
+
+.mf-scratch-label {
+  margin-top: 8px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #9a6d32;
+}
+
+@keyframes fadReveal {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadShine {
+  from { left: -50%; }
+  to { left: 130%; }
+}
+
+/* ==========================================================================
+   5. Interactive Scrolling Wedding Timeline with Rotating Flower Runner
+   ========================================================================== */
+.mf-timeline-section {
+  position: relative;
+  padding: 30px 14px 40px;
+}
+
+.mf-timeline-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.mf-timeline-title {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #765a37;
+  margin: 0;
+}
+
+.mf-timeline-track-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 720px;
+}
+
+.mf-timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  margin-left: -0.75px;
+  background: linear-gradient(to bottom, rgba(181, 138, 74, 0.4), rgba(181, 138, 74, 0.95) 8%, rgba(181, 138, 74, 0.95) 92%, rgba(181, 138, 74, 0.4));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mf-timeline-diamond-cap {
+  position: absolute;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  background: #f7ecd7;
+  border: 1.2px solid var(--gold);
+  transform: rotate(45deg);
+  z-index: 3;
+}
+
+.mf-timeline-diamond-cap.top { top: -5px; }
+.mf-timeline-diamond-cap.bottom { bottom: -5px; }
+
+/* The Animated Flower Runner */
+.mf-flower-runner {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  margin-left: -22px;
+  margin-top: -22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+}
+
+.mf-flower-graphic {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  animation: mfFlowerRotate 12s linear infinite;
+}
+
+.mf-flower-petal {
+  position: absolute;
+  left: 15px;
+  top: 1px;
+  width: 10px;
+  height: 20px;
+  border-radius: 55% 55% 48% 48%;
+  border: 1px solid #b98b4c;
+  background: linear-gradient(180deg, #fffaf0 0%, #f3dfba 68%, #d2aa6c 100%);
+  transform-origin: 5px 19px;
+}
+
+.mf-flower-petal:nth-child(1) { transform: rotate(0deg); }
+.mf-flower-petal:nth-child(2) { transform: rotate(45deg); }
+.mf-flower-petal:nth-child(3) { transform: rotate(90deg); }
+.mf-flower-petal:nth-child(4) { transform: rotate(135deg); }
+.mf-flower-petal:nth-child(5) { transform: rotate(180deg); }
+.mf-flower-petal:nth-child(6) { transform: rotate(225deg); }
+.mf-flower-petal:nth-child(7) { transform: rotate(270deg); }
+.mf-flower-petal:nth-child(8) { transform: rotate(315deg); }
+
+.mf-flower-center {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #a97939;
+  background: #d7b273;
+  box-shadow: inset 0 0 0 3px #fff4dc;
+  z-index: 3;
+}
+
+@keyframes mfFlowerRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Timeline Event Stops */
+.mf-timeline-stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 44px 1fr;
+  align-items: center;
+  min-height: 120px;
+  margin-bottom: 24px;
+}
+
+.mf-timeline-side-content {
+  padding: 0 16px;
+  text-align: center;
+}
+
+.mf-timeline-stop.alt-left .mf-timeline-side-content {
+  grid-column: 1;
+}
+
+.mf-timeline-stop.alt-left .mf-timeline-side-img {
+  grid-column: 3;
+}
+
+.mf-timeline-stop.alt-right .mf-timeline-side-img {
+  grid-column: 1;
+}
+
+.mf-timeline-stop.alt-right .mf-timeline-side-content {
+  grid-column: 3;
+}
+
+.mf-timeline-side-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.mf-timeline-side-img img {
+  max-width: 90px;
+  max-height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(181, 138, 74, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.mf-timeline-time {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #7b5d39;
+  margin: 0 0 4px;
+}
+
+.mf-timeline-desc {
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #725234;
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. Countdown Timer Section
+   ========================================================================== */
+.mf-countdown-section {
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.mf-countdown-title {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #765a37;
+  margin: 0 0 4px;
+}
+
+.mf-countdown-sub {
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  color: #9a7848;
+  margin: 0 0 16px;
+}
+
+.mf-countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.mf-countdown-box {
+  position: relative;
+  height: 94px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 252, 246, 0.96), rgba(245, 230, 202, 0.88));
+  border: 1px solid rgba(181, 138, 74, 0.55);
+  box-shadow: 0 6px 16px rgba(112, 78, 38, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mf-countdown-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 45%;
+  height: 200%;
+  transform: rotate(22deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  animation: facdShine 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.mf-countdown-box:nth-child(2)::before { animation-delay: 0.35s; }
+.mf-countdown-box:nth-child(3)::before { animation-delay: 0.7s; }
+.mf-countdown-box:nth-child(4)::before { animation-delay: 1.05s; }
+
+.mf-countdown-num {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #75552f;
+  line-height: 1;
+}
+
+.mf-countdown-unit {
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9b7543;
+  margin-top: 6px;
+}
+
+@keyframes facdShine {
+  0%, 65% { left: -70%; }
+  100% { left: 135%; }
+}
+
+/* ==========================================================================
+   7. Venue & Map Section
+   ========================================================================== */
+.mf-venue-section {
+  padding: 40px 16px;
+  text-align: center;
+  background: transparent;
+}
+
+.mf-venue-title {
+  font-family: 'Amiri', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #94712f;
+  margin: 0 0 6px;
+}
+
+.mf-venue-hall {
+  font-family: 'Amiri', serif;
+  font-size: 30px;
+  color: #94712f;
+  margin: 0 0 10px;
+}
+
+.mf-venue-address {
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  color: #817b73;
+  margin: 0 auto 24px;
+}
+
+.mf-venue-map-card {
+  width: 100%;
+  max-width: 520px;
+  height: 300px;
+  margin: 0 auto 28px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(110, 78, 35, 0.12);
+  border: 1px solid rgba(181, 138, 74, 0.4);
+}
+
+.mf-venue-map-card iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.mf-venue-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #b99450;
+  color: #ffffff;
+  padding: 12px 36px;
+  border-radius: 100px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(142, 106, 48, 0.25);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.mf-venue-btn:hover {
+  transform: translateY(-2px);
+  background: #aa843f;
+}
+
+/* ==========================================================================
+   8. Ceremonial Arch RSVP Form
+   ========================================================================== */
+.mf-rsvp-section {
+  padding: 30px 16px 50px;
+}
+
+.mf-rsvp-card {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 65px 24px 34px;
+  text-align: center;
+  border-radius: 190px 190px 28px 28px;
+  background: linear-gradient(180deg, #fffdf8 0%, #fbf3e3 60%, #f6ead2 100%);
+  box-shadow: 0 18px 45px rgba(110, 78, 35, 0.12),
+              inset 0 0 0 1px rgba(181, 138, 74, 0.5),
+              inset 0 0 0 7px #fffaf0,
+              inset 0 0 0 8px rgba(181, 138, 74, 0.35);
+}
+
+.mf-rsvp-arch-crest {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.mf-rsvp-title {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: #8a6530;
+  background: linear-gradient(180deg, #b88d45, #7a5521);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 6px;
+}
+
+.mf-rsvp-sub {
+  font-family: 'Amiri', serif;
+  font-size: 16px;
+  color: #9a8466;
+  margin: 0 0 24px;
+}
+
+.mf-rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: right;
+}
+
+.mf-input-line {
+  position: relative;
+  display: block;
+}
+
+.mf-input-line input {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-bottom: 1.5px solid rgba(181, 138, 74, 0.55);
+  background: transparent;
+  padding: 6px 4px 0;
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #5d4426;
+  outline: none;
+}
+
+.mf-input-line input:focus {
+  border-bottom-color: var(--gold);
+}
+
+.mf-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.mf-choice-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border-radius: 18px;
+  cursor: pointer;
+  border: 1px solid rgba(181, 138, 74, 0.4);
+  background: rgba(255, 253, 247, 0.85);
+  color: #7a5a33;
+  transition: all 0.25s ease;
+}
+
+.mf-choice-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mf-choice-card.is-active {
+  background: linear-gradient(160deg, #c9a05a, #9c7232);
+  color: #ffffff;
+  border-color: #9c7232;
+  box-shadow: 0 8px 20px rgba(140, 98, 40, 0.25);
+  transform: scale(1.02);
+}
+
+.mf-choice-card b {
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mf-counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-radius: 16px;
+  background: rgba(255, 253, 247, 0.7);
+  border: 1px dashed rgba(181, 138, 74, 0.5);
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #7a5a33;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.mf-counter-row.is-collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+  margin: 0;
+}
+
+.mf-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mf-step-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: #fffaf0;
+  color: #9c7232;
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+.mf-step-btn:hover {
+  background: #faeed7;
+}
+
+.mf-counter-val {
+  min-width: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #5d4426;
+}
+
+.mf-note-input {
+  width: 100%;
+  min-height: 84px;
+  padding: 10px 12px;
+  border: 1px solid rgba(181, 138, 74, 0.4);
+  border-radius: 16px;
+  font-family: 'Amiri', serif;
+  font-size: 16px;
+  line-height: 28px;
+  color: #5d4426;
+  outline: none;
+  background: #fffdf8 repeating-linear-gradient(180deg, transparent 0 27px, rgba(181, 138, 74, 0.2) 27px 28px);
+  resize: vertical;
+}
+
+.mf-seal-submit-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.mf-seal-btn {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  filter: drop-shadow(0 8px 14px rgba(120, 82, 30, 0.3));
+  transition: transform 0.2s;
+}
+
+.mf-seal-btn:active {
+  transform: scale(0.94);
+}
+
+.mf-seal-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: mfrTurn 18s linear infinite;
+}
+
+.mf-seal-text {
+  position: relative;
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff8e6;
+  text-shadow: 0 1px 1px rgba(90, 60, 20, 0.5);
+}
+
+.mf-seal-burst {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d4ae63;
+  pointer-events: none;
+  animation: mfrBurst 0.9s ease-out forwards;
+}
+
+@keyframes mfrTurn {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes mfrBurst {
+  to { transform: translate(var(--x), var(--y)) scale(0.3); opacity: 0; }
+}
+
+.mf-rsvp-success {
+  padding: 12px;
+  background: rgba(181, 138, 74, 0.14);
+  border-radius: 12px;
+  color: #7a5a33;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* ==========================================================================
+   9. Ending Blessing & Signatures
+   ========================================================================== */
+.mf-ending-section {
+  position: relative;
+  padding: 70px 24px 60px;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+  margin: 20px 12px;
+  overflow: hidden;
+}
+
+.mf-ending-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 241, 219, 0.88);
+  backdrop-filter: blur(2px);
+}
+
+.mf-ending-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.mf-ending-title {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #765a37;
+  margin: 0 0 12px;
+}
+
+.mf-ending-msg {
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #654b2d;
+  margin: 0 0 20px;
+}
+
+.mf-ending-final {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #866333;
+  margin: 0 0 8px;
+}
+
+.mf-ending-names {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #76532e;
+  margin: 0;
+}
+
+/* ==========================================================================
+   10. Floating Music & Auto-Scroll Controls
+   ========================================================================== */
+.mf-floating-bar {
+  position: fixed;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  right: 18px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mf-float-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(181, 138, 74, 0.6);
+  background: rgba(255, 253, 248, 0.94);
+  backdrop-filter: blur(8px);
+  color: #8a6229;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.mf-float-btn:hover {
+  transform: scale(1.08);
+  background: #ffffff;
+}
+
+.mf-float-btn.is-active svg {
+  animation: mfVinylSpin 3s linear infinite;
+}
+
+@keyframes mfVinylSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   10b. Floating Bottom Dock Bar (Matching Ma3zoom: Music Left | Pill Center | Play Right)
+   ========================================================================== */
+.mf-floating-bar-dock {
+  position: fixed;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max-w, 480px);
+  padding: 0 16px;
+  display: flex;
+  direction: ltr !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  z-index: 900;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.mf-dock-circle-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  color: #7b6656;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  pointer-events: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.mf-dock-circle-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18);
+  color: #5c432b;
+}
+
+.mf-dock-circle-btn:active {
+  transform: scale(0.96);
+}
+
+.mf-dock-circle-btn.is-playing svg {
+  animation: mfVinylSpin 3s linear infinite;
+}
+
+.mf-dock-order-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #634323;
+  color: #ffffff !important;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(99, 67, 35, 0.28);
+  pointer-events: auto;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+  flex: 1;
+  max-width: 270px;
+  text-align: center;
+}
+
+.mf-dock-order-pill:hover {
+  background-color: #50351a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 67, 35, 0.38);
+}
+
+.mf-dock-order-pill:active {
+  transform: translateY(0);
+}
+
+.mf-brand-footer {
+  text-align: center;
+  padding: 30px 16px calc(90px + env(safe-area-inset-bottom, 0px));
+  font-size: 14px;
+  color: #9a7848;
+}
+}
+
+.mf-brand-footer a {
+  color: #76532e;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   11. Elegant Music Player Card
+   ========================================================================== */
+.mf-music-card {
+  margin: 20px auto 10px;
+  max-width: 520px;
+  background: rgba(255, 253, 248, 0.94);
+  border: 1px solid rgba(181, 138, 74, 0.45);
+  border-radius: 20px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 24px rgba(118, 83, 46, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.mf-music-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mf-music-info-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mf-music-disc-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f6deb0, #c89c56 60%, #875c24 100%);
+  display: grid;
+  place-items: center;
+  color: #fff9ea;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.mf-music-disc-icon.is-playing {
+  animation: mfVinylSpin 3s linear infinite;
+}
+
+.mf-music-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.mf-music-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #a08256;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mf-music-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #4a3821;
+  margin-top: 2px;
+}
+
+.mf-music-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.mf-music-main-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid #b58a4a;
+  background: linear-gradient(135deg, #f7ecd7 0%, #ecd09e 100%);
+  color: #5c3f1a;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mf-music-main-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(181, 138, 74, 0.25);
+}
+
+.mf-music-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(200, 30, 30, 0.3);
+  background: rgba(255, 235, 235, 0.8);
+  color: #c41c1c;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mf-music-yt-btn:hover {
+  background: #ffe0e0;
+}
+
+.mf-soundwave-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.mf-soundwave-bars span {
+  width: 3px;
+  background: #b58a4a;
+  border-radius: 2px;
+  height: 4px;
+  transition: height 0.2s ease;
+}
+
+.mf-soundwave-bars.is-active span:nth-child(1) {
+  animation: mfWave 0.7s infinite alternate ease-in-out;
+}
+.mf-soundwave-bars.is-active span:nth-child(2) {
+  animation: mfWave 0.9s infinite alternate 0.2s ease-in-out;
+}
+.mf-soundwave-bars.is-active span:nth-child(3) {
+  animation: mfWave 0.6s infinite alternate 0.4s ease-in-out;
+}
+.mf-soundwave-bars.is-active span:nth-child(4) {
+  animation: mfWave 0.8s infinite alternate 0.1s ease-in-out;
+}
+
+@keyframes mfWave {
+  from { height: 4px; }
+  to { height: 16px; }
+}
+
+/* ==========================================================================
+   Order CTA Pill Button ("عايز دعوة زي دي؟ اطلبها من Wisal")
+   ========================================================================== */
+.mf-order-cta-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 20px 28px;
+  background: transparent;
+}
+
+.mf-order-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #634323;
+  color: #ffffff !important;
+  font-family: inherit;
+  font-size: 16.5px;
+  font-weight: 600;
+  padding: 13px 32px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(99, 67, 35, 0.28);
+  transition: transform 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+
+.mf-order-pill-btn:hover {
+  background-color: #50351a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(99, 67, 35, 0.38);
+  color: #ffffff !important;
+}
+
+.mf-order-pill-btn:active {
+  transform: translateY(0);
+}

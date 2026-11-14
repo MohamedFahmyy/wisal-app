@@ -1,0 +1,68 @@
+/**
+ * Wisal Design System — CSS Variables
+ * Colors, Spacing, Typography, Shadows, Borders, and Animations
+ */
+
+:root {
+  /* Brand Palette: Warm Ivory, Champagne, Muted Gold & Rich Espresso */
+  --color-ivory: #faf8f5;
+  --color-ivory-light: #fffdfa;
+  --color-cream: #f4efe6;
+  --color-sand: #ece4d8;
+  --color-sand-dark: #d8caba;
+  
+  --color-gold: #c5a059;
+  --color-gold-light: #dfc285;
+  --color-gold-dark: #9e7932;
+  --color-gold-subtle: rgba(197, 160, 89, 0.15);
+
+  --color-ink: #2b2520;
+  --color-ink-light: #443c34;
+  --color-muted: #796e65;
+  --color-muted-light: #a3978c;
+  --color-border: #e6ded3;
+  --color-border-subtle: rgba(121, 110, 101, 0.12);
+
+  --color-rose: #b57a72;
+  --color-rose-subtle: rgba(181, 122, 114, 0.12);
+  --color-sage: #6b7f6c;
+  --color-navy-deep: #0e1626;
+
+  /* Typography */
+  --font-arabic-heading: 'Alexandria', 'Tajawal', sans-serif;
+  --font-arabic-body: 'Tajawal', 'Alexandria', sans-serif;
+  --font-serif-luxury: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing Scale */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* Border Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-subtle: 0 2px 10px rgba(43, 37, 32, 0.04);
+  --shadow-card: 0 10px 30px rgba(43, 37, 32, 0.06);
+  --shadow-hover: 0 18px 45px rgba(43, 37, 32, 0.12);
+  --shadow-wax: 0 8px 24px rgba(158, 121, 50, 0.28);
+  --shadow-glass: 0 20px 50px rgba(0, 0, 0, 0.08);
+
+  /* Animation Timings */
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-luxury: 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+}

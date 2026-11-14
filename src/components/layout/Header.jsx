@@ -1,0 +1,112 @@
+import React, { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { Menu, X, ArrowUpLeft, WhatsAppIcon } from '../../utils/icons';
+import { BrandLogo } from '../common/BrandLogo';
+
+export function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const closeMenu = () => setMobileMenuOpen(false);
+
+  return (
+    <header className="site-header">
+      <div className="nav-container">
+        <BrandLogo />
+
+        <nav className="desktop-nav" aria-label="Main Navigation">
+          <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
+            الرئيسية
+          </NavLink>
+          <NavLink to="/demos" className={({ isActive }) => (isActive ? 'active' : '')}>
+            التصميمات
+          </NavLink>
+          <NavLink to="/card" className={({ isActive }) => (isActive ? 'active' : '')}>
+            كروت QR
+          </NavLink>
+          <NavLink to="/guests" className={({ isActive }) => (isActive ? 'active' : '')}>
+            قائمة الضيوف
+          </NavLink>
+          <NavLink to="/links" className={({ isActive }) => (isActive ? 'active' : '')}>
+            صانع الروابط
+          </NavLink>
+          <NavLink to="/features" className={({ isActive }) => (isActive ? 'active' : '')}>
+            المميزات
+          </NavLink>
+          <NavLink to="/packages" className={({ isActive }) => (isActive ? 'active' : '')}>
+            الباقات
+          </NavLink>
+          <NavLink to="/faq" className={({ isActive }) => (isActive ? 'active' : '')}>
+            الأسئلة الشائعة
+          </NavLink>
+        </nav>
+
+        <div className="header-actions">
+          <a
+            href="https://wa.me/201000000000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%88%D9%90%D8%B5%D8%A7%D9%84%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%AF%D8%B9%D9%88%D8%A9%20%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-order-cta"
+          >
+            <WhatsAppIcon size={16} />
+            <span>اطلب دعوتك</span>
+            <ArrowUpLeft size={16} className="btn-arrow" />
+          </a>
+
+          <button
+            className="mobile-toggle-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      <div className={`mobile-drawer ${mobileMenuOpen ? 'is-open' : ''}`}>
+        <div className="mobile-drawer-inner">
+          <nav className="mobile-nav-links">
+            <NavLink to="/" end onClick={closeMenu}>
+              الرئيسية
+            </NavLink>
+            <NavLink to="/demos" onClick={closeMenu}>
+              معرض التصميمات
+            </NavLink>
+            <NavLink to="/card" onClick={closeMenu}>
+              كروت QR للطباعة
+            </NavLink>
+            <NavLink to="/guests" onClick={closeMenu}>
+              لوحة إدارة الضيوف
+            </NavLink>
+            <NavLink to="/links" onClick={closeMenu}>
+              صانع روابط المعازيم
+            </NavLink>
+            <NavLink to="/features" onClick={closeMenu}>
+              المميزات والتفاصيل
+            </NavLink>
+            <NavLink to="/packages" onClick={closeMenu}>
+              الباقات والأسعار
+            </NavLink>
+            <NavLink to="/faq" onClick={closeMenu}>
+              الأسئلة الشائعة
+            </NavLink>
+          </nav>
+
+          <div className="mobile-drawer-footer">
+            <a
+              href="https://wa.me/201000000000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%88%D9%90%D8%B5%D8%A7%D9%84%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%AF%D8%B9%D9%88%D8%A9%20%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-order-cta mobile-cta"
+              onClick={closeMenu}
+            >
+              <WhatsAppIcon size={18} />
+              <span>تواصل معنا عبر واتساب</span>
+              <ArrowUpLeft size={16} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
