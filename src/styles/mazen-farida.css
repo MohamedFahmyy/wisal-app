@@ -219,6 +219,31 @@
   color: inherit;
 }
 
+.mf-hero-heart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: 12px;
+  vertical-align: middle;
+  color: inherit;
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.7));
+  animation: mfHeartBeat 2.4s ease-in-out infinite;
+}
+
+.mf-hero-heart svg {
+  width: 0.65em;
+  height: 0.65em;
+  fill: currentColor;
+}
+
+@keyframes mfHeartBeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
+}
+
 .mf-hero-title {
   font-family: 'Aref Ruqaa', serif;
   font-size: clamp(26px, 6.8cqw, 48px);
