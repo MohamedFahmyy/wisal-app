@@ -4,7 +4,9 @@ export const packages = [
     name: 'Essential',
     nameAr: 'الأساسية',
     tagline: 'الأناقة الأساسية لكل مناسبة',
-    price: '650',
+    price: '325',
+    originalPrice: '650',
+    discount: 'خصم 50%',
     currency: 'ج.م',
     period: 'مرة واحدة / للمناسبة',
     popular: false,
@@ -19,15 +21,17 @@ export const packages = [
       'نموذج تأكيد حضور تفاعلي (RSVP Demo)',
       'رابط مخصص وسريع بدون أي إعلانات'
     ],
-    ctaText: 'اطلب باقة Essential',
-    whatsappMessage: 'مرحباً وِصال، أود الاستفسار عن باقة Essential لتصميم دعوة إلكترونية'
+    ctaText: 'اطلب باقة Essential بخصم 50%',
+    whatsappMessage: 'مرحباً وِصال، أود الاستفادة من عرض خصم 50% على باقة Essential (بسعر 325 ج.م بدلاً من 650 ج.م) لتصميم دعوة إلكترونية'
   },
   {
     id: 'signature',
     name: 'Signature',
     nameAr: 'سيجنتشر',
     tagline: 'التجربة الأكثر طلباً وتفرداً',
-    price: '1,450',
+    price: '725',
+    originalPrice: '1,450',
+    discount: 'خصم 50%',
     currency: 'ج.م',
     period: 'مرة واحدة / للمناسبة',
     popular: true,
@@ -42,19 +46,21 @@ export const packages = [
       'تعديل لوحة الألوان والخطوط لتطابق ثيم الفرح',
       'دعم فني وتعديلات مجانية حتى موعد الحفل'
     ],
-    ctaText: 'اطلب باقة Signature',
-    whatsappMessage: 'مرحباً وِصال، أود حجز باقة Signature لتصميم دعوة إلكترونية متكاملة'
+    ctaText: 'اطلب باقة Signature بخصم 50%',
+    whatsappMessage: 'مرحباً وِصال، أود الاستفادة من عرض خصم 50% على باقة Signature (بسعر 725 ج.م بدلاً من 1,450 ج.م) لتصميم دعوة إلكترونية متكاملة'
   },
   {
     id: 'bespoke',
     name: 'Bespoke',
     nameAr: 'تصميم خاص',
     tagline: 'تجربة حصرية من الصفر لفكرتكم',
-    price: 'حسب الفكرة',
+    price: 'خصم 50%',
+    originalPrice: 'حسب الفكرة',
+    discount: 'خصم 50%',
     currency: '',
-    period: 'استشارة وتصميم حصري',
+    period: 'استشارة وتصميم حصري بنصف التكلفة',
     popular: false,
-    description: 'تجربة رقمية فريدة تصمم خصيصاً من الصفر لتجسيد مفهوم حفلكم الاستثنائي مع رسومات وحركات تفاعلية مخصصة.',
+    description: 'تجربة رقمية فريدة تصمم خصيصاً من الصفر لتجسيد مفهوم حفلكم الاستثنائي مع رسومات وحركات تفاعلية مخصصة بخصم 50% على أتعاب التصميم والتنفيذ.',
     features: [
       'كل مميزات باقة Signature',
       'جلسة عصف ذهني واستشارة تصميم مخصصة',
@@ -64,7 +70,7 @@ export const packages = [
       'تكاملات متقدمة ومؤثرات بصرية مبهرة',
       'أولوية تسليم فائقة مع فريق التصميم مباشرة'
     ],
-    ctaText: 'استشرنا في باقة Bespoke',
-    whatsappMessage: 'مرحباً وِصال، لدي فكرة خاصة لحفلي وأرغب في استشارة لباقة Bespoke'
+    ctaText: 'استشرنا في باقة Bespoke بخصم 50%',
+    whatsappMessage: 'مرحباً وِصال، لدي فكرة خاصة لحفلي وأرغب في استشارة لباقة Bespoke مع الاستفادة من خصم 50%'
   }
 ];

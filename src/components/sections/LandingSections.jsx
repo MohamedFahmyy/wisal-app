@@ -449,10 +449,10 @@ export function PackagesPreviewSection() {
     <section className="packages-preview-section">
       <div className="packages-container">
         <div className="section-center-head">
-          <span className="section-eyebrow">TRANSPARENT VALUE</span>
+          <span className="section-eyebrow">🔥 عرض خاص — خصم 50% على جميع الباقات</span>
           <h2 className="section-heading-title">باقات وِصال المصممة على ذوقكم</h2>
           <p className="section-lead-subtitle">
-            اختاروا الباقة المناسبة ليومكم، مع إمكانية الترقية وإضافة اللمسات الخاصة.
+            اختاروا الباقة المناسبة ليومكم بنصف السعر لفترة محدودة، مع إمكانية الترقية وإضافة اللمسات الخاصة.
           </p>
         </div>
 
@@ -474,9 +474,17 @@ export function PackagesPreviewSection() {
               <p className="pkg-desc">{pkg.description}</p>
 
               <div className="pkg-price-row">
+                {pkg.originalPrice && (
+                  <span className="pkg-original-price">
+                    {pkg.originalPrice} {pkg.currency}
+                  </span>
+                )}
                 <span className="pkg-amount">{pkg.price}</span>
                 {pkg.currency && <span className="pkg-curr">{pkg.currency}</span>}
                 <span className="pkg-period">/ {pkg.period}</span>
+                {pkg.discount && (
+                  <span className="pkg-discount-badge">{pkg.discount}</span>
+                )}
               </div>
 
               <ul className="pkg-features-list">

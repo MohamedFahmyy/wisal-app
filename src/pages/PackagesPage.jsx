@@ -21,7 +21,7 @@ export default function PackagesPage() {
         <div className="page-hero-container">
           <div className="hero-eyebrow-pill">
             <Sparkles size={14} className="sparkle-gold" />
-            <span>TRANSPARENT & TAILORED OPTIONS</span>
+            <span>🔥 عرض حصري لفترة محدودة — خصم 50% على جميع الباقات</span>
           </div>
 
           <h1 className="page-hero-title">
@@ -59,9 +59,21 @@ export default function PackagesPage() {
                 </div>
 
                 <div className="pack-price-block">
-                  <span className="pack-price-amount">{pkg.price}</span>
-                  {pkg.currency && <span className="pack-currency-label">{pkg.currency}</span>}
-                  <span className="pack-period-sub">{pkg.period}</span>
+                  {pkg.originalPrice && (
+                    <div className="pack-original-price-row">
+                      <span className="pack-original-price">
+                        {pkg.originalPrice} {pkg.currency}
+                      </span>
+                      {pkg.discount && (
+                        <span className="pack-discount-pill">{pkg.discount}</span>
+                      )}
+                    </div>
+                  )}
+                  <div className="pack-current-price-row">
+                    <span className="pack-price-amount">{pkg.price}</span>
+                    {pkg.currency && <span className="pack-currency-label">{pkg.currency}</span>}
+                    <span className="pack-period-sub">{pkg.period}</span>
+                  </div>
                 </div>
 
                 <p className="pack-full-description">{pkg.description}</p>
