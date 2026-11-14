@@ -606,9 +606,10 @@ export default function MohamedSalmaPage({ version: propVersion }) {
           />
           <div className="mf-hero-typography mf-hero-typography-centered">
             <h1 className="mf-hero-names">
-              محمد <span className="mf-amp">و</span> سلمى
+              محمد و سلمى
             </h1>
             <p className="mf-hero-title">يسعدنا ويشرفنا دعوتكم لحضور حفل خطوبتنا</p>
+            <p className="mf-hero-datetime">الساعة 7:00 مساءً</p>
           </div>
         </section>
 
