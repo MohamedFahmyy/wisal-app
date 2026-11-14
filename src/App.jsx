@@ -44,6 +44,8 @@ function LayoutWrapper() {
         <Route path="/invite/mohamed-salma" element={<MohamedSalmaPage />} />
         <Route path="/invite/:slug" element={<InvitationPage />} />
         <Route path="/guests" element={<GuestDashboardPage />} />
+        <Route path="/admin" element={<GuestDashboardPage />} />
+        <Route path="/dashboard" element={<GuestDashboardPage />} />
         <Route path="/links" element={<LinkGeneratorPage />} />
         <Route path="/card" element={<QRCardPage />} />
         <Route path="*" element={<HomePage />} />
