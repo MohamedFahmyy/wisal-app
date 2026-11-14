@@ -71,11 +71,17 @@
   border: none;
   cursor: pointer;
   z-index: 10;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mf-intro-trigger:hover {
   transform: translate(-50%, -50%) scale(1.05);
+}
+
+.mf-intro-overlay.is-opening .mf-intro-trigger {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.92);
 }
 
 .mf-intro-wax-seal {

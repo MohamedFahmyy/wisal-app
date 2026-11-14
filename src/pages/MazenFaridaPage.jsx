@@ -160,6 +160,7 @@ export default function MazenFaridaPage() {
   const wishDirect = searchParams.get('wish') === '1';
 
   // Intro & Audio State
+  const [isIntroOpening, setIsIntroOpening] = useState(false);
   const [isIntroOpen, setIsIntroOpen] = useState(false);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
@@ -268,7 +269,9 @@ export default function MazenFaridaPage() {
 
   // Open Invitation Sequence
   const handleOpenInvitation = () => {
-    if (isIntroOpen) return;
+    if (isIntroOpen || isIntroOpening) return;
+
+    setIsIntroOpening(true);
 
     // Start background audio directly within user touch event
     if (audioRef.current) {
@@ -277,12 +280,15 @@ export default function MazenFaridaPage() {
         .catch(() => setIsPlayingMusic(false));
     }
 
-    // Play intro video if available
+    // Play intro video from start
     if (introVideoRef.current) {
+      try {
+        introVideoRef.current.currentTime = 0;
+      } catch (e) {}
       introVideoRef.current.play().catch(() => {});
     }
 
-    // Smooth reveal of stage
+    // Smooth reveal of stage after ~4 seconds of envelope opening animation
     setTimeout(() => {
       setIsIntroOpen(true);
 
@@ -293,9 +299,9 @@ export default function MazenFaridaPage() {
           if (rsvpSection) {
             rsvpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }, 600);
+        }, 500);
       }
-    }, 450);
+    }, 4000);
   };
 
   // Toggle Background Audio
@@ -400,7 +406,7 @@ export default function MazenFaridaPage() {
   return (
     <div className="mf-page-container">
       {/* 1. Fullscreen Opening Screen with Video & Wax Seal */}
-      <div className={`mf-intro-overlay ${isIntroOpen ? 'is-opened' : ''}`}>
+      <div className={`mf-intro-overlay ${isIntroOpening ? 'is-opening' : ''} ${isIntroOpen ? 'is-opened' : ''}`}>
         <video
           ref={introVideoRef}
           className="mf-intro-video"

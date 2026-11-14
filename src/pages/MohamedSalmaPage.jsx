@@ -237,6 +237,7 @@ export default function MohamedSalmaPage({ version: propVersion }) {
   const isPink = version === 2;
 
   // Intro & Audio State
+  const [isIntroOpening, setIsIntroOpening] = useState(false);
   const [isIntroOpen, setIsIntroOpen] = useState(false);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
@@ -369,7 +370,9 @@ export default function MohamedSalmaPage({ version: propVersion }) {
 
   // Open Invitation Sequence — Triggered by direct user click
   const handleOpenInvitation = () => {
-    if (isIntroOpen) return;
+    if (isIntroOpen || isIntroOpening) return;
+
+    setIsIntroOpening(true);
 
     // Start requested track: "زينة شباب العيلة" starting at 21 seconds
     if (audioRef.current) {
@@ -389,12 +392,15 @@ export default function MohamedSalmaPage({ version: propVersion }) {
         });
     }
 
-    // Play intro video if available
+    // Play intro video from start
     if (introVideoRef.current) {
+      try {
+        introVideoRef.current.currentTime = 0;
+      } catch (e) {}
       introVideoRef.current.play().catch(() => {});
     }
 
-    // Smooth reveal of invitation stage
+    // Envelope opening animation runs for ~4 seconds before smoothly revealing the invitation
     setTimeout(() => {
       setIsIntroOpen(true);
 
@@ -405,14 +411,14 @@ export default function MohamedSalmaPage({ version: propVersion }) {
           if (rsvpSection) {
             rsvpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }, 600);
+        }, 500);
       } else {
         // Automatically start gentle, continuous auto-scroll downwards
         setTimeout(() => {
           setIsAutoScrolling(true);
-        }, 900);
+        }, 600);
       }
-    }, 450);
+    }, 4000);
   };
 
   // Toggle Background Music
@@ -561,7 +567,7 @@ export default function MohamedSalmaPage({ version: propVersion }) {
 
       {/* 1. Fullscreen Opening Screen with Video & Hidden Click Trigger over "بسم الله" */}
       <div
-        className={`mf-intro-overlay ${isIntroOpen ? 'is-opened' : ''}`}
+        className={`mf-intro-overlay ${isIntroOpening ? 'is-opening' : ''} ${isIntroOpen ? 'is-opened' : ''}`}
         onClick={handleOpenInvitation}
       >
         <video
