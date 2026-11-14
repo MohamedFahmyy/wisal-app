@@ -116,11 +116,11 @@ export const invitations = [
       timeFormattedEn: '7:00 PM',
       timezone: 'Africa/Cairo',
       schedule: [
-        { time: '06:30 PM', timeEn: '06:30 PM', title: 'وصول الضيوف والأهل الكرام', titleEn: 'Guest Arrival' },
-        { time: '07:30 PM', timeEn: '07:30 PM', title: 'تلبيس الدبل وتبادل الخواتم', titleEn: 'Rings Ceremony' },
-        { time: '08:00 PM', timeEn: '08:00 PM', title: 'جلسة التصوير والذكريات', titleEn: 'Photoshoot & Memories' },
-        { time: '08:45 PM', timeEn: '08:45 PM', title: 'تقطيع تورتة الخطوبة والبوفيه', titleEn: 'Cake & Buffet' },
-        { time: '09:15 PM', timeEn: '09:15 PM', title: 'الحفلة والاحتفال بالخطيبين', titleEn: 'Party & Celebration' }
+        { time: '06:45 PM', timeEn: '06:45 PM', title: 'وصول الضيوف', titleEn: 'Guest Arrival' },
+        { time: '07:30 PM', timeEn: '07:30 PM', title: 'دخول العروسين', titleEn: 'Couples Entrance' },
+        { time: '08:00 PM', timeEn: '08:00 PM', title: 'تلبيس الدبل', titleEn: 'Rings Ceremony' },
+        { time: '08:30 PM', timeEn: '08:30 PM', title: 'افتتاح البوفيه', titleEn: 'Buffet Opening' },
+        { time: '09:00 PM', timeEn: '09:00 PM', title: 'الحفله', titleEn: 'Party & Celebration' }
       ]
     },
 
@@ -213,11 +213,11 @@ export const invitations = [
       timeFormattedEn: '7:00 PM',
       timezone: 'Africa/Cairo',
       schedule: [
-        { time: '06:30 PM', timeEn: '06:30 PM', title: 'وصول الضيوف والأهل الكرام', titleEn: 'Guest Arrival' },
-        { time: '07:30 PM', timeEn: '07:30 PM', title: 'تلبيس الدبل وتبادل الخواتم', titleEn: 'Rings Ceremony' },
-        { time: '08:00 PM', timeEn: '08:00 PM', title: 'جلسة التصوير والذكريات', titleEn: 'Photoshoot & Memories' },
-        { time: '08:45 PM', timeEn: '08:45 PM', title: 'تقطيع تورتة الخطوبة والبوفيه', titleEn: 'Cake & Buffet' },
-        { time: '09:15 PM', timeEn: '09:15 PM', title: 'الحفلة والاحتفال بالخطيبين', titleEn: 'Party & Celebration' }
+        { time: '06:45 PM', timeEn: '06:45 PM', title: 'وصول الضيوف', titleEn: 'Guest Arrival' },
+        { time: '07:30 PM', timeEn: '07:30 PM', title: 'دخول العروسين', titleEn: 'Couples Entrance' },
+        { time: '08:00 PM', timeEn: '08:00 PM', title: 'تلبيس الدبل', titleEn: 'Rings Ceremony' },
+        { time: '08:30 PM', timeEn: '08:30 PM', title: 'افتتاح البوفيه', titleEn: 'Buffet Opening' },
+        { time: '09:00 PM', timeEn: '09:00 PM', title: 'الحفله', titleEn: 'Party & Celebration' }
       ]
     },
 

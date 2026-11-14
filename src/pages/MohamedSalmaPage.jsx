@@ -660,11 +660,11 @@ export default function MohamedSalmaPage({ version: propVersion }) {
               </div>
             </div>
 
-            {/* Stop 1: وصول الضيوف والأهل */}
+            {/* Stop 1: وصول الضيوف */}
             <div className="mf-timeline-stop alt-left">
               <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">6:30 مساءً</h3>
-                <p className="mf-timeline-desc">وصول الضيوف والأهل الكرام</p>
+                <h3 className="mf-timeline-time">6:45 مساءً</h3>
+                <p className="mf-timeline-desc">وصول الضيوف</p>
               </div>
               <div />
               <div className="mf-timeline-side-img">
@@ -677,12 +677,12 @@ export default function MohamedSalmaPage({ version: propVersion }) {
               </div>
             </div>
 
-            {/* Stop 2: تلبيس الدبل وتبادل الخواتم */}
+            {/* Stop 2: دخول العروسين */}
             <div className="mf-timeline-stop alt-right">
               <div className="mf-timeline-side-img">
                 <img
                   src="/farha/WhatsApp_Image_2026-09-08_at_4.52.06_PM-removebg-preview.webp"
-                  alt="تلبيس الدبل"
+                  alt="دخول العروسين"
                   loading="lazy"
                   decoding="async"
                 />
@@ -690,55 +690,55 @@ export default function MohamedSalmaPage({ version: propVersion }) {
               <div />
               <div className="mf-timeline-side-content">
                 <h3 className="mf-timeline-time">7:30 مساءً</h3>
-                <p className="mf-timeline-desc">تلبيس الدبل وتبادل الخواتم 💍</p>
+                <p className="mf-timeline-desc">دخول العروسين</p>
               </div>
             </div>
 
-            {/* Stop 3: جلسة التصوير التذكارية */}
+            {/* Stop 3: تلبيس الدبل */}
             <div className="mf-timeline-stop alt-left">
               <div className="mf-timeline-side-content">
                 <h3 className="mf-timeline-time">8:00 مساءً</h3>
-                <p className="mf-timeline-desc">جلسة التصوير والذكريات الجميلة 📸</p>
+                <p className="mf-timeline-desc">تلبيس الدبل</p>
               </div>
               <div />
               <div className="mf-timeline-side-img">
                 <img
                   src="/farha/WhatsApp_Image_2026-09-08_at_4.55.24_PM-removebg-preview.webp"
-                  alt="التصوير والذكريات"
+                  alt="تلبيس الدبل"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
             </div>
 
-            {/* Stop 4: تقطيع التورتة وبوفيه الحلويات */}
+            {/* Stop 4: افتتاح البوفيه */}
             <div className="mf-timeline-stop alt-right">
               <div className="mf-timeline-side-img">
                 <img
                   src="/farha/WhatsApp_Image_2026-09-08_at_5.00.17_PM-removebg-preview.webp"
-                  alt="تقطيع التورتة والبوفيه"
+                  alt="افتتاح البوفيه"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
               <div />
               <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">8:45 مساءً</h3>
-                <p className="mf-timeline-desc">تقطيع تورتة الخطوبة وبوفيه العشاء 🎂</p>
+                <h3 className="mf-timeline-time">8:30 مساءً</h3>
+                <p className="mf-timeline-desc">افتتاح البوفيه</p>
               </div>
             </div>
 
-            {/* Stop 5: الحفلة والاحتفال */}
+            {/* Stop 5: الحفله */}
             <div className="mf-timeline-stop alt-left">
               <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">9:15 مساءً</h3>
-                <p className="mf-timeline-desc">الحفلة والأغاني وفرحة العروسين 🎶</p>
+                <h3 className="mf-timeline-time">9:00 مساءً</h3>
+                <p className="mf-timeline-desc">الحفله</p>
               </div>
               <div />
               <div className="mf-timeline-side-img">
                 <img
                   src="/farha/WhatsApp_Image_2026-09-08_at_5.03.51_PM-removebg-preview.webp"
-                  alt="الحفلة والاحتفال"
+                  alt="الحفله"
                   loading="lazy"
                   decoding="async"
                 />
