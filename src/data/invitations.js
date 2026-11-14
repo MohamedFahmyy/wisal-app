@@ -90,9 +90,9 @@ export const invitations = [
     language: 'ar',
     tag: 'تجربة الخطوبة التفاعلية',
     tagEn: 'Interactive Engagement Experience',
-    titleAr: 'حفل خطوبة محمد وسلمى | وِصال',
+    titleAr: 'حفل خطوبه محمد وسلمى.',
     titleEn: 'Mohamed & Salma Engagement Invitation | Wisal',
-    description: 'يسعدنا مشاركتكم فرحتنا بحفل خطوبة محمد وسلمى يوم الاثنين 30 نوفمبر 2026.',
+    description: 'يسعدنا مشاركتكم فرحتنا.',
     descriptionEn: 'Join us in celebrating the engagement of Mohamed & Salma on Monday, November 30, 2026.',
     
     people: {
@@ -139,7 +139,7 @@ export const invitations = [
       ogImage: '/images/og/mohamed-salma-engagement.png',
       ogImageWidth: 1024,
       ogImageHeight: 576,
-      ogImageAlt: 'حفل خطوبة محمد وسلمى | وِصال',
+      ogImageAlt: 'حفل خطوبه محمد وسلمى.',
       gallery: [
         '/images/og/mohamed-salma-engagement.png',
         '/farha/B20D1599-6455-4B98-8EE9-8A5FB2ADE06F-crop.webp'

@@ -199,12 +199,12 @@ for (const inv of invitations) {
   let imageAlt;
 
   if (isMohamedSalma) {
-    title = 'حفل خطوبة محمد وسلمى | وِصال';
-    description = 'يسعدنا مشاركتكم فرحتنا بحفل خطوبة محمد وسلمى يوم الاثنين 30 نوفمبر 2026.';
+    title = 'حفل خطوبه محمد وسلمى.';
+    description = 'يسعدنا مشاركتكم فرحتنا.';
     image = '/images/og/mohamed-salma-engagement.png';
     imageWidth = 1024;
     imageHeight = 576;
-    imageAlt = 'حفل خطوبة محمد وسلمى | وِصال';
+    imageAlt = 'حفل خطوبه محمد وسلمى.';
   } else {
     const p = inv.people || {};
     const names = `${p.firstPerson || ''} ${p.relation || '&'} ${p.secondPerson || ''}`.trim();
@@ -273,12 +273,12 @@ const staticPages = [
   },
   {
     path: 'mohamed-salma',
-    title: 'حفل خطوبة محمد وسلمى | وِصال',
-    description: 'يسعدنا مشاركتكم فرحتنا بحفل خطوبة محمد وسلمى يوم الاثنين 30 نوفمبر 2026.',
+    title: 'حفل خطوبه محمد وسلمى.',
+    description: 'يسعدنا مشاركتكم فرحتنا.',
     image: '/images/og/mohamed-salma-engagement.png',
     imageWidth: 1024,
     imageHeight: 576,
-    imageAlt: 'حفل خطوبة محمد وسلمى | وِصال',
+    imageAlt: 'حفل خطوبه محمد وسلمى.',
     url: 'https://wisal.app/mohamed-salma'
   },
   {

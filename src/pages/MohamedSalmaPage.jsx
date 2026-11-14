@@ -190,18 +190,19 @@ export default function MohamedSalmaPage() {
 
   // Set Page Title & Social Meta Tags
   useEffect(() => {
-    document.title = 'حفل خطوبة محمد وسلمى | وِصال';
+    document.title = 'حفل خطوبه محمد وسلمى. | وِصال';
     const updateMeta = (selector, attr, value) => {
       let el = document.querySelector(selector);
       if (el) el.setAttribute(attr, value);
     };
-    updateMeta('meta[name="description"]', 'content', 'يسعدنا مشاركتكم فرحتنا بحفل خطوبة محمد وسلمى يوم الاثنين 30 نوفمبر 2026.');
-    updateMeta('meta[property="og:title"]', 'content', 'حفل خطوبة محمد وسلمى | وِصال');
-    updateMeta('meta[property="og:description"]', 'content', 'يسعدنا مشاركتكم فرحتنا بحفل خطوبة محمد وسلمى يوم الاثنين 30 نوفمبر 2026.');
+    updateMeta('meta[name="description"]', 'content', 'يسعدنا مشاركتكم فرحتنا.');
+    updateMeta('meta[property="og:title"]', 'content', 'حفل خطوبه محمد وسلمى.');
+    updateMeta('meta[property="og:description"]', 'content', 'يسعدنا مشاركتكم فرحتنا.');
     updateMeta('meta[property="og:image"]', 'content', 'https://wisal.app/images/og/mohamed-salma-engagement.png');
-    updateMeta('meta[property="og:image:alt"]', 'content', 'حفل خطوبة محمد وسلمى | وِصال');
-    updateMeta('meta[name="twitter:title"]', 'content', 'حفل خطوبة محمد وسلمى | وِصال');
-    updateMeta('meta[name="twitter:description"]', 'content', 'يسعدنا مشاركتكم فرحتنا بحفل خطوبة محمد وسلمى يوم الاثنين 30 نوفمبر 2026.');
+    updateMeta('meta[property="og:image:alt"]', 'content', 'حفل خطوبه محمد وسلمى.');
+    updateMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
+    updateMeta('meta[name="twitter:title"]', 'content', 'حفل خطوبه محمد وسلمى.');
+    updateMeta('meta[name="twitter:description"]', 'content', 'يسعدنا مشاركتكم فرحتنا.');
     updateMeta('meta[name="twitter:image"]', 'content', 'https://wisal.app/images/og/mohamed-salma-engagement.png');
   }, []);
 
