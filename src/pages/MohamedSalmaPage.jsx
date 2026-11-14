@@ -604,29 +604,11 @@ export default function MohamedSalmaPage({ version: propVersion }) {
             playsInline
             preload="metadata"
           />
-          <div className="mf-hero-typography">
-            <div style={{
-              display: 'inline-block',
-              background: isPink ? 'rgba(255, 240, 245, 0.92)' : 'rgba(255, 248, 235, 0.88)',
-              padding: '6px 20px',
-              borderRadius: '50px',
-              color: isPink ? '#a84562' : '#8a6229',
-              fontSize: '15px',
-              fontWeight: '600',
-              marginBottom: '10px',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.08)'
-            }}>
-              💍 حفل خطوبة مبارك
-            </div>
+          <div className="mf-hero-typography mf-hero-typography-centered">
             <h1 className="mf-hero-names">
               محمد <span className="mf-amp">و</span> سلمى
             </h1>
             <p className="mf-hero-title">يسعدنا ويشرفنا دعوتكم لحضور حفل خطوبتنا</p>
-            <p className="mf-hero-datetime">
-              الإثنين، 30 نوفمبر 2026
-              <br />
-              الساعة 7:00 مساءً
-            </p>
           </div>
         </section>
 
