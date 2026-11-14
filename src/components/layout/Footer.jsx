@@ -28,7 +28,7 @@ export function Footer() {
                 <InstagramIcon size={18} />
               </a>
               <a
-                href="https://wa.me/201000000000"
+                href="https://wa.me/201112194828"
                 target="_blank"
                 rel="noreferrer"
                 className="social-btn"

@@ -123,7 +123,7 @@ export default function FAQPage() {
               <p>فريق وِصال يسعده الإجابة على كافة تفاصيلكم ومساعدتكم في اختيار التصميم الأنسب.</p>
             </div>
             <a
-              href="https://wa.me/201000000000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%88%D9%90%D8%B5%D8%A7%D9%84%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%AD%D9%88%D9%84%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A7%D8%AA"
+              href="https://wa.me/201112194828?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%88%D9%90%D8%B5%D8%A7%D9%84%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%AD%D9%88%D9%84%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A7%D8%AA"
               target="_blank"
               rel="noreferrer"
               className="btn-faq-whatsapp"

@@ -82,7 +82,7 @@ export default function PackagesPage() {
                 </ul>
 
                 <a
-                  href={`https://wa.me/201000000000?text=${encodeURIComponent(pkg.whatsappMessage)}`}
+                  href={`https://wa.me/201112194828?text=${encodeURIComponent(pkg.whatsappMessage)}`}
                   target="_blank"
                   rel="noreferrer"
                   className={`btn-pack-order ${pkg.popular ? 'btn-gold-pack' : 'btn-outline-pack'}`}
