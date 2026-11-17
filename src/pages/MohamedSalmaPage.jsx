@@ -614,7 +614,7 @@ export default function MohamedSalmaPage({ version: propVersion }) {
               </span>
             </h1>
             <p className="mf-hero-title">يسعدنا ويشرفنا دعوتكم لحضور حفل خطوبتنا</p>
-            <p className="mf-hero-datetime">الساعة 7:00 مساءً</p>
+            <p className="mf-hero-datetime">الساعة 7:00 مساءًا</p>
           </div>
         </section>
 
@@ -665,25 +665,13 @@ export default function MohamedSalmaPage({ version: propVersion }) {
               </div>
             </div>
 
-            {/* Stop 1: وصول الضيوف */}
+            {/* Stop 1: دخول العروسين */}
             <div className="mf-timeline-stop alt-left">
               <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">6:45 مساءً</h3>
-                <p className="mf-timeline-desc">وصول الضيوف</p>
+                <h3 className="mf-timeline-time">7:00 مساءًا</h3>
+                <p className="mf-timeline-desc">دخول العروسين</p>
               </div>
               <div />
-              <div className="mf-timeline-side-img">
-                <img
-                  src="/farha/WhatsApp_Image_2026-09-08_at_4.01.35_AM-removebg-preview.webp"
-                  alt="وصول الضيوف"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </div>
-
-            {/* Stop 2: دخول العروسين */}
-            <div className="mf-timeline-stop alt-right">
               <div className="mf-timeline-side-img">
                 <img
                   src="/farha/WhatsApp_Image_2026-09-08_at_4.52.06_PM-removebg-preview.webp"
@@ -692,31 +680,9 @@ export default function MohamedSalmaPage({ version: propVersion }) {
                   decoding="async"
                 />
               </div>
-              <div />
-              <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">7:30 مساءً</h3>
-                <p className="mf-timeline-desc">دخول العروسين</p>
-              </div>
             </div>
 
-            {/* Stop 3: تلبيس الدبل */}
-            <div className="mf-timeline-stop alt-left">
-              <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">8:00 مساءً</h3>
-                <p className="mf-timeline-desc">تلبيس الدبل</p>
-              </div>
-              <div />
-              <div className="mf-timeline-side-img">
-                <img
-                  src="/farha/WhatsApp_Image_2026-09-08_at_4.55.24_PM-removebg-preview.webp"
-                  alt="تلبيس الدبل"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </div>
-
-            {/* Stop 4: افتتاح البوفيه */}
+            {/* Stop 2: افتتاح البوفيه */}
             <div className="mf-timeline-stop alt-right">
               <div className="mf-timeline-side-img">
                 <img
@@ -728,22 +694,22 @@ export default function MohamedSalmaPage({ version: propVersion }) {
               </div>
               <div />
               <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">8:30 مساءً</h3>
+                <h3 className="mf-timeline-time">9:00 مساءًا</h3>
                 <p className="mf-timeline-desc">افتتاح البوفيه</p>
               </div>
             </div>
 
-            {/* Stop 5: الحفله */}
+            {/* Stop 3: تكمله الحفله */}
             <div className="mf-timeline-stop alt-left">
               <div className="mf-timeline-side-content">
-                <h3 className="mf-timeline-time">9:00 مساءً</h3>
-                <p className="mf-timeline-desc">الحفله</p>
+                <h3 className="mf-timeline-time">9:30 مساءًا</h3>
+                <p className="mf-timeline-desc">تكمله الحفله</p>
               </div>
               <div />
               <div className="mf-timeline-side-img">
                 <img
                   src="/farha/WhatsApp_Image_2026-09-08_at_5.03.51_PM-removebg-preview.webp"
-                  alt="الحفله"
+                  alt="تكمله الحفله"
                   loading="lazy"
                   decoding="async"
                 />
