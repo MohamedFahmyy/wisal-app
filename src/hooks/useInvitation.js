@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { globalAudio } from '../utils/audio';
 import { translations } from '../utils/localization';
+import { startAutoScroll } from '../utils/autoScroll';
 
 export function useInvitation(invitation) {
   const [searchParams] = useSearchParams();
@@ -59,6 +60,9 @@ export function useInvitation(invitation) {
         setIsPlayingMusic(playing);
       });
     }
+
+    // Auto-scroll down smoothly after opening
+    startAutoScroll({ delay: 3600, speed: 45, stopAt: '#rsvp' });
   };
 
   const toggleMusic = () => {

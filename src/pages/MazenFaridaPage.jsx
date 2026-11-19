@@ -300,6 +300,11 @@ export default function MazenFaridaPage() {
             rsvpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }, 500);
+      } else {
+        // Start smooth auto-scroll down the page
+        setTimeout(() => {
+          setIsAutoScrolling(true);
+        }, 2200);
       }
     }, 4000);
   };

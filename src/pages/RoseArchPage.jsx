@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
+import { startAutoScroll } from '../utils/autoScroll';
 import '../styles/rosearch.css';
 
 // Converts western digits to Eastern Arabic digits
@@ -167,28 +168,12 @@ export default function RoseArchPage() {
       setIsCoverGone(true);
     }, 1700);
 
-    // Auto-scroll after 4.5s towards RSVP if user doesn't interact
-    let userScrolled = false;
-    const cancelAutoScroll = () => {
-      userScrolled = true;
-      window.removeEventListener('touchstart', cancelAutoScroll);
-      window.removeEventListener('wheel', cancelAutoScroll);
-      window.removeEventListener('keydown', cancelAutoScroll);
-      window.removeEventListener('mousedown', cancelAutoScroll);
-    };
-
-    window.addEventListener('touchstart', cancelAutoScroll, { passive: true });
-    window.addEventListener('wheel', cancelAutoScroll, { passive: true });
-    window.addEventListener('keydown', cancelAutoScroll, { passive: true });
-    window.addEventListener('mousedown', cancelAutoScroll, { passive: true });
-
-    setTimeout(() => {
-      if (userScrolled) return;
-      const rsvpEl = document.getElementById('rsvp');
-      if (rsvpEl) {
-        rsvpEl.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 4500);
+    // Smooth auto-scroll down the invitation showcase
+    startAutoScroll({
+      delay: 3500,
+      speed: 46,
+      stopAt: '#rsvp'
+    });
   };
 
   // RSVP Submit Handler
@@ -272,6 +257,12 @@ export default function RoseArchPage() {
               </button>
               <p>اضغط لفتح الدعوة</p>
             </div>
+
+            {/* 3D Double Gate Doors for Entrance Animation */}
+            <div className="rosearch-gate-doors">
+              <div className="rosearch-gate-door left" />
+              <div className="rosearch-gate-door right" />
+            </div>
           </div>
         </div>
       )}
@@ -281,15 +272,15 @@ export default function RoseArchPage() {
         {/* Hero Section */}
         <section className={`rosearch-hero ${isHeroOn ? 'on' : ''}`} id="hero">
           <div className="poem">
-            <p>وراء كل باب حكاية،</p>
-            <p>وحكايتنا بدأت من هنا…</p>
-            <p>افتحوا الباب وشاركونا الفرحة.</p>
+            <p className="poem-line-1">وراء كل باب حكاية،</p>
+            <p className="poem-line-2">وحكايتنا بدأت من هنا…</p>
+            <p className="poem-line-3">افتحوا الباب وشاركونا الفرحة.</p>
           </div>
 
           <div className="couple-names">
-            <h1>يحيى</h1>
+            <h1 className="name-g">يحيى</h1>
             <span className="amp">&amp;</span>
-            <h1>ليلى</h1>
+            <h1 className="name-b">ليلى</h1>
           </div>
 
           <p className="date-badge">٨ مايو ٢٠٢٧</p>

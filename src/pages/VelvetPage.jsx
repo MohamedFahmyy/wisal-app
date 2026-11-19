@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { saveGuestResponse, getGuestResponsesByInvitation } from '../utils/guestStorage';
+import { startAutoScroll } from '../utils/autoScroll';
 import '../styles/velvet.css';
 
 // Converts western digits to Eastern Arabic digits
@@ -172,28 +173,8 @@ export default function VelvetPage() {
       setIsHeroOn(true);
     }, 700);
 
-    // Auto-scroll after 4.5s towards RSVP if user doesn't interact
-    let userScrolled = false;
-    const cancelAutoScroll = () => {
-      userScrolled = true;
-      window.removeEventListener('touchstart', cancelAutoScroll);
-      window.removeEventListener('wheel', cancelAutoScroll);
-      window.removeEventListener('keydown', cancelAutoScroll);
-      window.removeEventListener('mousedown', cancelAutoScroll);
-    };
-
-    window.addEventListener('touchstart', cancelAutoScroll, { passive: true });
-    window.addEventListener('wheel', cancelAutoScroll, { passive: true });
-    window.addEventListener('keydown', cancelAutoScroll, { passive: true });
-    window.addEventListener('mousedown', cancelAutoScroll, { passive: true });
-
-    setTimeout(() => {
-      if (userScrolled) return;
-      const rsvpEl = document.getElementById('rsvp');
-      if (rsvpEl) {
-        rsvpEl.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 4500);
+    // Continuous smooth auto-scroll down towards RSVP card
+    startAutoScroll({ delay: 3500, speed: 46, stopAt: '#rsvp' });
   };
 
   // Gallery Touch Gestures
