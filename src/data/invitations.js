@@ -1144,6 +1144,99 @@ export const invitations = [
       secondaryAccent: '#c9a265',
       bgMuted: '#f7efe6'
     }
+  },
+  {
+    id: 'inv_rosearch',
+    slug: 'rosearch',
+    template: 'rosearch',
+    category: 'wedding',
+    categoryLabel: 'زفاف',
+    categoryLabelEn: 'Wedding',
+    language: 'ar',
+    tag: 'تجربة قوس الورد الرومانسية',
+    tagEn: 'Rose Arch Experience',
+    titleAr: 'حفل زفاف يحيى و ليلى 🌹',
+    titleEn: 'Yehia & Laila Wedding Invitation | Wisal',
+    description: 'قوس ورد وبوابة حديقة ساحرة، خط زمني متعرج، وخريطة مرسومة أنيقة مع نموذج حضور رومانسي.',
+    descriptionEn: 'Rose Arch romantic wedding experience: botanical arch, blooming garden gate, watercolor milestones, and illustrated map.',
+
+    people: {
+      firstPerson: 'يحيى',
+      secondPerson: 'ليلى',
+      firstPersonEn: 'Yehia',
+      secondPersonEn: 'Laila',
+      relation: '&'
+    },
+
+    event: {
+      title: 'حفل زفاف',
+      titleEn: 'Wedding Celebration',
+      subtitle: 'وراء كل باب حكاية، وحكايتنا بدأت من هنا… افتحوا الباب وشاركونا الفرحة',
+      subtitleEn: 'Behind every door is a story, and ours began here… Open the door and share our joy',
+      date: '2027-05-08',
+      time: '19:00',
+      dateFormatted: 'السبت، 8 مايو 2027',
+      dateFormattedEn: 'Saturday, May 8, 2027',
+      timeFormatted: '7:00 مساءً',
+      timeFormattedEn: '7:00 PM',
+      timezone: 'Africa/Cairo',
+      schedule: [
+        { time: '07:00 PM', timeEn: '07:00 PM', title: 'استقبال الضيوف', titleEn: 'Guest Reception' },
+        { time: '07:30 PM', timeEn: '07:30 PM', title: 'كتب الكتاب', titleEn: 'Marriage Contract' },
+        { time: '08:30 PM', timeEn: '08:30 PM', title: 'دخول العروسين', titleEn: 'Couples Grand Entrance' },
+        { time: '09:00 PM', timeEn: '09:00 PM', title: 'الرقصة الأولى', titleEn: 'First Dance' },
+        { time: '09:30 PM', timeEn: '09:30 PM', title: 'العشاء', titleEn: 'Dinner' },
+        { time: '10:30 PM', timeEn: '10:30 PM', title: 'تقطيع التورتة', titleEn: 'Cake Cutting' }
+      ]
+    },
+
+    venue: {
+      name: 'حديقة الورد',
+      nameAr: 'حديقة الورد',
+      nameEn: 'The Rose Garden',
+      address: 'المعادي، القاهرة',
+      addressEn: 'Maadi, Cairo, Egypt',
+      city: 'القاهرة، مصر',
+      mapUrl: 'https://maps.google.com/?q=Maadi+Cairo+Egypt',
+      coordinates: '29.9602, 31.2569'
+    },
+
+    media: {
+      coverImage: '/img/rosearch/arch-pink-roses.webp',
+      ogImage: '/images/og/rosearch.jpg',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: 'حفل زفاف يحيى و ليلى 🌹',
+      gallery: [
+        '/img/rosearch/arch-pink-roses.webp',
+        '/img/rosearch/gate-pink-roses.webp',
+        '/img/rosearch/corner-blush-roses.webp',
+        '/img/rosearch/couple-blush.webp'
+      ],
+      music: '/audio/veil.mp3'
+    },
+
+    closing: {
+      dua: 'بارك الله لكما، وبارك عليكما، وجمع بينكما في خير. اللهم اجعل بيتهما عامرًا بالمودة والرحمة، واجعل أيامهما كلها فرح وسكينة.',
+      duaEn: 'May Allah bless you, shower His blessings upon you, and unite you both in goodness.',
+      signoff: 'مستنيينكم بكل الحب',
+      signoffEn: 'With all our love'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#7A4E55',
+      secondaryAccent: '#C2A267',
+      bgMuted: '#FBF7F4'
+    }
   }
 ];
 

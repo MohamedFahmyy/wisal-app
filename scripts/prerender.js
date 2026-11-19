@@ -216,6 +216,13 @@ for (const inv of invitations) {
     imageWidth = 1200;
     imageHeight = 630;
     imageAlt = 'خطوبة عبدالرحمن و آية 💍';
+  } else if (inv.slug === 'rosearch') {
+    title = 'حفل زفاف يحيى و ليلى 🌹 | وِصال';
+    description = 'على عتبة الحلم… افتح الدعوة 🌹 — قوس ورد وبوابة حديقة ساحرة، خط زمني متعرج، وخريطة مرسومة.';
+    image = '/images/og/rosearch.jpg';
+    imageWidth = 1200;
+    imageHeight = 630;
+    imageAlt = 'حفل زفاف يحيى و ليلى 🌹';
   } else {
     const p = inv.people || {};
     const names = `${p.firstPerson || ''} ${p.relation || '&'} ${p.secondPerson || ''}`.trim();
@@ -311,6 +318,16 @@ const staticPages = [
     imageHeight: 630,
     imageAlt: 'خطوبة عبدالرحمن و آية 💍',
     url: 'https://wisal.app/velvet'
+  },
+  {
+    path: 'rosearch',
+    title: 'حفل زفاف يحيى و ليلى 🌹 | وِصال',
+    description: 'على عتبة الحلم… افتح الدعوة 🌹 — قوس ورد وبوابة حديقة ساحرة، خط زمني متعرج، وخريطة مرسومة.',
+    image: '/images/og/rosearch.jpg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageAlt: 'حفل زفاف يحيى و ليلى 🌹',
+    url: 'https://wisal.app/rosearch'
   },
   {
     path: 'guests',

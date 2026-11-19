@@ -33,7 +33,9 @@ export const templateRegistry = {
   'mazen-farida': MazenFaridaTemplate,
   'mohamed-salma': MohamedSalmaTemplate,
   farha: MazenFaridaTemplate,
-  velvet: VelvetTemplate
+  velvet: VelvetTemplate,
+  rosearch: RoseArchTemplate,
+  'rose-arch': RoseArchTemplate
 };
 
 export function getTemplateComponent(templateKey) {
