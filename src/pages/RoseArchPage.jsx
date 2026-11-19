@@ -231,7 +231,7 @@ export default function RoseArchPage() {
               ✦
             </span>
 
-            <p style={{ margin: 0, font: '400 28px "Aref Ruqaa", serif', color: '#7A4E55' }}>
+            <p className="intro-quote" style={{ margin: 0, font: '400 28px "Aref Ruqaa", serif', color: '#7A4E55' }}>
               على عتبة الحلم…
             </p>
 
@@ -256,12 +256,6 @@ export default function RoseArchPage() {
                 </svg>
               </button>
               <p>اضغط لفتح الدعوة</p>
-            </div>
-
-            {/* 3D Double Gate Doors for Entrance Animation */}
-            <div className="rosearch-gate-doors">
-              <div className="rosearch-gate-door left" />
-              <div className="rosearch-gate-door right" />
             </div>
           </div>
         </div>
