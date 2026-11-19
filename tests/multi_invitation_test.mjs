@@ -56,14 +56,15 @@ console.log('===============================================================\n')
 // 1. DATA MODEL & INVITATION ID AUDIT
 // -------------------------------------------------------------
 console.log('Test Group 1: Invitation Registry & ID Verification');
-testAssert('All 14 invitations are registered', invitations.length === 14);
+testAssert('All 15 invitations are registered', invitations.length === 15);
 
 const allIds = invitations.map(i => i.id);
 const uniqueIds = new Set(allIds);
-testAssert('Every invitation has a unique, non-null ID', uniqueIds.size === 14 && !uniqueIds.has(undefined));
+testAssert('Every invitation has a unique, non-null ID', uniqueIds.size === 15 && !uniqueIds.has(undefined));
 
 testAssert('Mohamed & Salma has inv_mohamed_salma', resolveInvitationId('mohamed-salma') === 'inv_mohamed_salma');
 testAssert('Mazen & Farida has inv_mazen_farida', resolveInvitationId('mazen-farida') === 'inv_mazen_farida');
+testAssert('Velvet has inv_velvet', resolveInvitationId('velvet') === 'inv_velvet');
 testAssert('Adam & Jana has inv_adam_jana', resolveInvitationId('adam-jana') === 'inv_adam_jana');
 testAssert('Lookup by ID works', getInvitationById('inv_karim_hagar')?.slug === 'karim-hagar');
 

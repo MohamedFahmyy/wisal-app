@@ -1,0 +1,1112 @@
+/* ==========================================================================
+   Velvet Invitation Template — Burgundy & Cream with Polaroid Envelope
+   Wisal Luxury Collection
+   ========================================================================== */
+
+:root {
+  --velvet-wine: #5c1422;
+  --velvet-wine-d: #3d0b15;
+  --velvet-wine-l: #8c2a3a;
+  --velvet-cream: #f7efe6;
+  --velvet-cream-2: #fbf6f0;
+  --velvet-paper: #f3e9dd;
+  --velvet-gold: #c9a265;
+  --velvet-gold-l: #e8cf9f;
+  --velvet-ink: #3a2326;
+  --velvet-ink-2: #7d6264;
+  --velvet-rose: #b86b70;
+}
+
+.velvet-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--velvet-wine-d);
+  color: var(--velvet-ink);
+  font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.velvet-container * {
+  box-sizing: border-box;
+}
+
+/* Gold floating dust */
+.velvet-dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.velvet-dust i {
+  position: absolute;
+  width: var(--s, 3px);
+  height: var(--s, 3px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #f3d9a6, rgba(201, 162, 101, 0));
+  opacity: 0;
+  animation: velvetDust var(--t, 6s) linear var(--d, 0s) infinite;
+}
+
+@keyframes velvetDust {
+  0% { transform: translateY(20px); opacity: 0; }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.6; }
+  100% { transform: translateY(-120px); opacity: 0; }
+}
+
+/* ==========================================================================
+   Cover Screen (The Opening Envelope / Modal)
+   ========================================================================== */
+.velvet-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(90% 60% at 50% 30%, #7a1a2b 0%, #4a0f1a 55%, #2e0710 100%);
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.velvet-cover.gone {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.velvet-ccard {
+  position: relative;
+  width: min(100%, 380px);
+  background: var(--velvet-cream);
+  border-radius: 18px;
+  padding: 64px 26px 34px;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(201, 162, 101, 0.25);
+  transform: translateY(0);
+  transition: transform 0.8s cubic-bezier(0.6, 0, 0.3, 1), opacity 0.6s ease;
+}
+
+.velvet-cover.go .velvet-ccard {
+  transform: translateY(-30px) scale(0.96);
+  opacity: 0;
+}
+
+.velvet-ccard .frame {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(201, 162, 101, 0.45);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.velvet-medal {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #8c2a3a, #4a0f1a);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 22px rgba(60, 10, 20, 0.45), 0 0 0 4px var(--velvet-cream), 0 0 0 5px rgba(201, 162, 101, 0.6);
+}
+
+.velvet-medal svg {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  fill: currentColor;
+}
+
+.velvet-ccard .ey {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--velvet-rose);
+  margin: 0;
+}
+
+.velvet-ccard .nm {
+  font: 700 46px/1 'Aref Ruqaa', serif;
+  color: var(--velvet-wine);
+  margin: 6px 0 0;
+}
+
+.velvet-ccard .nm .lat {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.velvet-ccard .nm .amp {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  margin: 2px 0 0;
+  font-size: 38px;
+  font-family: 'Great Vibes', cursive;
+  color: var(--velvet-gold);
+  overflow: visible;
+}
+
+.velvet-orn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px auto;
+  color: var(--velvet-gold);
+}
+
+.velvet-orn::before,
+.velvet-orn::after {
+  content: '';
+  width: 58px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--velvet-gold));
+}
+
+.velvet-orn::after {
+  transform: scaleX(-1);
+}
+
+.velvet-orn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.velvet-ccard .dt {
+  font: 400 20px 'Amiri', serif;
+  color: var(--velvet-ink-2);
+  margin: 0;
+}
+
+.velvet-ccard .inv {
+  font: 400 17px 'Amiri', serif;
+  color: var(--velvet-ink-2);
+  margin: 6px 0 0;
+}
+
+.velvet-open-btn {
+  margin-top: 22px;
+  font: 700 17px 'Tajawal', sans-serif;
+  color: #fff;
+  background: linear-gradient(180deg, #7a1a2b, #4a0f1a);
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 38px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(74, 15, 26, 0.4);
+  animation: velvetPulse 2.4s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.velvet-open-btn:hover {
+  transform: scale(1.04);
+}
+
+@keyframes velvetPulse {
+  50% {
+    box-shadow: 0 10px 24px rgba(74, 15, 26, 0.4), 0 0 0 10px rgba(140, 42, 58, 0.12);
+  }
+}
+
+.velvet-roses {
+  position: absolute;
+  pointer-events: none;
+}
+
+.velvet-roses img {
+  width: 100%;
+  display: block;
+}
+
+.velvet-roses.tr {
+  top: -14px;
+  right: -18px;
+  width: 120px;
+}
+
+.velvet-roses.bl {
+  bottom: -16px;
+  left: -18px;
+  width: 110px;
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Main Page Layout
+   ========================================================================== */
+.velvet-page {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  margin: 0 auto;
+  background:
+    radial-gradient(70% 40% at 100% 0%, rgba(201, 162, 101, 0.12), transparent 70%),
+    repeating-linear-gradient(45deg, rgba(140, 42, 58, 0.025) 0 2px, transparent 2px 14px),
+    var(--velvet-paper);
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.velvet-section {
+  position: relative;
+  padding: 44px 20px;
+}
+
+/* Scroll reveal animations */
+.velvet-rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.velvet-rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   Hero Section: Save-The-Date Velvet Polaroid Envelope
+   ========================================================================== */
+.velvet-hero {
+  padding: 34px 20px 36px;
+  text-align: center;
+  background: linear-gradient(180deg, #f6efe6, #f1e7da);
+  overflow: hidden;
+}
+
+.velvet-hero .std {
+  position: relative;
+  font: 500 14px 'Cormorant Garamond', serif;
+  letter-spacing: 0.42em;
+  color: #6e4a45;
+  margin: 0 0 18px;
+  direction: ltr;
+}
+
+.velvet-env {
+  position: relative;
+  width: min(84%, 330px);
+  margin: 0 auto;
+  aspect-ratio: 1 / 1.08;
+}
+
+/* The Polaroid photo lifting out of the envelope */
+.velvet-env .photo {
+  position: absolute;
+  left: 17%;
+  right: 11%;
+  top: 6%;
+  height: 74%;
+  background: #fff;
+  padding: 9px 9px 30px;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 14px 30px rgba(40, 10, 10, 0.28);
+  transform: translateY(38%) rotate(0deg);
+  transition: transform 1.7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.5s;
+  z-index: 1;
+}
+
+.velvet-env .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  display: block;
+  filter: contrast(1.03) saturate(1.05);
+}
+
+.velvet-hero.on .velvet-env .photo {
+  transform: translateY(0) rotate(6deg);
+}
+
+.velvet-env .back {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60%;
+  background: linear-gradient(180deg, #5a1120, #3f0b16);
+  border-radius: 4px;
+  z-index: 0;
+  box-shadow: 0 26px 40px -22px rgba(40, 5, 12, 0.7);
+}
+
+.velvet-env .back::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -26%;
+  height: 30%;
+  background: linear-gradient(180deg, #4c0e1b, #5a1120);
+  clip-path: polygon(0 100%, 8% 0, 92% 0, 100% 100%);
+}
+
+.velvet-env .front {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60%;
+  z-index: 2;
+  filter: drop-shadow(0 -3px 7px rgba(0, 0, 0, 0.28));
+}
+
+.velvet-env .front svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.velvet-env .wax {
+  position: absolute;
+  left: 50%;
+  bottom: 19%;
+  width: 80px;
+  margin-left: -40px;
+  z-index: 3;
+  filter: drop-shadow(0 3px 2px rgba(30, 5, 5, 0.45)) drop-shadow(0 8px 10px rgba(30, 5, 5, 0.3));
+}
+
+.velvet-env .wax img {
+  width: 100%;
+  display: block;
+}
+
+.velvet-env .velvet-roses {
+  z-index: 4;
+  width: 172px;
+  top: 4%;
+  left: -52px;
+  transform: rotate(-8deg);
+}
+
+.velvet-env .velvet-roses.r2 {
+  width: 92px;
+  top: auto;
+  bottom: -10%;
+  right: -30px;
+  left: auto;
+  transform: rotate(150deg);
+}
+
+.velvet-hero .names {
+  position: relative;
+  margin-top: 30px;
+  font: 600 54px/1 'Cormorant Garamond', serif;
+  color: #5c1422;
+  direction: ltr;
+}
+
+.velvet-hero .names .lat {
+  display: block;
+  line-height: 1;
+}
+
+.velvet-hero .names .amp {
+  display: block;
+  font: 400 44px/34px 'Great Vibes', cursive;
+  height: 34px;
+  color: #b48a52;
+  margin: 2px 0 10px;
+}
+
+.velvet-hero .ln {
+  position: relative;
+  margin-top: 16px;
+  font: 400 18px 'Amiri', serif;
+  color: var(--velvet-ink-2);
+}
+
+/* ==========================================================================
+   Wine Date Card
+   ========================================================================== */
+.velvet-wine {
+  background: linear-gradient(180deg, #651626, #4a0f1a);
+  color: #f7ece4;
+  border-radius: 22px;
+  padding: 34px 22px;
+  text-align: center;
+  box-shadow: 0 24px 50px -24px rgba(60, 10, 20, 0.7);
+  position: relative;
+}
+
+.velvet-wine .ey {
+  font: 700 17px 'Tajawal', sans-serif;
+  letter-spacing: 0;
+  color: var(--velvet-gold-l);
+  margin: 0;
+}
+
+.velvet-wine .nm {
+  font: 700 44px/1 'Aref Ruqaa', serif;
+  margin: 4px 0 0;
+}
+
+.velvet-wine .nm .lat {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.velvet-wine .nm .amp {
+  display: block;
+  font: 400 38px/30px 'Great Vibes', cursive;
+  height: 30px;
+  color: var(--velvet-gold-l);
+  margin: 2px 0 0;
+}
+
+.velvet-when {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.velvet-when .side {
+  font: 500 15px 'Tajawal', sans-serif;
+  color: #e9d6cc;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+
+.velvet-when .day {
+  font: 700 58px/1 'Amiri', serif;
+  color: #fff;
+  padding: 0 16px;
+  border-inline: 1px solid rgba(232, 207, 159, 0.45);
+}
+
+.velvet-wine .velvet-roses {
+  width: 110px;
+  top: -30px;
+  left: -26px;
+}
+
+/* ==========================================================================
+   Gallery: 3D Cover-Flow
+   ========================================================================== */
+.velvet-gal-h {
+  text-align: center;
+  font: 700 30px 'Aref Ruqaa', serif;
+  color: var(--velvet-wine);
+  margin: 0 0 22px;
+}
+
+.velvet-flow {
+  position: relative;
+  height: 360px;
+  perspective: 1000px;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.velvet-flow .it {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 220px;
+  height: 330px;
+  margin-left: -110px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ccc;
+  box-shadow: 0 18px 36px -14px rgba(60, 10, 20, 0.55);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.6s ease, filter 0.6s ease;
+  cursor: pointer;
+}
+
+.velvet-flow .it img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+  display: block;
+  pointer-events: none;
+}
+
+.velvet-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.velvet-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(92, 20, 34, 0.25);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.velvet-dots i.on {
+  width: 20px;
+  background: var(--velvet-wine);
+}
+
+/* ==========================================================================
+   Countdown & Calendar
+   ========================================================================== */
+.velvet-cd {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 22px 0 4px;
+}
+
+.velvet-cd div {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(232, 207, 159, 0.25);
+  border-radius: 14px;
+  padding: 12px 2px 8px;
+  text-align: center;
+}
+
+.velvet-cd b {
+  display: block;
+  font: 700 30px/1.1 'Amiri', serif;
+  color: #fff;
+}
+
+.velvet-cd small {
+  font-size: 12px;
+  color: #e3cfc4;
+}
+
+.velvet-cal {
+  background: var(--velvet-cream);
+  color: var(--velvet-ink);
+  border-radius: 16px;
+  padding: 18px 14px 14px;
+  margin-top: 22px;
+  text-align: center;
+}
+
+.velvet-cal h4 {
+  margin: 0 0 10px;
+  font: 700 26px 'Aref Ruqaa', serif;
+  color: var(--velvet-wine);
+}
+
+.velvet-cal .g {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  font: 400 15px 'Tajawal', sans-serif;
+  text-align: center;
+  isolation: isolate;
+}
+
+.velvet-cal .g .w {
+  font-size: 11px;
+  color: var(--velvet-ink-2);
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(92, 20, 34, 0.15);
+  margin-bottom: 4px;
+}
+
+.velvet-cal .g span {
+  height: 34px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.velvet-cal .g .hit {
+  color: #fff;
+  font-weight: 700;
+}
+
+.velvet-cal .g .hit::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M12 21C5 15.5 1 12 1 7a5.5 5.5 0 0 1 11-1.6A5.5 5.5 0 0 1 23 7c0 5-4 8.5-11 14z' fill='%235c1422'/%3E%3C/svg%3E");
+}
+
+.velvet-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font: 700 15px 'Tajawal', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.velvet-btn:hover {
+  transform: translateY(-2px);
+}
+
+.velvet-btn.gold {
+  background: linear-gradient(180deg, #e8cf9f, #c9a265);
+  color: #3d0b15;
+  margin-top: 18px;
+}
+
+.velvet-btn.wine-b {
+  background: var(--velvet-wine);
+  color: #fff;
+}
+
+/* ==========================================================================
+   Venue Section
+   ========================================================================== */
+.velvet-venue {
+  text-align: center;
+}
+
+.velvet-venue h3 {
+  margin: 0;
+  font: 700 26px 'Aref Ruqaa', serif;
+  color: var(--velvet-wine);
+}
+
+.velvet-venue .ad {
+  color: var(--velvet-ink-2);
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.velvet-map {
+  margin-top: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 14px 30px -18px rgba(60, 10, 20, 0.6);
+  height: 220px;
+  background: #e9e0d6;
+}
+
+.velvet-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.velvet-venue .btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   RSVP & Live Wishes Wall
+   ========================================================================== */
+.velvet-rs {
+  background: var(--velvet-cream-2);
+  border: 1px solid rgba(201, 162, 101, 0.35);
+  border-radius: 22px;
+  padding: 26px 18px;
+  box-shadow: 0 18px 40px -26px rgba(60, 10, 20, 0.5);
+}
+
+.velvet-rs h3 {
+  margin: 0;
+  text-align: center;
+  font: 700 30px 'Aref Ruqaa', serif;
+  color: var(--velvet-wine);
+}
+
+.velvet-rs .sub {
+  text-align: center;
+  color: var(--velvet-ink-2);
+  font-size: 14px;
+  margin: 2px 0 16px;
+}
+
+.velvet-rs form {
+  display: grid;
+  gap: 12px;
+}
+
+.velvet-rs input[type='text'],
+.velvet-rs textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
+  color: var(--velvet-ink);
+  background: #fff;
+  border: 1px solid #e6d8cb;
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.velvet-rs input:focus,
+.velvet-rs textarea:focus {
+  border-color: var(--velvet-rose);
+}
+
+.velvet-ch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.velvet-ch label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border-radius: 14px;
+  border: 1px solid #e6d8cb;
+  background: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.velvet-ch input {
+  position: absolute;
+  opacity: 0;
+}
+
+.velvet-ch label.is-selected {
+  background: var(--velvet-wine);
+  border-color: var(--velvet-wine);
+  color: #fff;
+  font-weight: 700;
+}
+
+.velvet-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.velvet-chips button {
+  font: inherit;
+  font-size: 13px;
+  border: 1px solid #e6d8cb;
+  background: #fff;
+  color: var(--velvet-ink);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.velvet-chips button:hover {
+  background: var(--velvet-cream);
+}
+
+.velvet-rs .velvet-btn {
+  justify-self: center;
+  padding: 0 44px;
+}
+
+.velvet-ok {
+  display: none;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.velvet-ok.on {
+  display: block;
+}
+
+.velvet-ok b {
+  display: block;
+  font: 700 30px 'Aref Ruqaa', serif;
+  color: var(--velvet-wine);
+}
+
+.velvet-err {
+  color: #a3253a;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+}
+
+.velvet-wall {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.velvet-wish {
+  background: #fff;
+  border: 1px solid #eee2d6;
+  border-radius: 16px;
+  padding: 12px 14px;
+  animation: velvetFadeIn 0.5s ease;
+}
+
+.velvet-wish b {
+  color: var(--velvet-wine);
+  font-size: 15px;
+  display: block;
+}
+
+.velvet-wish p {
+  color: var(--velvet-ink);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-top: 2px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.velvet-wall .empty {
+  text-align: center;
+  color: var(--velvet-ink-2);
+  font-size: 14px;
+}
+
+.velvet-more {
+  justify-self: center;
+  font: inherit;
+  font-size: 14px;
+  border: 1px solid #e6d8cb;
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  color: var(--velvet-wine);
+  margin-top: 10px;
+}
+
+@keyframes velvetFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Ceremonial Closing Card (.fin)
+   ========================================================================== */
+.velvet-fin {
+  padding: 44px 26px 64px;
+  overflow: hidden;
+}
+
+.velvet-fin-in {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 26px;
+  padding: 70px 26px 46px;
+  color: #f6e9e2;
+  background: radial-gradient(120% 70% at 50% 0, #7a1a2b, #4a0f1a 70%, #3a0a14);
+  box-shadow: 0 30px 60px -28px rgba(60, 8, 20, 0.75);
+}
+
+.velvet-fin-in::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(232, 207, 159, 0.45);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.velvet-fin-seal {
+  position: absolute;
+  left: 50%;
+  top: -38px;
+  width: 86px;
+  margin-left: -43px;
+  filter: drop-shadow(0 6px 8px rgba(40, 5, 10, 0.45));
+}
+
+.velvet-fin-fl {
+  position: absolute;
+  width: 128px;
+  pointer-events: none;
+}
+
+.velvet-fin-fl.a {
+  top: -40px;
+  left: -40px;
+  width: 104px;
+  transform: rotate(-14deg);
+}
+
+.velvet-fin-fl.b {
+  bottom: -40px;
+  right: -40px;
+  transform: rotate(166deg);
+  width: 96px;
+}
+
+.velvet-fin-t {
+  font: 400 42px/1.15 'Great Vibes', cursive;
+  color: #e8cf9f;
+  margin: 0;
+}
+
+.velvet-fin-o {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #e8cf9f;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.velvet-fin-o i {
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8cf9f);
+  display: inline-block;
+}
+
+.velvet-fin-o i:last-child {
+  transform: scaleX(-1);
+}
+
+.velvet-fin-v {
+  font: 400 21px/1.95 'Amiri', serif;
+  color: #fff;
+  margin: 0;
+}
+
+.velvet-fin-e {
+  font: italic 400 17px/1.65 'Cormorant Garamond', Georgia, serif;
+  color: #ead6cb;
+  margin-top: 8px;
+}
+
+.velvet-fin-w {
+  font: 400 32px 'Great Vibes', cursive;
+  color: #e8cf9f;
+  margin-top: 16px;
+}
+
+.velvet-fin-n {
+  font: 600 42px/1 'Cormorant Garamond', serif;
+  color: #fff;
+  margin-top: 6px;
+  direction: ltr;
+}
+
+.velvet-fin-n span {
+  display: block;
+}
+
+.velvet-fin-n i {
+  display: block;
+  font: 400 40px/0.9 'Great Vibes', cursive;
+  color: #e8cf9f;
+  font-style: normal;
+  margin: 2px 0;
+}
+
+.velvet-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--velvet-ink-2);
+  padding: 0 0 110px;
+}
+
+.velvet-footer a {
+  color: var(--velvet-wine);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Floating Controls & Dock
+   ========================================================================== */
+.velvet-mus {
+  position: fixed;
+  left: max(16px, calc(50% - 224px));
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index: 30;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--velvet-wine);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 20px rgba(60, 10, 20, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.velvet-mus:hover {
+  transform: scale(1.08);
+}
+
+.velvet-mus svg {
+  width: 22px;
+  height: 22px;
+}
+
+.velvet-dock-order {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index: 29;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #7a1a2b, #4a0f1a);
+  color: #ffffff !important;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(74, 15, 26, 0.45);
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+
+.velvet-dock-order:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 10px 28px rgba(74, 15, 26, 0.6);
+}
+
+/* Falling flower petals */
+.velvet-petal {
+  position: fixed;
+  top: -20px;
+  z-index: 99999;
+  pointer-events: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 60% 0 60% 0;
+  opacity: 0.95;
+  animation: velvetFall var(--t, 6s) linear forwards;
+}
+
+@keyframes velvetFall {
+  to {
+    transform: translate(var(--x, 40px), 110vh) rotate(var(--r, 360deg));
+    opacity: 0.2;
+  }
+}

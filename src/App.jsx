@@ -10,6 +10,7 @@ import FAQPage from './pages/FAQPage';
 import InvitationPage from './pages/InvitationPage';
 import MazenFaridaPage from './pages/MazenFaridaPage';
 import MohamedSalmaPage from './pages/MohamedSalmaPage';
+import VelvetPage from './pages/VelvetPage';
 import GuestDashboardPage from './pages/GuestDashboardPage';
 import LinkGeneratorPage from './pages/LinkGeneratorPage';
 import QRCardPage from './pages/QRCardPage';
@@ -28,7 +29,8 @@ function LayoutWrapper() {
     location.pathname.startsWith('/invite/') ||
     location.pathname === '/mazen-farida' ||
     location.pathname === '/mohamed-salma' ||
-    location.pathname === '/mohamed-salma-v2';
+    location.pathname === '/mohamed-salma-v2' ||
+    location.pathname === '/velvet';
 
   return (
     <div className="app-layout-container">
@@ -45,6 +47,8 @@ function LayoutWrapper() {
         <Route path="/mohamed-salma-v2" element={<MohamedSalmaPage version={2} />} />
         <Route path="/invite/mohamed-salma" element={<MohamedSalmaPage />} />
         <Route path="/invite/mohamed-salma-v2" element={<MohamedSalmaPage version={2} />} />
+        <Route path="/velvet" element={<VelvetPage />} />
+        <Route path="/invite/velvet" element={<VelvetPage />} />
         <Route path="/invite/:slug" element={<InvitationPage />} />
         <Route path="/guests" element={<GuestDashboardPage />} />
         <Route path="/admin" element={<GuestDashboardPage />} />

@@ -209,6 +209,13 @@ for (const inv of invitations) {
     imageWidth = 1024;
     imageHeight = 576;
     imageAlt = 'حفل خطوبه محمد وسلمى.';
+  } else if (inv.slug === 'velvet') {
+    title = 'خطوبة عبدالرحمن و آية 💍 | وِصال';
+    description = 'دعوة خطوبة أونلاين: ظرف عنابي بختم شمع دهبي وصورتكم بولارويد، ورد، عد تنازلي، تأكيد حضور وتهاني.';
+    image = '/images/og/velvet.jpg';
+    imageWidth = 1200;
+    imageHeight = 630;
+    imageAlt = 'خطوبة عبدالرحمن و آية 💍';
   } else {
     const p = inv.people || {};
     const names = `${p.firstPerson || ''} ${p.relation || '&'} ${p.secondPerson || ''}`.trim();
@@ -294,6 +301,16 @@ const staticPages = [
     imageHeight: 576,
     imageAlt: 'حفل خطوبه محمد وسلمى.',
     url: 'https://wisal.app/mohamed-salma-v2'
+  },
+  {
+    path: 'velvet',
+    title: 'خطوبة عبدالرحمن و آية 💍 | وِصال',
+    description: 'دعوة خطوبة أونلاين: ظرف عنابي بختم شمع دهبي وصورتكم بولارويد، ورد، عد تنازلي، تأكيد حضور وتهاني.',
+    image: '/images/og/velvet.jpg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageAlt: 'خطوبة عبدالرحمن و آية 💍',
+    url: 'https://wisal.app/velvet'
   },
   {
     path: 'guests',

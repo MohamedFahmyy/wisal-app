@@ -12,6 +12,7 @@ import FloralDoorsTemplate from './FloralDoorsTemplate';
 import ModernPhotoTemplate from './ModernPhotoTemplate';
 import MazenFaridaTemplate from './MazenFaridaTemplate';
 import MohamedSalmaTemplate from './MohamedSalmaTemplate';
+import VelvetTemplate from './VelvetTemplate';
 
 export const templateRegistry = {
   classic: ClassicWaxTemplate,
@@ -31,7 +32,8 @@ export const templateRegistry = {
   modern: ModernPhotoTemplate,
   'mazen-farida': MazenFaridaTemplate,
   'mohamed-salma': MohamedSalmaTemplate,
-  farha: MazenFaridaTemplate
+  farha: MazenFaridaTemplate,
+  velvet: VelvetTemplate
 };
 
 export function getTemplateComponent(templateKey) {

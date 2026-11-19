@@ -1053,6 +1053,97 @@ export const invitations = [
       secondaryAccent: '#9fae9a',
       bgMuted: '#f3f6f4'
     }
+  },
+  {
+    id: 'inv_velvet',
+    slug: 'velvet',
+    template: 'velvet',
+    category: 'engagement',
+    categoryLabel: 'خطوبة',
+    categoryLabelEn: 'Engagement',
+    language: 'ar',
+    tag: 'تجربة الڤيلڤيت الفاخرة',
+    tagEn: 'Velvet Luxury Experience',
+    titleAr: 'حفل خطوبة عبدالرحمن و آية 💍',
+    titleEn: 'Abdelrahman & Aya Engagement Invitation | Wisal',
+    description: 'دعوة خطوبة أونلاين: ظرف عنابي بختم شمع دهبي وصورتكم بولارويد، ورد، عد تنازلي، تأكيد حضور وتهاني.',
+    descriptionEn: 'Luxury velvet burgundy envelope with wax seal, polaroid reveal, 3D gallery, countdown and live wishes wall.',
+
+    people: {
+      firstPerson: 'عبدالرحمن',
+      secondPerson: 'آية',
+      firstPersonEn: 'Abdelrahman',
+      secondPersonEn: 'Aya',
+      relation: '&'
+    },
+
+    event: {
+      title: 'حفل خطوبة',
+      titleEn: 'Engagement Celebration',
+      subtitle: 'بكل الحب، ندعوكم لمشاركتنا فرحتنا بليلة العمر',
+      subtitleEn: 'With all our love, we invite you to share our joy',
+      date: '2026-12-20',
+      time: '20:00',
+      dateFormatted: 'الأحد، 20 ديسمبر 2026',
+      dateFormattedEn: 'Sunday, December 20, 2026',
+      timeFormatted: '8:00 مساءً',
+      timeFormattedEn: '8:00 PM',
+      timezone: 'Africa/Cairo',
+      schedule: [
+        { time: '07:30 PM', timeEn: '07:30 PM', title: 'وصول الضيوف', titleEn: 'Guest Arrival' },
+        { time: '08:00 PM', timeEn: '08:00 PM', title: 'مراسم الخطوبة وتلبيس الدبل', titleEn: 'Engagement Rings Ceremony' },
+        { time: '09:00 PM', timeEn: '09:00 PM', title: 'العشاء والاحتفال', titleEn: 'Dinner & Celebration' }
+      ]
+    },
+
+    venue: {
+      name: 'قاعة الياسمين',
+      nameAr: 'قاعة الياسمين',
+      nameEn: 'Al Yasmine Hall',
+      address: 'مصر الجديدة، القاهرة',
+      addressEn: 'Heliopolis, Cairo, Egypt',
+      city: 'القاهرة، مصر',
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Heliopolis+Cairo+Egypt',
+      coordinates: '30.0914, 31.2585'
+    },
+
+    media: {
+      coverImage: '/img/velvet/cover.webp',
+      ogImage: '/images/og/velvet.jpg',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: 'خطوبة عبدالرحمن و آية 💍',
+      gallery: [
+        '/img/velvet/p1.webp',
+        '/img/velvet/p2.webp',
+        '/img/velvet/p3.webp',
+        '/img/velvet/p4.webp',
+        '/img/velvet/p5.webp'
+      ],
+      music: '/audio/envelope.mp3'
+    },
+
+    closing: {
+      dua: 'وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً',
+      duaEn: 'And among His signs is that He created for you mates, that you may find tranquility in them, and He placed between you affection and mercy.',
+      signoff: 'With love, we await you',
+      signoffEn: 'With love, we await you'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#5c1422',
+      secondaryAccent: '#c9a265',
+      bgMuted: '#f7efe6'
+    }
   }
 ];
 
