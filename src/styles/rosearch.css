@@ -1035,3 +1035,76 @@
     opacity: 0.2;
   }
 }
+
+/* =========================================================================
+   ROSEARCH MOBILE RESPONSIVENESS & SAFE AREA OPTIMIZATIONS
+   ========================================================================= */
+@media (max-width: 768px) {
+  .rosearch-mus {
+    top: max(14px, env(safe-area-inset-top, 0px));
+    inset-inline-end: max(14px, env(safe-area-inset-right, 0px));
+    width: 46px;
+    height: 46px;
+  }
+
+  .rosearch-dock-order {
+    bottom: max(14px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .rosearch-wrap {
+    padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .rosearch-f input,
+  .rosearch-f select,
+  .rosearch-f textarea {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .rosearch-cv {
+    padding: 36px 14px 40px;
+  }
+
+  .rosearch-intro .wreath-wrap {
+    width: min(230px, 72vw);
+    height: min(230px, 72vw);
+  }
+
+  .rosearch-hero .couple-names h1.name-g,
+  .rosearch-hero .couple-names h1.name-b {
+    font-size: clamp(34px, 11vw, 50px);
+  }
+
+  .rosearch-cd {
+    gap: 8px;
+  }
+
+  .rosearch-cd b {
+    font-size: 26px;
+  }
+
+  .rosearch-cd small {
+    font-size: 12px;
+  }
+
+  .rosearch-dock-order {
+    font-size: 13.5px;
+    left: max(74px, calc(50% - 170px));
+    right: max(12px, calc(50% - 220px));
+    height: 48px;
+  }
+}
+
+@media (max-width: 380px) {
+  .rosearch-cd b {
+    font-size: 22px;
+  }
+
+  .rosearch-dock-order {
+    font-size: 12px;
+    height: 44px;
+    letter-spacing: -0.2px;
+  }
+}

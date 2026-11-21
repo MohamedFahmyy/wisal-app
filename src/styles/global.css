@@ -2411,3 +2411,149 @@ img {
     text-align: center;
   }
 }
+
+/* =========================================================================
+   COMPREHENSIVE MOBILE VIEW OPTIMIZATIONS (Smartphones 320px - 480px)
+   ========================================================================= */
+
+/* Prevent horizontal wiggle and layout shifts */
+html, body, #root, .app-layout-container {
+  overflow-x: clip;
+  max-width: 100vw;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* iOS Safari Input Auto-Zoom Fix (Must be 16px+ on touch devices) */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="search"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Header notch and dynamic island safe area */
+  .site-header {
+    padding-top: max(14px, env(safe-area-inset-top, 0px));
+  }
+
+  /* Mobile Drawer momentum scroll & safe padding */
+  .mobile-drawer {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100svh - 70px);
+    padding-bottom: calc(var(--space-3xl) + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Horizontal swipeable category & filter tabs */
+  .categories-filter-bar,
+  .filter-tabs-wrapper,
+  .filter-tabs-group,
+  .catalog-filter-bar {
+    display: flex !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 6px !important;
+    gap: 8px !important;
+  }
+
+  .categories-filter-bar::-webkit-scrollbar,
+  .filter-tabs-wrapper::-webkit-scrollbar,
+  .filter-tabs-group::-webkit-scrollbar,
+  .catalog-filter-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .filter-tab-pill,
+  .category-pill {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --space-xl: 20px;
+    --space-2xl: 32px;
+    --space-3xl: 44px;
+    --space-4xl: 60px;
+  }
+
+  /* Safe container gutters */
+  .container,
+  .nav-container,
+  .demos-page-container,
+  .packages-page-container,
+  .features-page-container,
+  .faq-page-container {
+    padding-inline: 16px !important;
+  }
+
+  /* Hero Typography on Mobile */
+  .landing-hero-heading {
+    font-size: clamp(28px, 8.5vw, 38px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .hero-lead-paragraph {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+  }
+
+  .hero-cta-group {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .hero-cta-group a,
+  .hero-cta-group button {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 48px !important;
+  }
+
+  /* Interactive Cards on Mobile */
+  .featured-invitation-card,
+  .gallery-card-item,
+  .package-card,
+  .step-card {
+    border-radius: var(--radius-lg) !important;
+  }
+
+  /* Table responsive wrap */
+  .dashboard-table-wrap,
+  .guests-table-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: var(--radius-md) !important;
+    margin-inline: -8px;
+    padding-inline: 8px;
+  }
+
+  /* Floating and Bottom dock actions */
+  .btn-order-cta,
+  .mobile-cta {
+    min-height: 48px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .landing-hero-heading {
+    font-size: 26px !important;
+  }
+
+  .hero-eyebrow-pill {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+  }
+
+  .package-price-number {
+    font-size: 32px !important;
+  }
+}

@@ -1759,3 +1759,172 @@
   background: #c85676;
   color: #ffffff;
 }
+
+/* =========================================================================
+   MOBILE RESPONSIVENESS & SAFE AREA OPTIMIZATIONS
+   ========================================================================= */
+@media (max-width: 768px) {
+  .mf-stage {
+    padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mf-version-switcher {
+    top: max(14px, env(safe-area-inset-top, 0px));
+  }
+
+  .mf-floating-bar-dock {
+    bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .mf-rsvp-input,
+  .mf-rsvp-select,
+  .mf-rsvp-textarea {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mf-stage {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Intro overlay full height on mobile */
+  .mf-intro-overlay {
+    height: 100svh;
+  }
+
+  .mf-hero-video-wrap {
+    height: 100svh;
+  }
+
+  .mf-hero-names {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .mf-hero-title {
+    font-size: 15px;
+    padding: 0 14px;
+  }
+
+  .mf-hero-datetime {
+    font-size: 15px;
+  }
+
+  /* Scratch cards grid on mobile */
+  .mf-scratch-grid {
+    gap: 8px;
+    padding: 0 12px;
+  }
+
+  .mf-scratch-card {
+    height: 112px;
+    border-radius: 15px;
+  }
+
+  .mf-scratch-value {
+    font-size: 28px;
+  }
+
+  .mf-scratch-value.is-month {
+    font-size: 21px;
+  }
+
+  .mf-scratch-label {
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  /* Timeline stops on mobile */
+  .mf-timeline-stop {
+    grid-template-columns: 1fr 38px 1fr;
+    min-height: 100px;
+    margin-bottom: 20px;
+  }
+
+  .mf-timeline-side-content {
+    padding: 0 6px;
+  }
+
+  .mf-timeline-time {
+    font-size: 19px;
+  }
+
+  .mf-timeline-desc {
+    font-size: 14px;
+  }
+
+  .mf-timeline-side-img img {
+    max-width: 72px;
+    max-height: 72px;
+  }
+
+  /* Countdown grid on mobile */
+  .mf-countdown-grid {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .mf-countdown-card {
+    padding: 12px 6px;
+  }
+
+  .mf-countdown-num {
+    font-size: 26px;
+  }
+
+  .mf-countdown-label {
+    font-size: 12px;
+  }
+
+  /* Floating dock on mobile */
+  .mf-floating-bar-dock {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .mf-dock-circle-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mf-dock-order-pill {
+    padding: 11px 14px;
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 380px) {
+  .mf-scratch-grid {
+    gap: 6px;
+    padding: 0 8px;
+  }
+
+  .mf-scratch-card {
+    height: 100px;
+    border-radius: 12px;
+  }
+
+  .mf-scratch-value {
+    font-size: 25px;
+  }
+
+  .mf-scratch-value.is-month {
+    font-size: 18px;
+  }
+
+  .mf-dock-circle-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .mf-dock-order-pill {
+    padding: 10px 10px;
+    font-size: 11.5px;
+    letter-spacing: -0.3px;
+  }
+
+  .mf-countdown-num {
+    font-size: 22px;
+  }
+}
