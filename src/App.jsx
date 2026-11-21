@@ -14,6 +14,7 @@ import VelvetPage from './pages/VelvetPage';
 import RoseArchPage from './pages/RoseArchPage';
 import LunePage from './pages/LunePage';
 import PearlPage from './pages/PearlPage';
+import VeilPage from './pages/VeilPage';
 import GuestDashboardPage from './pages/GuestDashboardPage';
 import LinkGeneratorPage from './pages/LinkGeneratorPage';
 import QRCardPage from './pages/QRCardPage';
@@ -36,7 +37,8 @@ function LayoutWrapper() {
     location.pathname === '/velvet' ||
     location.pathname === '/rosearch' ||
     location.pathname === '/lune' ||
-    location.pathname === '/pearl';
+    location.pathname === '/pearl' ||
+    location.pathname === '/veil';
 
   return (
     <div className="app-layout-container">
@@ -61,6 +63,8 @@ function LayoutWrapper() {
         <Route path="/invite/lune" element={<LunePage />} />
         <Route path="/pearl" element={<PearlPage />} />
         <Route path="/invite/pearl" element={<PearlPage />} />
+        <Route path="/veil" element={<VeilPage />} />
+        <Route path="/invite/veil" element={<VeilPage />} />
         <Route path="/invite/:slug" element={<InvitationPage />} />
         <Route path="/guests" element={<GuestDashboardPage />} />
         <Route path="/admin" element={<GuestDashboardPage />} />

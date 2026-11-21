@@ -230,6 +230,13 @@ for (const inv of invitations) {
     imageWidth = 1200;
     imageHeight = 630;
     imageAlt = 'عقد قران وحفل زفاف يوسف وليلى 🤍';
+  } else if (inv.slug === 'veil') {
+    title = 'عقد قران وحفل زفاف · عبدالرحمن وآية 🤍 | وِصال';
+    description = 'طرحة عروس رقيقة تنفتح عند اللمس 🤍 — عقد قران وحفل زفاف عبدالرحمن وآية، كشط التاريخ، شريط الصور، وتأكيد الحضور.';
+    image = '/images/og/veil.jpg';
+    imageWidth = 1200;
+    imageHeight = 630;
+    imageAlt = 'عقد قران وحفل زفاف عبدالرحمن وآية 🤍';
   } else if (inv.slug === 'lune') {
     title = 'حفل زفاف يوسف و ليلى 🌙 | وِصال';
     description = 'تحت نور القمر، ندعوكم لفرحنا — أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.';
@@ -362,6 +369,16 @@ const staticPages = [
     imageHeight: 630,
     imageAlt: 'عقد قران وحفل زفاف يوسف وليلى 🤍',
     url: 'https://wisal.app/pearl'
+  },
+  {
+    path: 'veil',
+    title: 'عقد قران وحفل زفاف · عبدالرحمن وآية 🤍 | وِصال',
+    description: 'طرحة عروس رقيقة تنفتح عند اللمس 🤍 — عقد قران وحفل زفاف عبدالرحمن وآية، كشط التاريخ، شريط الصور، وتأكيد الحضور.',
+    image: '/images/og/veil.jpg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageAlt: 'عقد قران وحفل زفاف عبدالرحمن وآية 🤍',
+    url: 'https://wisal.app/veil'
   },
   {
     path: 'guests',

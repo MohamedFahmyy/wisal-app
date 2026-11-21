@@ -1422,6 +1422,102 @@ export const invitations = [
       secondaryAccent: '#86672d',
       bgMuted: '#f5f0e6'
     }
+  },
+  {
+    id: 'inv_veil',
+    slug: 'veil',
+    template: 'veil',
+    category: 'wedding',
+    categoryLabel: 'عقد قران وزفاف',
+    categoryLabelEn: 'Katb el-Ketab & Wedding',
+    language: 'ar',
+    tag: 'طرحة العروس البيضاء وكشط الميعاد',
+    tagEn: 'Bridal Veil & Scratch Card',
+    titleAr: 'عقد قران وحفل زفاف · عبدالرحمن وآية 🤍',
+    titleEn: 'Abdelrahman & Aya — Katb el-Ketab & Wedding | Wisal',
+    description: 'طرحة عروس رقيقة تنفتح عند اللمس 🤍 — عقد قران وحفل زفاف عبدالرحمن وآية، كشط التاريخ، شريط الصور، وتأكيد الحضور.',
+    descriptionEn: 'A delicate sheer bridal veil parts on tap — katb el-ketab & wedding of Abdelrahman & Aya with scratch card, photo strip, and RSVP.',
+
+    people: {
+      firstPerson: 'عبدالرحمن',
+      secondPerson: 'آية',
+      firstPersonEn: 'Abdelrahman',
+      secondPersonEn: 'Aya',
+      firstPersonTitle: 'العريس',
+      secondPersonTitle: 'العروس',
+      firstPersonTitleEn: 'The Groom',
+      secondPersonTitleEn: 'The Bride',
+      parentsAr: 'تتشرف عائلتا عبدالرحمن وآية بدعوتكم',
+      parentsEn: 'Together with their families, Abdelrahman & Aya'
+    },
+
+    event: {
+      type: 'wedding',
+      title: 'عقد قران وحفل زفاف عبدالرحمن وآية',
+      titleEn: 'Katb el-Ketab & Wedding of Abdelrahman & Aya',
+      date: '2027-06-24',
+      time: '18:45',
+      timeFormatted: '٦:٤٥ مساءً',
+      timeFormattedEn: '6:45 PM',
+      dateFormatted: 'الخميس، ٢٤ يونيو ٢٠٢٧',
+      dateFormattedEn: 'Thursday, 24 June 2027',
+      hijriDate: '١٩ محرم ١٤٤٩ هـ',
+      hijriDateEn: '19 Muharram 1449 AH',
+      epochMs: 1813851900000,
+      description: 'بفرحة كبيرة، ندعوكم تشاركونا كتب كتابنا وفرحنا في يوم واحد.'
+    },
+
+    venue: {
+      name: 'فيلا الياسمين',
+      nameEn: 'Villa Yasmine',
+      hall: 'الجنينة المفتوحة',
+      hallEn: 'The Garden',
+      city: 'الزمالك، القاهرة',
+      cityEn: 'Zamalek, Cairo',
+      address: 'الزمالك، القاهرة · الجنينة',
+      addressEn: 'Zamalek, Cairo, Egypt · The garden',
+      mapEmbedUrl: 'https://maps.google.com/maps?q=Zamalek%20Cairo&z=14&output=embed',
+      mapUrl: 'https://maps.google.com/?q=Zamalek+Cairo',
+      coordinates: '30.0617, 31.2195'
+    },
+
+    media: {
+      coverImage: '/img/ivory/walk.jpg',
+      ogImage: '/images/og/veil.jpg',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: 'عقد قران وحفل زفاف عبدالرحمن وآية 🤍',
+      gallery: [
+        '/img/ivory/walk.jpg',
+        '/img/ivory/stairs.jpg',
+        '/img/ivory/arcade.jpg',
+        '/img/ivory/lift.jpg',
+        '/img/ivory/gazebo.jpg'
+      ],
+      music: '/audio/veil.mp3'
+    },
+
+    closing: {
+      dua: 'وجودكم معانا هو اللي هيكمل فرحتنا. شكرًا من قلبنا إنكم جزء من يومنا.',
+      duaEn: 'Having you with us is what will make our day complete. Thank you, from our hearts.',
+      signoff: 'عبدالرحمن وآية',
+      signoffEn: 'Abdelrahman & Aya'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#c7837a',
+      secondaryAccent: '#9d5d55',
+      bgMuted: '#f7f1ee'
+    }
   }
 ];
 

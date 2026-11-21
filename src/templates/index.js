@@ -15,6 +15,7 @@ import MohamedSalmaTemplate from './MohamedSalmaTemplate';
 import VelvetTemplate from './VelvetTemplate';
 import LuneTemplate from './LuneTemplate';
 import PearlTemplate from './PearlTemplate';
+import VeilTemplate from './VeilTemplate';
 
 export const templateRegistry = {
   classic: ClassicWaxTemplate,
@@ -40,7 +41,8 @@ export const templateRegistry = {
   'rose-arch': RoseArchTemplate,
   lune: LuneTemplate,
   'under-the-moonlight': LuneTemplate,
-  pearl: PearlTemplate
+  pearl: PearlTemplate,
+  veil: VeilTemplate
 };
 
 export function getTemplateComponent(templateKey) {
