@@ -223,6 +223,20 @@ for (const inv of invitations) {
     imageWidth = 1200;
     imageHeight = 630;
     imageAlt = 'حفل زفاف يحيى و ليلى 🌹';
+  } else if (inv.slug === 'pearl') {
+    title = 'عقد قران وحفل زفاف · يوسف وليلى 🤍 | وِصال';
+    description = 'اضغط على الختم وافتح الظرف 🤍 — عقد قران وحفل زفاف يوسف وليلى، بطاقة كشط التاريخ، تفاصيل اليوم، وتأكيد الحضور.';
+    image = '/images/og/pearl.jpg';
+    imageWidth = 1200;
+    imageHeight = 630;
+    imageAlt = 'عقد قران وحفل زفاف يوسف وليلى 🤍';
+  } else if (inv.slug === 'lune') {
+    title = 'حفل زفاف يوسف و ليلى 🌙 | وِصال';
+    description = 'تحت نور القمر، ندعوكم لفرحنا — أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.';
+    image = '/images/og/lune.jpg';
+    imageWidth = 1200;
+    imageHeight = 630;
+    imageAlt = 'حفل زفاف يوسف و ليلى 🌙';
   } else {
     const p = inv.people || {};
     const names = `${p.firstPerson || ''} ${p.relation || '&'} ${p.secondPerson || ''}`.trim();
@@ -338,6 +352,16 @@ const staticPages = [
     imageHeight: 630,
     imageAlt: 'حفل زفاف يوسف و ليلى 🌙',
     url: 'https://wisal.app/lune'
+  },
+  {
+    path: 'pearl',
+    title: 'عقد قران وحفل زفاف · يوسف وليلى 🤍 | وِصال',
+    description: 'اضغط على الختم وافتح الظرف 🤍 — عقد قران وحفل زفاف يوسف وليلى، بطاقة كشط التاريخ، تفاصيل اليوم، وتأكيد الحضور.',
+    image: '/images/og/pearl.jpg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageAlt: 'عقد قران وحفل زفاف يوسف وليلى 🤍',
+    url: 'https://wisal.app/pearl'
   },
   {
     path: 'guests',

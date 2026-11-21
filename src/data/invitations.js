@@ -1330,6 +1330,98 @@ export const invitations = [
       secondaryAccent: '#1c2642',
       bgMuted: '#0e1424'
     }
+  },
+  {
+    id: 'inv_pearl',
+    slug: 'pearl',
+    template: 'pearl',
+    category: 'wedding',
+    categoryLabel: 'عقد قران وزفاف',
+    categoryLabelEn: 'Katb el-Ketab & Wedding',
+    language: 'ar',
+    tag: 'ختم الشمع العاجي وكشط التاريخ',
+    tagEn: 'Ivory Wax Seal & Scratch Card',
+    titleAr: 'عقد قران وحفل زفاف · يوسف وليلى 🤍',
+    titleEn: 'Youssef & Laila — Katb el-Ketab & Wedding | Wisal',
+    description: 'اضغط على الختم وافتح الظرف 🤍 — عقد قران وحفل زفاف يوسف وليلى، بطاقة كشط التاريخ، تفاصيل اليوم، وتأكيد الحضور.',
+    descriptionEn: 'Tap the wax seal and open the embossed ivory envelope — scratch card to reveal the date, schedule of the day, live countdown, and RSVP.',
+
+    people: {
+      firstPerson: 'يوسف',
+      secondPerson: 'ليلى',
+      firstPersonEn: 'Youssef',
+      secondPersonEn: 'Laila',
+      firstPersonTitle: 'العريس',
+      secondPersonTitle: 'العروس',
+      firstPersonTitleEn: 'The Groom',
+      secondPersonTitleEn: 'The Bride',
+      parentsAr: 'تتشرف عائلتا يوسف وليلى بدعوتكم',
+      parentsEn: 'Together with their families, Youssef & Laila'
+    },
+
+    event: {
+      type: 'wedding',
+      title: 'عقد قران وحفل زفاف يوسف وليلى',
+      titleEn: 'Katb el-Ketab & Wedding of Youssef & Laila',
+      date: '2027-02-18',
+      time: '19:00',
+      timeFormatted: '٧:٠٠ مساءً',
+      timeFormattedEn: '7:00 PM',
+      dateFormatted: 'الخميس، ١٨ فبراير ٢٠٢٧',
+      dateFormattedEn: 'Thursday, 18 February 2027',
+      hijriDate: '١١ شعبان ١٤٤٨ هـ',
+      hijriDateEn: '11 Sha\'ban 1448 AH',
+      epochMs: 1771434000000,
+      description: 'بسم الله وعلى بركة الله، يتشرف أهل العروسين بدعوتكم لحضور عقد القران وحفل الزفاف.'
+    },
+
+    venue: {
+      name: 'قاعة الياقوت',
+      nameEn: 'Al Yaqout Hall',
+      hall: 'القاعة الكبرى',
+      hallEn: 'Grand Hall',
+      city: 'مصر الجديدة، القاهرة',
+      cityEn: 'Heliopolis, Cairo',
+      address: 'مصر الجديدة، القاهرة',
+      addressEn: 'Heliopolis, Cairo, Egypt',
+      mapEmbedUrl: 'https://maps.google.com/maps?q=Heliopolis%20Cairo&z=14&output=embed',
+      mapUrl: 'https://maps.google.com/?q=Heliopolis+Cairo',
+      coordinates: '30.0875, 31.3285'
+    },
+
+    media: {
+      coverImage: '/img/wedding/cover.jpg',
+      ogImage: '/images/og/pearl.jpg',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: 'عقد قران وحفل زفاف يوسف وليلى 🤍',
+      gallery: [
+        '/img/wedding/cover.jpg'
+      ],
+      music: '/audio/pearl.mp3'
+    },
+
+    closing: {
+      dua: 'وجودكم معانا هو اللي هيكمل فرحتنا. شكرًا من قلبنا إنكم جزء من يومنا.',
+      duaEn: 'Having you with us is what will make our day complete. Thank you, from our hearts.',
+      signoff: 'يوسف وليلى',
+      signoffEn: 'Youssef & Laila'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#b8944f',
+      secondaryAccent: '#86672d',
+      bgMuted: '#f5f0e6'
+    }
   }
 ];
 
