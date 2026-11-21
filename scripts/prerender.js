@@ -330,6 +330,16 @@ const staticPages = [
     url: 'https://wisal.app/rosearch'
   },
   {
+    path: 'lune',
+    title: 'حفل زفاف يوسف و ليلى 🌙 | وِصال',
+    description: 'تحت نور القمر، ندعوكم لفرحنا — أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.',
+    image: '/images/og/lune.jpg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageAlt: 'حفل زفاف يوسف و ليلى 🌙',
+    url: 'https://wisal.app/lune'
+  },
+  {
     path: 'guests',
     title: 'لوحة إدارة قائمة الضيوف وتأكيد الحضور — وِصال',
     description: 'متابعة حية لتأكيدات الحضور واعتذارات المعازيم، إجمالي الأفراد، ورسائل التهاني مع إمكانية مشاركتها ستوري وتصدير ملف Excel.',

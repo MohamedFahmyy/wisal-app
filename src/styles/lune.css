@@ -1,0 +1,1016 @@
+/* ==========================================================================
+   LUNE — Under the Moonlight Luxury Invitation Styles
+   Faithfully reproduced from https://ma3zoom.vercel.app/lune
+   ========================================================================== */
+
+.lune-container {
+  --lune-bg: #0e1424;
+  --lune-paper: #151d33;
+  --lune-ink: #eef1f8;
+  --lune-muted: #9aa5c0;
+  --lune-line: #26304d;
+  --lune-accent: #d9c08a;
+  --lune-accent-dark: #e8d3a2;
+  --lune-deep: #1c2642;
+  --lune-deep-ink: #f1f3fa;
+  --lune-deep-accent: #e6cf98;
+  --lune-around: #070b16;
+  --lune-f-ar: "El Messiri", "Amiri", serif;
+  --lune-f-ar-script: "Aref Ruqaa", "Amiri", serif;
+  --lune-f-script: "Pinyon Script", "Snell Roundhand", cursive;
+  --lune-f-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --lune-f-body: "Alexandria", system-ui, "Segoe UI", Tahoma, sans-serif;
+  --lune-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .32 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  
+  background: var(--lune-bg);
+  color: var(--lune-ink);
+  font-family: var(--lune-f-body);
+  font-weight: 300;
+  line-height: 1.85;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.lune-container *,
+.lune-container *::before,
+.lune-container *::after {
+  box-sizing: border-box;
+}
+
+.lune-container a {
+  color: inherit;
+}
+
+.lune-container button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.lune-container :focus-visible {
+  outline: 2px solid var(--lune-accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Cover: The Gate with 3D Doors ---------- */
+.lune-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--lune-around);
+  transition: opacity 1s ease 1.7s;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lune-gate::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: url("/img/lune/gate.jpg") center/cover;
+  filter: blur(30px) brightness(0.55);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.lune-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  perspective: 1300px;
+  background: #000;
+}
+
+@media (min-width: 600px) {
+  .lune-stage {
+    width: auto;
+    height: 94vh;
+    aspect-ratio: 9/16;
+    border-radius: 8px;
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.lune-stage .lune-scene {
+  position: absolute;
+  inset: 0;
+  background: url("/img/lune/scene-couple.jpg") center/cover;
+  transform: scale(1.18);
+  filter: brightness(0.8);
+  transition: transform 3.2s cubic-bezier(0.2, 0.7, 0.2, 1), filter 2s ease;
+}
+
+.lune-stage .lune-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 244, 214, 0.85), transparent 55%);
+  opacity: 0;
+  transition: opacity 1.2s ease 0.3s;
+  pointer-events: none;
+}
+
+.lune-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  transition: transform 1.9s cubic-bezier(0.6, 0, 0.2, 1) 0.15s, box-shadow 1.9s ease;
+  will-change: transform;
+}
+
+.lune-half.l {
+  left: 0;
+  transform-origin: 0 50%;
+}
+
+.lune-half.r {
+  right: 0;
+  transform-origin: 100% 50%;
+}
+
+.lune-half i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200%;
+  background: url("/img/lune/gate.jpg") center/cover;
+}
+
+.lune-half.l i {
+  left: 0;
+}
+
+.lune-half.r i {
+  right: 0;
+}
+
+.lune-half::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
+  opacity: 0;
+  transition: opacity 1.9s ease 0.15s;
+  pointer-events: none;
+}
+
+.lune-half.r::after {
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
+}
+
+.lune-top,
+.lune-cta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  transition: opacity 0.5s ease;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+}
+
+.lune-top {
+  top: calc(28px + env(safe-area-inset-top, 0px));
+}
+
+.lune-top small {
+  display: block;
+  font-family: var(--lune-f-serif);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  opacity: 0.92;
+}
+
+.lune-container[dir="rtl"] .lune-top small {
+  font-family: var(--lune-f-ar);
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.lune-top b {
+  display: block;
+  font-family: var(--lune-f-script);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.25;
+}
+
+.lune-container[dir="rtl"] .lune-top b {
+  font-family: var(--lune-f-ar-script);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.6;
+}
+
+.lune-cta {
+  bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  justify-content: center;
+}
+
+.lune-cta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--lune-f-serif);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-shadow: none;
+  animation: luneBreathe 2.6s ease-in-out infinite;
+}
+
+.lune-container[dir="rtl"] .lune-cta span {
+  font-family: var(--lune-f-ar);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.lune-cta svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes luneBreathe {
+  50% {
+    transform: scale(1.04);
+    background: rgba(255, 255, 255, 0.28);
+  }
+}
+
+.lune-ring {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  animation: luneRing 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes luneRing {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+/* Door Opening States */
+.lune-gate.is-opened {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lune-gate.is-opened .lune-stage .lune-scene {
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+.lune-gate.is-opened .lune-stage .lune-glow {
+  opacity: 0.55;
+}
+
+.lune-gate.is-opened .lune-top,
+.lune-gate.is-opened .lune-cta,
+.lune-gate.is-opened .lune-ring {
+  opacity: 0;
+}
+
+.lune-gate.is-opened .lune-half::after {
+  opacity: 1;
+}
+
+.lune-gate.is-opened .lune-half.l {
+  transform: rotateY(-108deg);
+}
+
+.lune-gate.is-opened .lune-half.r {
+  transform: rotateY(108deg);
+}
+
+#lune-petals {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Top Floating Action Dock (Music & Lang) ---------- */
+.lune-dock {
+  position: fixed;
+  z-index: 1010;
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  inset-inline-end: max(12px, env(safe-area-inset-right, 0px));
+  display: flex;
+  gap: 8px;
+}
+
+.lune-dock button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.82);
+  color: #2c2a26;
+  display: grid;
+  place-items: center;
+  font-family: var(--lune-f-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+.lune-dock button.is-playing {
+  background: var(--lune-ink);
+  color: var(--lune-bg);
+}
+
+.lune-dock button:hover {
+  transform: scale(1.06);
+}
+
+.lune-dock svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ---------- Main Page Column ---------- */
+.lune-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 110px;
+  text-align: center;
+  background: var(--lune-bg);
+  position: relative;
+}
+
+.lune-wrap {
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+
+.lune-page section {
+  padding-block: 44px;
+}
+
+/* ---------- Hero Section ---------- */
+.lune-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+  color: #fff;
+  overflow: hidden;
+}
+
+.lune-hero .lune-bgimg {
+  position: absolute;
+  inset: 0;
+  background: url("/img/lune/scene-couple.jpg") center/cover;
+  animation: luneDrift 24s ease-in-out infinite alternate;
+}
+
+@keyframes luneDrift {
+  to {
+    transform: scale(1.08) translateY(-1.5%);
+  }
+}
+
+.lune-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.18) 30%,
+    rgba(0, 0, 0, 0) 46%,
+    rgba(0, 0, 0, 0) 86%,
+    var(--lune-bg) 100%
+  );
+}
+
+.lune-hero .lune-in {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(72px + env(safe-area-inset-top, 0px));
+  padding-bottom: 0;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+
+.lune-eyebrow {
+  margin: 0;
+  font-family: var(--lune-f-serif);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.lune-container[dir="rtl"] .lune-eyebrow {
+  font-family: var(--lune-f-ar);
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+}
+
+.lune-names {
+  margin: 10px 0 0;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.lune-names span {
+  display: block;
+}
+
+.lune-names .en {
+  font-family: var(--lune-f-script);
+  font-size: clamp(46px, 13vw, 60px);
+  line-height: 1.15;
+}
+
+.lune-names .ar {
+  font-family: var(--lune-f-ar-script);
+  font-weight: 700;
+  font-size: clamp(42px, 12vw, 54px);
+  line-height: 1.35;
+}
+
+.lune-names i {
+  display: block;
+  font-style: normal;
+  font-family: var(--lune-f-script);
+  font-size: 26px;
+  color: var(--lune-deep-accent);
+  line-height: 1;
+  margin: 2px 0;
+}
+
+.lune-hero .lune-when {
+  margin: 14px 0 0;
+  font-family: var(--lune-f-serif);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.lune-container[dir="rtl"] .lune-hero .lune-when {
+  font-family: var(--lune-f-ar);
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0;
+}
+
+.lune-scroll {
+  display: block;
+  margin: 22px auto 0;
+  width: 22px;
+  height: 34px;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  position: relative;
+}
+
+.lune-scroll::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: #fff;
+  animation: luneSc 1.8s ease-in-out infinite;
+}
+
+@keyframes luneSc {
+  50% {
+    transform: translateY(9px);
+    opacity: 0.3;
+  }
+}
+
+/* ---------- Date & Divider Section ---------- */
+.lune-date {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--lune-f-serif);
+  font-size: 15px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--lune-ink);
+}
+
+.lune-date span {
+  padding: 4px 0;
+  border-block: 1px solid var(--lune-line);
+  min-width: 84px;
+}
+
+.lune-date b {
+  font-weight: 500;
+  font-size: 46px;
+  letter-spacing: 0;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+
+.lune-date + p {
+  margin: 10px 0 0;
+  color: var(--lune-muted);
+  font-size: 14px;
+}
+
+.lune-rule {
+  display: block;
+  width: 120px;
+  height: 14px;
+  margin: 30px auto 0;
+  color: var(--lune-accent);
+}
+
+/* ---------- Headings & Typographic System ---------- */
+.lune-page h2 {
+  margin: 0 0 6px;
+  font-family: var(--lune-f-script);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.2;
+  color: var(--lune-ink);
+}
+
+.lune-container[dir="rtl"] .lune-page h2 {
+  font-family: var(--lune-f-ar);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.5;
+}
+
+.lune-kicker {
+  margin: 0 0 22px;
+  font-family: var(--lune-f-serif);
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--lune-accent-dark);
+}
+
+.lune-container[dir="rtl"] .lune-kicker {
+  font-family: var(--lune-f-ar);
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.lune-lead {
+  margin: 0 auto;
+  max-width: 32ch;
+  color: var(--lune-muted);
+}
+
+/* ---------- Countdown Grid ---------- */
+.lune-count {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  direction: ltr;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.lune-count div {
+  border: 1px solid var(--lune-line);
+  padding: 14px 0 8px;
+  background: var(--lune-bg);
+}
+
+.lune-count b {
+  display: block;
+  font-family: var(--lune-f-serif);
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.05;
+  color: var(--lune-ink);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.lune-count span {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--lune-muted);
+}
+
+.lune-container[dir="rtl"] .lune-count span {
+  letter-spacing: 0;
+  font-size: 12px;
+}
+
+/* ---------- Paper Tinted Background Section ---------- */
+.lune-tint {
+  background: var(--lune-paper) var(--lune-grain);
+}
+
+/* ---------- Venue Section ---------- */
+.lune-map {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border: 0;
+  filter: grayscale(0.35) sepia(0.12) contrast(0.95);
+  background: var(--lune-paper);
+}
+
+.lune-venue {
+  margin: 22px 0 0;
+  font-family: var(--lune-f-serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lune-container[dir="rtl"] .lune-venue {
+  font-family: var(--lune-f-ar);
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.lune-addr {
+  margin: 2px 0 22px;
+  color: var(--lune-muted);
+  font-size: 14px;
+}
+
+.lune-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.lune-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border: 1px solid var(--lune-ink);
+  color: var(--lune-ink);
+  background: transparent;
+  text-decoration: none;
+  font-family: var(--lune-f-serif);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.lune-container[dir="rtl"] .lune-btn {
+  font-family: var(--lune-f-body);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.lune-btn svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.lune-btn.solid {
+  background: var(--lune-ink);
+  color: var(--lune-bg);
+}
+
+.lune-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- The Day Timeline ---------- */
+.lune-day {
+  background: var(--lune-deep);
+  color: var(--lune-deep-ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.lune-day::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--lune-grain);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.lune-day h2 {
+  color: var(--lune-deep-ink);
+}
+
+.lune-day .lune-kicker {
+  color: var(--lune-deep-accent);
+}
+
+.lune-day ol {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 300px;
+  position: relative;
+}
+
+.lune-day li {
+  position: relative;
+  padding: 0 0 30px;
+}
+
+.lune-day li:last-child {
+  padding-bottom: 0;
+}
+
+.lune-day li:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 18px;
+  background: currentColor;
+  opacity: 0.35;
+  margin: 14px auto 0;
+}
+
+.lune-day time {
+  display: block;
+  font-family: var(--lune-f-serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  color: var(--lune-deep-accent);
+  direction: ltr;
+  font-variant-numeric: lining-nums;
+}
+
+.lune-day li span {
+  display: block;
+  font-family: var(--lune-f-serif);
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.lune-container[dir="rtl"] .lune-day li span {
+  font-family: var(--lune-f-ar);
+  font-size: 19px;
+  letter-spacing: 0;
+}
+
+/* ---------- RSVP Form ---------- */
+.lune-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: start;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.lune-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--lune-f-serif);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--lune-muted);
+}
+
+.lune-container[dir="rtl"] .lune-label {
+  font-family: var(--lune-f-body);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.lune-form input,
+.lune-form select,
+.lune-form textarea {
+  font: inherit;
+  font-family: var(--lune-f-body);
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--lune-ink);
+  background: var(--lune-bg);
+  border: 0;
+  border-bottom: 1px solid var(--lune-line);
+  border-radius: 0;
+  padding: 10px 2px;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+.lune-form input:focus,
+.lune-form select:focus,
+.lune-form textarea:focus {
+  outline: 0;
+  border-bottom-color: var(--lune-accent-dark);
+}
+
+.lune-form textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.lune-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  position: relative;
+}
+
+.lune-choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+.lune-choice label {
+  border: 1px solid var(--lune-line);
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  background: var(--lune-bg);
+  color: var(--lune-ink);
+  transition: all 0.2s ease;
+}
+
+.lune-choice input:checked + label {
+  background: var(--lune-ink);
+  border-color: var(--lune-ink);
+  color: var(--lune-bg);
+}
+
+.lune-choice input:focus-visible + label {
+  outline: 2px solid var(--lune-accent);
+  outline-offset: 2px;
+}
+
+.lune-thanks p {
+  margin: 6px 0;
+}
+
+.lune-thanks .big {
+  font-family: var(--lune-f-script);
+  font-size: 44px;
+  color: var(--lune-ink);
+}
+
+.lune-container[dir="rtl"] .lune-thanks .big {
+  font-family: var(--lune-f-ar);
+  font-size: 28px;
+}
+
+/* ---------- Closing Section & Monogram ---------- */
+.lune-mono {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 16px;
+  border: 1px solid var(--lune-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-family: var(--lune-f-script);
+  font-size: 38px;
+  line-height: 1;
+  color: var(--lune-accent-dark);
+  direction: ltr;
+  box-shadow: 0 0 0 5px var(--lune-paper), 0 0 0 6px var(--lune-line);
+}
+
+.lune-closing p {
+  margin: 0 auto;
+  color: var(--lune-muted);
+  max-width: 30ch;
+}
+
+.lune-closing .lune-sig {
+  margin-top: 8px;
+  font-family: var(--lune-f-script);
+  font-size: 38px;
+  color: var(--lune-ink);
+}
+
+.lune-container[dir="rtl"] .lune-closing .lune-sig {
+  font-family: var(--lune-f-ar-script);
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.lune-sign {
+  color: var(--lune-muted);
+  font-size: 12px;
+  margin: 0;
+}
+
+.lune-sign a {
+  color: var(--lune-accent-dark);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* ---------- Floating Made with Ma3zoom / Wisal Pill ---------- */
+.lune-made {
+  position: fixed;
+  z-index: 1000;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--lune-ink);
+  color: var(--lune-bg);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.45);
+  transition: opacity 0.6s ease 2.6s, transform 0.2s ease;
+}
+
+.lune-made:hover {
+  transform: translateX(-50%) scale(1.04);
+}
+
+/* ---------- Scroll Reveal Animations ---------- */
+.lune-reveal {
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.lune-reveal.lune-out {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lune-container * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

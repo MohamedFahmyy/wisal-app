@@ -12,6 +12,7 @@ import MazenFaridaPage from './pages/MazenFaridaPage';
 import MohamedSalmaPage from './pages/MohamedSalmaPage';
 import VelvetPage from './pages/VelvetPage';
 import RoseArchPage from './pages/RoseArchPage';
+import LunePage from './pages/LunePage';
 import GuestDashboardPage from './pages/GuestDashboardPage';
 import LinkGeneratorPage from './pages/LinkGeneratorPage';
 import QRCardPage from './pages/QRCardPage';
@@ -32,7 +33,8 @@ function LayoutWrapper() {
     location.pathname === '/mohamed-salma' ||
     location.pathname === '/mohamed-salma-v2' ||
     location.pathname === '/velvet' ||
-    location.pathname === '/rosearch';
+    location.pathname === '/rosearch' ||
+    location.pathname === '/lune';
 
   return (
     <div className="app-layout-container">
@@ -53,6 +55,8 @@ function LayoutWrapper() {
         <Route path="/invite/velvet" element={<VelvetPage />} />
         <Route path="/rosearch" element={<RoseArchPage />} />
         <Route path="/invite/rosearch" element={<RoseArchPage />} />
+        <Route path="/lune" element={<LunePage />} />
+        <Route path="/invite/lune" element={<LunePage />} />
         <Route path="/invite/:slug" element={<InvitationPage />} />
         <Route path="/guests" element={<GuestDashboardPage />} />
         <Route path="/admin" element={<GuestDashboardPage />} />

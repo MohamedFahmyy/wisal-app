@@ -13,6 +13,7 @@ import ModernPhotoTemplate from './ModernPhotoTemplate';
 import MazenFaridaTemplate from './MazenFaridaTemplate';
 import MohamedSalmaTemplate from './MohamedSalmaTemplate';
 import VelvetTemplate from './VelvetTemplate';
+import LuneTemplate from './LuneTemplate';
 
 export const templateRegistry = {
   classic: ClassicWaxTemplate,
@@ -35,7 +36,9 @@ export const templateRegistry = {
   farha: MazenFaridaTemplate,
   velvet: VelvetTemplate,
   rosearch: RoseArchTemplate,
-  'rose-arch': RoseArchTemplate
+  'rose-arch': RoseArchTemplate,
+  lune: LuneTemplate,
+  'under-the-moonlight': LuneTemplate
 };
 
 export function getTemplateComponent(templateKey) {

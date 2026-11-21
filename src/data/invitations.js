@@ -1237,6 +1237,99 @@ export const invitations = [
       secondaryAccent: '#C2A267',
       bgMuted: '#FBF7F4'
     }
+  },
+  {
+    id: 'inv_lune',
+    slug: 'lune',
+    template: 'lune',
+    category: 'wedding',
+    categoryLabel: 'زفاف',
+    categoryLabelEn: 'Wedding',
+    language: 'ar',
+    tag: 'تجربة ليلة القمر الرومانسية',
+    tagEn: 'Under The Moonlight Experience',
+    titleAr: 'حفل زفاف يوسف و ليلى 🌙',
+    titleEn: 'Youssef & Laila Wedding Invitation | Wisal',
+    description: 'تحت نور القمر، ندعوكم لفرحنا — أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.',
+    descriptionEn: 'Under the moonlight, join us as we wed — 3D opening doors, full moon terrace above the sea, live countdown, timeline, and RSVP.',
+
+    people: {
+      firstPerson: 'يوسف',
+      secondPerson: 'ليلى',
+      firstPersonEn: 'Youssef',
+      secondPersonEn: 'Laila',
+      firstPersonTitle: 'العريس',
+      secondPersonTitle: 'العروس',
+      firstPersonTitleEn: 'The Groom',
+      secondPersonTitleEn: 'The Bride',
+      parentsAr: 'تتشرف عائلتا يوسف وليلى بدعوتكم',
+      parentsEn: 'Together with their families, Youssef & Laila'
+    },
+
+    event: {
+      type: 'wedding',
+      title: 'حفل زفاف يوسف و ليلى',
+      titleEn: 'Youssef & Laila Wedding',
+      date: '2027-08-21',
+      time: '20:00',
+      timeFormatted: '٨:٠٠ مساءً',
+      timeFormattedEn: '8:00 PM',
+      dateFormatted: 'السبت، ٢١ أغسطس ٢٠٢٧',
+      dateFormattedEn: 'Saturday, 21 August 2027',
+      hijriDate: '١٨ صفر ١٤٤٩ هـ',
+      hijriDateEn: '18 Safar 1449 AH',
+      epochMs: 1818867600000,
+      description: 'على تراس فوق البحر وتحت ضوء القمر، هنرقص أول رقصة في حياتنا سوا. وجودكم هيكمّل الليلة.'
+    },
+
+    venue: {
+      name: 'تراس القمر',
+      nameEn: 'Moonlight Terrace',
+      hall: 'التراس المفتوح',
+      hallEn: 'Open Sea Terrace',
+      city: 'العلمين الجديدة',
+      cityEn: 'New Alamein',
+      address: 'العلمين الجديدة، الساحل الشمالي',
+      addressEn: 'New Alamein, North Coast',
+      mapEmbedUrl: 'https://maps.google.com/maps?q=New%20Alamein&z=14&output=embed',
+      mapUrl: 'https://maps.google.com/?q=New+Alamein',
+      coordinates: '30.8358, 28.9536'
+    },
+
+    media: {
+      coverImage: '/img/lune/gate.jpg',
+      ogImage: '/images/og/lune.jpg',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: 'حفل زفاف يوسف و ليلى 🌙',
+      gallery: [
+        '/img/lune/gate.jpg',
+        '/img/lune/scene-couple.jpg'
+      ],
+      music: '/audio/veil.mp3'
+    },
+
+    closing: {
+      dua: 'بارك الله لكما، وبارك عليكما، وجمع بينكما في خير.',
+      duaEn: 'May Allah bless you and unite you in goodness.',
+      signoff: 'وجودكم معانا هو اللي هيكمل فرحتنا',
+      signoffEn: 'Your presence is the greatest gift of all'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#d9c08a',
+      secondaryAccent: '#1c2642',
+      bgMuted: '#0e1424'
+    }
   }
 ];
 
