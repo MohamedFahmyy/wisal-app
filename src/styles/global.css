@@ -67,8 +67,8 @@ img {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(250, 248, 245, 0.92);
+  z-index: 1000;
+  background: rgba(250, 248, 245, 0.94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border);
@@ -188,54 +188,127 @@ img {
 
 .mobile-toggle-btn {
   display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   color: var(--color-ink);
-  padding: var(--space-xs);
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.mobile-toggle-btn:hover,
+.mobile-toggle-btn:focus-visible {
+  background-color: rgba(43, 37, 32, 0.06);
+}
+
+/* Mobile Drawer Backdrop */
+.mobile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 22, 19, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-drawer-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Mobile Drawer */
 .mobile-drawer {
-  display: none;
   position: fixed;
   top: 80px;
+  top: calc(80px + env(safe-area-inset-top, 0px));
   left: 0;
   right: 0;
   bottom: 0;
+  height: calc(100svh - 80px - env(safe-area-inset-top, 0px));
   background: rgba(250, 248, 245, 0.98);
   backdrop-filter: blur(20px);
-  z-index: 99;
-  padding: var(--space-xl) var(--space-lg);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 999;
+  padding: var(--space-lg) var(--space-lg) calc(var(--space-2xl) + env(safe-area-inset-bottom, 0px));
   transform: translateY(-100%);
   opacity: 0;
-  transition: all var(--transition-normal);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease,
+              visibility 0.35s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-drawer.is-open {
   transform: translateY(0);
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  gap: var(--space-xl);
 }
 
 .mobile-nav-links {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 4px;
 }
 
 .mobile-nav-links a {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--color-border);
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
   color: var(--color-ink);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-nav-links a:active,
+.mobile-nav-links a:hover {
+  background-color: rgba(197, 160, 89, 0.12);
+  color: var(--color-gold-dark);
+}
+
+.mobile-nav-links a.active {
+  background-color: rgba(197, 160, 89, 0.15);
+  color: var(--color-gold-dark);
 }
 
 .mobile-drawer-footer {
-  margin-top: var(--space-2xl);
+  margin-top: auto;
+  padding-top: var(--space-md);
 }
 
 .mobile-cta {
-  width: 100%;
-  justify-content: center;
-  padding: 14px 20px;
+  display: inline-flex !important;
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 14px 20px !important;
+  min-height: 48px !important;
+  box-sizing: border-box !important;
 }
 
 /* =========================================================================
@@ -2343,16 +2416,16 @@ img {
 
 @media (max-width: 768px) {
   .desktop-nav,
-  .btn-order-cta {
+  .site-header .nav-container > .header-actions > .btn-order-cta {
     display: none;
   }
 
   .mobile-toggle-btn {
-    display: block;
+    display: inline-flex;
   }
 
   .mobile-drawer {
-    display: block;
+    display: flex;
   }
 
   .landing-hero-container {
@@ -2444,7 +2517,8 @@ html, body, #root, .app-layout-container {
   .mobile-drawer {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    max-height: calc(100svh - 70px);
+    height: calc(100svh - 80px - env(safe-area-inset-top, 0px));
+    max-height: 100svh;
     padding-bottom: calc(var(--space-3xl) + env(safe-area-inset-bottom, 0px));
   }
 
