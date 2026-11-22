@@ -237,6 +237,13 @@ for (const inv of invitations) {
     imageWidth = 1200;
     imageHeight = 630;
     imageAlt = 'عقد قران وحفل زفاف عبدالرحمن وآية 🤍';
+  } else if (inv.slug === 'sage-garden') {
+    title = 'حفل زفاف يوسف وأميرة 🤍 | حديقة المريمية — وِصال';
+    description = 'دعوة زفاف فاخرة بظرف كريمي ومفرش دانتيل وكولاج فينتاج ساحر بألوان الأخضر الهادي والأوف وايت 🤍';
+    image = '/images/og/sage-garden.jpg';
+    imageWidth = 1200;
+    imageHeight = 630;
+    imageAlt = 'حفل زفاف يوسف وأميرة 🤍';
   } else if (inv.slug === 'lune') {
     title = 'حفل زفاف يوسف و ليلى 🌙 | وِصال';
     description = 'تحت نور القمر، ندعوكم لفرحنا — أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.';
@@ -379,6 +386,16 @@ const staticPages = [
     imageHeight: 630,
     imageAlt: 'عقد قران وحفل زفاف عبدالرحمن وآية 🤍',
     url: 'https://wisal.app/veil'
+  },
+  {
+    path: 'sage-garden',
+    title: 'حفل زفاف يوسف وأميرة 🤍 | حديقة المريمية — وِصال',
+    description: 'دعوة زفاف فاخرة بظرف كريمي ومفرش دانتيل وكولاج فينتاج ساحر بألوان الأخضر الهادي والأوف وايت 🤍',
+    image: '/images/og/sage-garden.jpg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageAlt: 'حفل زفاف يوسف وأميرة 🤍',
+    url: 'https://wisal.app/sage-garden'
   },
   {
     path: 'guests',

@@ -1518,6 +1518,102 @@ export const invitations = [
       secondaryAccent: '#9d5d55',
       bgMuted: '#f7f1ee'
     }
+  },
+  {
+    id: 'inv_sage_garden',
+    slug: 'sage-garden',
+    template: 'sage-garden',
+    category: 'wedding',
+    categoryLabel: 'دعوة زفاف فاخرة',
+    categoryLabelEn: 'Luxury Wedding Invitation',
+    language: 'ar',
+    tag: 'ظرف كريمي وكولاج فينتاج بألوان الحديقة',
+    tagEn: 'Cream Envelope & Vintage Garden Collage',
+    titleAr: 'حفل زفاف يوسف وأميرة 🤍 | حديقة المريمية',
+    titleEn: 'Yusuf & Amira — Sage Garden Wedding Invitation | Wisal',
+    description: 'دعوة زفاف فاخرة بظرف كريمي ومفرش دانتيل وكولاج فينتاج ساحر بألوان الأخضر الهادي والأوف وايت 🤍',
+    descriptionEn: 'A luxury vintage wedding invitation with wax-sealed envelope, lace doily, live countdown, order of the day, venue map, dress code, RSVP and memories.',
+
+    people: {
+      firstPerson: 'يوسف',
+      secondPerson: 'أميرة',
+      firstPersonEn: 'Yusuf',
+      secondPersonEn: 'Amira',
+      firstPersonTitle: 'العريس',
+      secondPersonTitle: 'العروس',
+      firstPersonTitleEn: 'The Groom',
+      secondPersonTitleEn: 'The Bride',
+      parentsAr: 'تتشرف عائلتا يوسف وأميرة بدعوتكم',
+      parentsEn: 'Together with their families, Yusuf & Amira'
+    },
+
+    event: {
+      type: 'wedding',
+      title: 'حفل زفاف يوسف وأميرة',
+      titleEn: 'Wedding of Yusuf & Amira',
+      date: '2027-01-15',
+      time: '18:00',
+      timeFormatted: '٦:٠٠ مساءً',
+      timeFormattedEn: '6:00 PM',
+      dateFormatted: 'الجمعة، ١٥ يناير ٢٠٢٧',
+      dateFormattedEn: 'Friday, 15 January 2027',
+      hijriDate: '٧ شعبان ١٤٤٨ هـ',
+      hijriDateEn: '7 Shaban 1448 AH',
+      epochMs: 1799942400000,
+      description: 'يسعدنا ويشرفنا حضوركم لتشاركونا فرحتنا ببداية حياتنا معاً.'
+    },
+
+    venue: {
+      name: 'قاعة روز جاردن',
+      nameEn: 'Rose Garden Hall',
+      hall: 'الحديقة المفتوحة',
+      hallEn: 'Open Garden',
+      city: 'القاهرة الجديدة، مصر',
+      cityEn: 'New Cairo, Egypt',
+      address: 'القاهرة الجديدة، مصر · قاعة روز جاردن',
+      addressEn: 'New Cairo, Egypt · Rose Garden Hall',
+      mapEmbedUrl: 'https://www.google.com/maps?q=Cairo&hl=en&output=embed',
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cairo',
+      coordinates: '30.0444, 31.2357'
+    },
+
+    media: {
+      coverImage: '/templates/sage-garden/p-story.webp',
+      ogImage: '/images/og/sage-garden.jpg',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: 'حفل زفاف يوسف وأميرة 🤍',
+      gallery: [
+        '/templates/sage-garden/p-strip-1.webp',
+        '/templates/sage-garden/p-strip-2.webp',
+        '/templates/sage-garden/p-strip-3.webp',
+        '/templates/sage-garden/p-venue.webp',
+        '/templates/sage-garden/p-story.webp'
+      ],
+      music: '/audio/sage-garden.mp3'
+    },
+
+    closing: {
+      dua: 'وجودكم معنا يكتمل به سرورنا. شكرًا لمشاركتكم فرحتنا.',
+      duaEn: 'We cannot wait to celebrate this special day with you. Thank you for being part of our story.',
+      signoff: 'يوسف وأميرة',
+      signoffEn: 'Yusuf & Amira'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#7c8a6a',
+      secondaryAccent: '#5f6c4f',
+      bgMuted: '#fbf8f2'
+    }
   }
 ];
 
