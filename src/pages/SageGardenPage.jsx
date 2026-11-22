@@ -284,6 +284,25 @@ export default function SageGardenPage() {
     }, 1300);
   };
 
+  // Cover swipe/wheel to open handlers
+  const coverTouchY = useRef(0);
+  const handleCoverTouchStart = (e) => {
+    coverTouchY.current = e.touches[0].clientY;
+  };
+  const handleCoverTouchEnd = (e) => {
+    if (isOpen || isCoverGone) return;
+    const diffY = coverTouchY.current - e.changedTouches[0].clientY;
+    if (Math.abs(diffY) > 25) {
+      openInvitation();
+    }
+  };
+  const handleCoverWheel = (e) => {
+    if (isOpen || isCoverGone) return;
+    if (Math.abs(e.deltaY) > 15) {
+      openInvitation();
+    }
+  };
+
   // Collage Click Navigation
   const handleScrollTo = (targetId) => {
     const el = document.getElementById(targetId);
@@ -452,7 +471,15 @@ export default function SageGardenPage() {
 
       {/* ============ غلاف الظرف الافتتاحي ============ */}
       {!isCoverGone && (
-        <div className={`cover ${isOpen ? 'opening' : ''}`} id="coverScreen">
+        <div 
+          className={`cover ${isOpen ? 'opening' : ''}`} 
+          id="coverScreen"
+          onTouchStart={handleCoverTouchStart}
+          onTouchEnd={handleCoverTouchEnd}
+          onWheel={handleCoverWheel}
+          onClick={openInvitation}
+          style={{ cursor: 'pointer' }}
+        >
           <div className="env-wrap">
             <img className="env-img" src="/templates/sage-garden/envelope-cream.webp" alt="Envelope" />
             <div className="env-card">

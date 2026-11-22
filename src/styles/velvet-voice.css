@@ -88,7 +88,7 @@
 }
 [hidden]{display:none !important}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,.velvet-voice-wrapper {height:100%;overflow:hidden;overscroll-behavior:none}
+.velvet-voice-wrapper {height:100%;overflow:hidden;overscroll-behavior:none}
 .velvet-voice-wrapper {background:#4a1b21;font-family:var(--f-body);color:#4b1d24;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none;letter-spacing:0}
 img{display:block;width:100%;height:100%;-webkit-user-drag:none}
 .backdrop{position:fixed;inset:-40px;background:url(/templates/velvet-voice/envelope.webp) center/cover;filter:blur(34px) saturate(.95) brightness(.8);opacity:.85}
@@ -447,54 +447,54 @@ input,textarea{-webkit-user-select:text;user-select:text}
   box-shadow:0 0 0 1px rgba(230,198,132,.35);transition:opacity .25s ease,transform .3s var(--ease);direction:rtl}
 .vv-chip.on{opacity:1;transform:translate(-50%,0)}
 /* المحرر: الكتابة لازم تشتغل (سفاري بيمنع الكتابة لو الصفحة كلها user-select:none) والصفحة بتظهر بسرعة */
-body.vv-edit{-webkit-user-select:auto;user-select:auto}
-body.vv-edit .wda-writing,body.vv-edit .wda-writing *{-webkit-user-select:text !important;user-select:text !important}
+.velvet-voice-wrapper.vv-edit{-webkit-user-select:auto;user-select:auto}
+.velvet-voice-wrapper.vv-edit .wda-writing,.velvet-voice-wrapper.vv-edit .wda-writing *{-webkit-user-select:text !important;user-select:text !important}
 /* المحرر: الصفحات المستخبية شفافة مش "مخفية" — المحرر بيقرا كلام كل عنصر عشان
    يعلّمه قابل للتعديل (و"وريني" تلاقيه في أي صفحة)، والمتصفح مابيرجّعش كلام
    العناصر المخفية. مابتتلمسش (pointer-events) فالضغط بيروح للصفحة الظاهرة بس */
-body.vv-edit .sec{visibility:visible;opacity:0}
-body.vv-edit .sec.active{opacity:1}
-body.vv-edit .sec.in .rv{transition-duration:.35s;transition-delay:0s}
-body.vv-edit .sec.leave-up,body.vv-edit .sec.leave-down{transition-duration:.22s}
+.velvet-voice-wrapper.vv-edit .sec{visibility:visible;opacity:0}
+.velvet-voice-wrapper.vv-edit .sec.active{opacity:1}
+.velvet-voice-wrapper.vv-edit .sec.in .rv{transition-duration:.35s;transition-delay:0s}
+.velvet-voice-wrapper.vv-edit .sec.leave-up,.velvet-voice-wrapper.vv-edit .sec.leave-down{transition-duration:.22s}
 
 /* ===== النسخة الإنجليزي ===== */
-html.vv-en{
+.velvet-voice-wrapper[lang="en"]{
   --f-body: var(--serif-ar, 'Cormorant Garamond'), 'Cormorant Garamond', Georgia, serif;
   --f-disp: var(--serif-ar, 'Pinyon Script'), 'Pinyon Script', 'Cormorant Garamond', serif;
 }
-html.vv-en .pg,html.vv-en .vx,html.vv-en .tap,html.vv-en .scroll-hint,html.vv-en .cd,html.vv-en .vpanel .slide{direction:ltr}
-html.vv-en .fld input,html.vv-en .fld textarea,html.vv-en .vpanel .vname{direction:ltr;text-align:left}
+.velvet-voice-wrapper[lang="en"] .pg,.velvet-voice-wrapper[lang="en"] .vx,.velvet-voice-wrapper[lang="en"] .tap,.velvet-voice-wrapper[lang="en"] .scroll-hint,.velvet-voice-wrapper[lang="en"] .cd,.velvet-voice-wrapper[lang="en"] .vpanel .slide{direction:ltr}
+.velvet-voice-wrapper[lang="en"] .fld input,.velvet-voice-wrapper[lang="en"] .fld textarea,.velvet-voice-wrapper[lang="en"] .vpanel .vname{direction:ltr;text-align:left}
 /* الآية بتفضل عربي بخطها في النسخة الإنجليزي (والترجمة تحتها) */
-html.vv-en .bsm,html.vv-en .ayah{direction:rtl}
-html.vv-en .nm{font-weight:400;font-size:126px;line-height:1.2;padding:10px 18px 18px}
-html.vv-en .amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:52px;margin:-26px 0 -16px}
-html.vv-en .ttl{font-weight:400;font-size:54px;line-height:1.3;padding:4px 12px 8px}
-html.vv-en .ttl.sm{font-size:42px}
-html.vv-en .kick{font-size:21px;font-style:italic;letter-spacing:.3px}
-html.vv-en .para{font-size:22px;line-height:1.5}
-html.vv-en .para.sm{font-size:20px;line-height:1.45}
-html.vv-en .sura{font-size:18.5px;font-style:italic;line-height:1.5;max-width:400px}
-html.vv-en .date .dw,html.vv-en .date .dt{font-size:22px;font-weight:600;letter-spacing:.4px}
-html.vv-en .date .dd b{font-size:58px;font-weight:600}
-html.vv-en .date .dd small{font-size:19px;font-weight:600;letter-spacing:.6px}
-html.vv-en .cu .num b{font-weight:600;font-size:33px}
-html.vv-en .cu .lab,html.vv-en .fathers small{font-size:16px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600}
-html.vv-en .when,html.vv-en .addr{font-size:21px;font-weight:600}
-html.vv-en .p-story .ttl{margin-bottom:0}
-html.vv-en .p-story .orn{margin:8px 0}
-html.vv-en .fam{font-size:35px;line-height:1.25;margin:0 0 8px;width:auto;max-width:421px;white-space:normal;flex-wrap:wrap;justify-content:center;gap:0 12px}
-html.vv-en .fam span{white-space:nowrap}
+.velvet-voice-wrapper[lang="en"] .bsm,.velvet-voice-wrapper[lang="en"] .ayah{direction:rtl}
+.velvet-voice-wrapper[lang="en"] .nm{font-weight:400;font-size:126px;line-height:1.2;padding:10px 18px 18px}
+.velvet-voice-wrapper[lang="en"] .amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:52px;margin:-26px 0 -16px}
+.velvet-voice-wrapper[lang="en"] .ttl{font-weight:400;font-size:54px;line-height:1.3;padding:4px 12px 8px}
+.velvet-voice-wrapper[lang="en"] .ttl.sm{font-size:42px}
+.velvet-voice-wrapper[lang="en"] .kick{font-size:21px;font-style:italic;letter-spacing:.3px}
+.velvet-voice-wrapper[lang="en"] .para{font-size:22px;line-height:1.5}
+.velvet-voice-wrapper[lang="en"] .para.sm{font-size:20px;line-height:1.45}
+.velvet-voice-wrapper[lang="en"] .sura{font-size:18.5px;font-style:italic;line-height:1.5;max-width:400px}
+.velvet-voice-wrapper[lang="en"] .date .dw,.velvet-voice-wrapper[lang="en"] .date .dt{font-size:22px;font-weight:600;letter-spacing:.4px}
+.velvet-voice-wrapper[lang="en"] .date .dd b{font-size:58px;font-weight:600}
+.velvet-voice-wrapper[lang="en"] .date .dd small{font-size:19px;font-weight:600;letter-spacing:.6px}
+.velvet-voice-wrapper[lang="en"] .cu .num b{font-weight:600;font-size:33px}
+.velvet-voice-wrapper[lang="en"] .cu .lab,.velvet-voice-wrapper[lang="en"] .fathers small{font-size:16px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600}
+.velvet-voice-wrapper[lang="en"] .when,.velvet-voice-wrapper[lang="en"] .addr{font-size:21px;font-weight:600}
+.velvet-voice-wrapper[lang="en"] .p-story .ttl{margin-bottom:0}
+.velvet-voice-wrapper[lang="en"] .p-story .orn{margin:8px 0}
+.velvet-voice-wrapper[lang="en"] .fam{font-size:35px;line-height:1.25;margin:0 0 8px;width:auto;max-width:421px;white-space:normal;flex-wrap:wrap;justify-content:center;gap:0 12px}
+.velvet-voice-wrapper[lang="en"] .fam span{white-space:nowrap}
 /* أرقام مستوية (خط Cormorant بيكتبها بالشكل القديم المتدرّج) */
-html.vv-en .cu .num b,html.vv-en .date,html.vv-en .when,html.vv-en .vpanel .t{font-variant-numeric:lining-nums tabular-nums}
-html.vv-en .fam i{font-family:'Cormorant Garamond',serif;font-size:30px}
-html.vv-en .fathers b{font-size:31px;line-height:1.35;font-weight:400}
-html.vv-en .hall{font-size:46px;line-height:1.35;font-weight:400}
-html.vv-en .btn{font-size:21px;font-weight:700;letter-spacing:.4px}
-html.vv-en .seg button{font-size:19.5px}
-html.vv-en .vx .cap b{font-size:30px;font-weight:700;font-style:italic}
-html.vv-en .vx .cap small{font-size:18px;font-style:italic}
-html.vv-en .tap .pill,html.vv-en .scroll-hint .pill{font-weight:600;letter-spacing:.4px}
-html.vv-en .vtoast{font-size:22px;font-weight:600}
+.velvet-voice-wrapper[lang="en"] .cu .num b,.velvet-voice-wrapper[lang="en"] .date,.velvet-voice-wrapper[lang="en"] .when,.velvet-voice-wrapper[lang="en"] .vpanel .t{font-variant-numeric:lining-nums tabular-nums}
+.velvet-voice-wrapper[lang="en"] .fam i{font-family:'Cormorant Garamond',serif;font-size:30px}
+.velvet-voice-wrapper[lang="en"] .fathers b{font-size:31px;line-height:1.35;font-weight:400}
+.velvet-voice-wrapper[lang="en"] .hall{font-size:46px;line-height:1.35;font-weight:400}
+.velvet-voice-wrapper[lang="en"] .btn{font-size:21px;font-weight:700;letter-spacing:.4px}
+.velvet-voice-wrapper[lang="en"] .seg button{font-size:19.5px}
+.velvet-voice-wrapper[lang="en"] .vx .cap b{font-size:30px;font-weight:700;font-style:italic}
+.velvet-voice-wrapper[lang="en"] .vx .cap small{font-size:18px;font-style:italic}
+.velvet-voice-wrapper[lang="en"] .tap .pill,.velvet-voice-wrapper[lang="en"] .scroll-hint .pill{font-weight:600;letter-spacing:.4px}
+.velvet-voice-wrapper[lang="en"] .vtoast{font-size:22px;font-weight:600}
 
 @media (prefers-reduced-motion: reduce){.rv{filter:none}.sec.in .rv{transition-duration:.4s}}
 
@@ -503,8 +503,8 @@ html.vv-en .vtoast{font-size:22px;font-weight:600}
   /* شكل نظيف زي الموبايل الحقيقي — بنخفي شريط التمرير (الصفحة بتفضل بتتمرّر
      عادي باللمس أو العجلة، بس من غير الشريط اللي كان بيبان على الجنب وشكله وحش،
      خصوصًا جوه فريم المعاينة في المحرر). */
-  html { scrollbar-width: none; -ms-overflow-style: none; }
-  html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+  
+  
 
 
 

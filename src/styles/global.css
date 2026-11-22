@@ -2489,11 +2489,11 @@ img {
    COMPREHENSIVE MOBILE VIEW OPTIMIZATIONS (Smartphones 320px - 480px)
    ========================================================================= */
 
-/* Prevent horizontal wiggle and layout shifts */
-html, body, #root, .app-layout-container {
-  overflow-x: clip;
-  max-width: 100vw;
-  -webkit-text-size-adjust: 100%;
+/* Clean horizontal overflow guard */
+body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
 }
 
 /* iOS Safari Input Auto-Zoom Fix (Must be 16px+ on touch devices) */
@@ -2637,12 +2637,10 @@ html, body, #root, .app-layout-container {
    ADDITIONAL MOBILE OPTIMIZATIONS (Smartphones 320px - 768px)
    ========================================================================= */
 
-/* Prevent any accidental horizontal scrolling */
-html, body {
-  width: 100%;
-  max-width: 100vw;
+/* Smooth vertical scrolling */
+html {
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
 }
 
 /* Touch targets ergonomics (WCAG 2.5.5 target size) */

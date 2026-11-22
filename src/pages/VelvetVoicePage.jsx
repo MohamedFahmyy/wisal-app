@@ -203,17 +203,23 @@ export default function VelvetVoicePage() {
   };
 
   const handleTouchEnd = (e) => {
-    if (!isOpen) return;
     const diffY = touchStartY.current - e.changedTouches[0].clientY;
-    if (Math.abs(diffY) > 45) {
+    if (!isOpen) {
+      if (Math.abs(diffY) > 25) openInvitation();
+      return;
+    }
+    if (Math.abs(diffY) > 30) {
       if (diffY > 0) nextPage();
       else prevPage();
     }
   };
 
   const handleWheel = (e) => {
-    if (!isOpen) return;
-    if (Math.abs(e.deltaY) > 35) {
+    if (!isOpen) {
+      if (Math.abs(e.deltaY) > 15) openInvitation();
+      return;
+    }
+    if (Math.abs(e.deltaY) > 20) {
       if (e.deltaY > 0) nextPage();
       else prevPage();
     }
