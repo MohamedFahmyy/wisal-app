@@ -706,6 +706,7 @@ export default function PearlPage() {
               id="scratch"
               ref={scratchCanvasRef}
               aria-label="Scratch to reveal the date"
+              style={{ touchAction: 'none' }}
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}

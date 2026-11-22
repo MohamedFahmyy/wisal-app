@@ -400,11 +400,11 @@ export default function LinkGeneratorPage() {
               الصق أسماء الضيوف في المربع بالأعلى لتوليد الروابط فورياً.
             </div>
           ) : (
-            <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
               <table
                 style={{
                   width: '100%',
-                  minWidth: '480px',
+                  minWidth: 'min(100%, 460px)',
                   borderCollapse: 'collapse',
                   fontSize: '14px'
                 }}

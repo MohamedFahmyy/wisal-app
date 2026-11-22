@@ -1715,7 +1715,7 @@
 .sage-garden-wrapper .fab {
   position: fixed;
   z-index: 60;
-  bottom: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom, 18px));
   right: max(16px, calc(50vw - 214px));
   width: 48px;
   height: 48px;

@@ -698,8 +698,10 @@
 }
 
 .veil-wrapper .dock button {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   border: 1px solid var(--line);
   background: rgba(255, 253, 251, 0.92);

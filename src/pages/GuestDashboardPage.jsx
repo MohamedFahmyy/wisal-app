@@ -550,8 +550,8 @@ ${filteredResponses
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '12px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 95px), 1fr))',
+            gap: '10px',
             marginBottom: '20px'
           }}
         >

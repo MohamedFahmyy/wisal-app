@@ -565,3 +565,71 @@ html.vv-en .vtoast{font-size:22px;font-weight:600}
   height: 32px;
   max-width: 150px;
 }
+
+
+/* Floating Audio Button for Velvet Voice */
+.velvet-voice-wrapper .fab {
+  position: fixed;
+  z-index: 600;
+  bottom: max(20px, env(safe-area-inset-bottom, 20px));
+  right: max(16px, calc(50vw - 214px));
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(45, 14, 18, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #d6b482;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(214, 180, 130, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.velvet-voice-wrapper[dir="rtl"] .fab {
+  right: auto;
+  left: max(16px, calc(50vw - 214px));
+}
+
+.velvet-voice-wrapper .fab.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.velvet-voice-wrapper .fab:active {
+  transform: scale(0.94);
+}
+
+.velvet-voice-wrapper .bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 16px;
+}
+
+.velvet-voice-wrapper .bars i {
+  width: 3px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: height 0.2s;
+}
+
+.velvet-voice-wrapper .fab.playing .bars i:nth-child(1) {
+  animation: vvEq 0.9s ease-in-out infinite alternate;
+}
+.velvet-voice-wrapper .fab.playing .bars i:nth-child(2) {
+  animation: vvEq 0.75s ease-in-out 0.2s infinite alternate;
+}
+.velvet-voice-wrapper .fab.playing .bars i:nth-child(3) {
+  animation: vvEq 0.85s ease-in-out 0.4s infinite alternate;
+}
+
+@keyframes vvEq {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
