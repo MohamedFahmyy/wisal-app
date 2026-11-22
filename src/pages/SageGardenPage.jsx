@@ -480,50 +480,52 @@ export default function SageGardenPage() {
           onClick={openInvitation}
           style={{ cursor: 'pointer' }}
         >
-          <div className="env-wrap">
-            <img className="env-img" src="/templates/sage-garden/envelope-cream.webp" alt="Envelope" />
-            <div className="env-card">
-              <div className="cover-eyebrow">
-                {isArabic ? 'دعوة زفاف' : 'You are invited'}
+          <div className="paper paper-bg" />
+          <div className="cover-inner">
+            <div className="cover-eyebrow">
+              {isArabic ? 'دعوة زفاف' : 'You are invited'}
+            </div>
+            <div className="cover-names">
+              <span className="nm">{isArabic ? 'يوسف' : 'Yusuf'}</span>
+              <span className="amp">{isArabic ? 'و' : '&'}</span>
+              <span className="nm">{isArabic ? 'أميرة' : 'Amira'}</span>
+            </div>
+            <div className="env-wrap">
+              <img className="env" src="/templates/sage-garden/envelope-cream.webp" alt="Envelope" />
+              <div
+                className="seal"
+                id="seal"
+                role="button"
+                tabIndex={0}
+                aria-label="Open"
+                onClick={openInvitation}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openInvitation();
+                  }
+                }}
+              >
+                <img src="/templates/sage-garden/seal-heart.webp" alt="Wax Seal" />
               </div>
-              <div className="cover-names">
-                {isArabic ? 'يوسف & أميرة' : 'Yusuf & Amira'}
-              </div>
-              <div className="cover-date">
-                {isArabic ? '15 يناير 2027' : '15 January 2027'}
+              <div className="burst" id="burst">
+                {burstParticles.map((p, idx) => (
+                  <span
+                    key={idx}
+                    style={{
+                      '--x': `${p.x}px`,
+                      '--y': `${p.y}px`,
+                      '--r': `${p.rot}deg`,
+                      background: p.bg
+                    }}
+                  />
+                ))}
               </div>
             </div>
-            <div
-              className="seal"
-              id="seal"
-              role="button"
-              tabIndex={0}
-              aria-label="Open"
-              onClick={openInvitation}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openInvitation();
-                }
-              }}
-            >
-              <img src="/templates/sage-garden/seal-heart.webp" alt="Wax Seal" />
-              <span className="seal-tip">
-                {isArabic ? 'اضغط على الختم للفتح' : 'Tap the seal to open'}
-              </span>
-            </div>
-            <div className="burst" id="burst">
-              {burstParticles.map((p, idx) => (
-                <span
-                  key={idx}
-                  style={{
-                    '--x': `${p.x}px`,
-                    '--y': `${p.y}px`,
-                    '--r': `${p.rot}deg`,
-                    background: p.bg
-                  }}
-                />
-              ))}
+            <div className="cover-hint">
+              <i />
+              <span>{isArabic ? 'اضغط على الختم للفتح' : 'Tap the seal to open'}</span>
+              <i />
             </div>
           </div>
         </div>
@@ -531,7 +533,8 @@ export default function SageGardenPage() {
 
       {/* ============ المحتوى الرئيسي للكولاج ============ */}
       <main className="stage paper-bg" id="stage">
-        <div className={`collage ${isCollagePlaying ? 'play' : ''}`} id="collage">
+        <section className="collage-sec">
+          <div className={`collage ${isCollagePlaying ? 'play' : ''}`} id="collage">
           {/* خلفية السماء الجبلية */}
           <svg className="pc bg" style={{ '--x': 0, '--y': 0, '--w': 736, '--h': 1308, '--d': '0s', '--fs': 1.08 }} viewBox="0 0 736 1308" preserveAspectRatio="none" aria-hidden="true">
             <defs>
@@ -802,7 +805,7 @@ export default function SageGardenPage() {
             style={{ '--x': 470, '--y': 1108, '--w': 167, '--h': 164, '--fx': '200px', '--fr': '220deg', '--d': '1.25s' }}
           />
         </div>
-      </main>
+      </section>
 
       {/* ============ العد التنازلي ============ */}
       <section className="count-sec" id="countdownSec" data-section="countdown">
@@ -1238,6 +1241,7 @@ export default function SageGardenPage() {
           <span>{isArabic ? '15 يناير 2027' : '15 January 2027'}</span>
         </div>
       </section>
+      </main>
 
       {/* Floating Audio Play / Pause Button */}
       {isCoverGone && (
