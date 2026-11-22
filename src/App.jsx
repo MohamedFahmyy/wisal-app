@@ -16,6 +16,7 @@ import LunePage from './pages/LunePage';
 import PearlPage from './pages/PearlPage';
 import VeilPage from './pages/VeilPage';
 import SageGardenPage from './pages/SageGardenPage';
+import VelvetVoicePage from './pages/VelvetVoicePage';
 import GuestDashboardPage from './pages/GuestDashboardPage';
 import LinkGeneratorPage from './pages/LinkGeneratorPage';
 import QRCardPage from './pages/QRCardPage';
@@ -40,7 +41,8 @@ function LayoutWrapper() {
     location.pathname === '/lune' ||
     location.pathname === '/pearl' ||
     location.pathname === '/veil' ||
-    location.pathname === '/sage-garden';
+    location.pathname === '/sage-garden' ||
+    location.pathname === '/velvet-voice';
 
   return (
     <div className="app-layout-container">
@@ -69,6 +71,8 @@ function LayoutWrapper() {
         <Route path="/invite/veil" element={<VeilPage />} />
         <Route path="/sage-garden" element={<SageGardenPage />} />
         <Route path="/invite/sage-garden" element={<SageGardenPage />} />
+        <Route path="/velvet-voice" element={<VelvetVoicePage />} />
+        <Route path="/invite/velvet-voice" element={<VelvetVoicePage />} />
         <Route path="/invite/:slug" element={<InvitationPage />} />
         <Route path="/guests" element={<GuestDashboardPage />} />
         <Route path="/admin" element={<GuestDashboardPage />} />

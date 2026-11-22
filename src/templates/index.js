@@ -17,6 +17,7 @@ import LuneTemplate from './LuneTemplate';
 import PearlTemplate from './PearlTemplate';
 import VeilTemplate from './VeilTemplate';
 import SageGardenTemplate from './SageGardenTemplate';
+import VelvetVoiceTemplate from './VelvetVoiceTemplate';
 
 export const templateRegistry = {
   classic: ClassicWaxTemplate,
@@ -45,7 +46,9 @@ export const templateRegistry = {
   pearl: PearlTemplate,
   veil: VeilTemplate,
   'sage-garden': SageGardenTemplate,
-  sage: SageGardenTemplate
+  sage: SageGardenTemplate,
+  'velvet-voice': VelvetVoiceTemplate,
+  velvetvoice: VelvetVoiceTemplate
 };
 
 export function getTemplateComponent(templateKey) {

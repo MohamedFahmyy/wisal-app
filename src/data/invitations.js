@@ -1614,6 +1614,100 @@ export const invitations = [
       secondaryAccent: '#5f6c4f',
       bgMuted: '#fbf8f2'
     }
+  },
+  {
+    id: 'inv_velvet_voice',
+    slug: 'velvet-voice',
+    template: 'velvet-voice',
+    category: 'wedding',
+    categoryLabel: 'دعوة زفاف مخملية فاخرة',
+    categoryLabelEn: 'Luxury Velvet & Voice Wedding Invitation',
+    language: 'ar',
+    tag: 'ظرف مخملي ملكي وتسجيل صوتي تفاعلي',
+    tagEn: 'Royal Velvet Envelope & Interactive Voice Note',
+    titleAr: 'حفل زفاف يوسف وأميرة 🤍 | المخمل الملكي',
+    titleEn: 'Yusuf & Amira — Velvet Voice Wedding Invitation | Wisal',
+    description: 'دعوة زفاف ملكية بظرف مخملي أحمر دافئ، ختم شمعي ثلاثي الأبعاد، تسجيل تهنئة صوتية تفاعلي، وبطاقات تنقل سلسة 🤍',
+    descriptionEn: 'A luxury royal velvet wedding invitation with 3D folding flap, wax seal, interactive voice note recorder, countdown, venue map, and RSVP.',
+
+    people: {
+      firstPerson: 'يوسف',
+      secondPerson: 'أميرة',
+      firstPersonEn: 'Yusuf',
+      secondPersonEn: 'Amira',
+      firstPersonTitle: 'العريس',
+      secondPersonTitle: 'العروس',
+      firstPersonTitleEn: 'The Groom',
+      secondPersonTitleEn: 'The Bride',
+      parentsAr: 'تتشرف عائلتا يوسف وأميرة بدعوتكم',
+      parentsEn: 'Together with their families, Yusuf & Amira'
+    },
+
+    event: {
+      type: 'wedding',
+      title: 'حفل زفاف يوسف وأميرة',
+      titleEn: 'Wedding of Yusuf & Amira',
+      date: '2027-01-15',
+      time: '18:00',
+      timeFormatted: '٦:٠٠ مساءً',
+      timeFormattedEn: '6:00 PM',
+      dateFormatted: 'الجمعة، ١٥ يناير ٢٠٢٧',
+      dateFormattedEn: 'Friday, 15 January 2027',
+      hijriDate: '٧ شعبان ١٤٤٨ هـ',
+      hijriDateEn: '7 Shaban 1448 AH',
+      epochMs: 1799942400000,
+      description: 'هذه ليلتنا، تكتمل بها فرحتنا. سعادتنا لن تكتمل إلا بوجودكم معنا.'
+    },
+
+    venue: {
+      name: 'قاعة روز جاردن',
+      nameEn: 'Rose Garden Hall',
+      hall: 'القاعة الملكية',
+      hallEn: 'Royal Hall',
+      city: 'القاهرة الجديدة، مصر',
+      cityEn: 'New Cairo, Egypt',
+      address: 'القاهرة الجديدة، مصر · قاعة روز جاردن',
+      addressEn: 'New Cairo, Egypt · Rose Garden Hall',
+      mapEmbedUrl: 'https://www.google.com/maps?q=Cairo&hl=en&output=embed',
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cairo',
+      coordinates: '30.0444, 31.2357'
+    },
+
+    media: {
+      coverImage: '/templates/velvet-voice/envelope.webp',
+      ogImage: '/images/og/velvet-voice.jpg',
+      ogImageWidth: 640,
+      ogImageHeight: 1385,
+      ogImageAlt: 'حفل زفاف يوسف وأميرة 🤍 | Velvet Voice',
+      gallery: [
+        '/templates/velvet-voice/envelope.webp',
+        '/templates/velvet-voice/cover-bg.webp',
+        '/templates/velvet-voice/scene-sharp.webp'
+      ],
+      music: '/audio/velvet-voice.mp3'
+    },
+
+    closing: {
+      dua: 'يسعدنا ويشرفنا حضوركم لتشاركونا أجمل لحظات العمر.',
+      duaEn: 'We look forward to celebrating this unforgettable night together.',
+      signoff: 'يوسف وأميرة',
+      signoffEn: 'Yusuf & Amira'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#b49a6a',
+      secondaryAccent: '#4a1b21',
+      bgMuted: '#3b161b'
+    }
   }
 ];
 

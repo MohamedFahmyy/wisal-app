@@ -244,6 +244,13 @@ for (const inv of invitations) {
     imageWidth = 1200;
     imageHeight = 630;
     imageAlt = 'حفل زفاف يوسف وأميرة 🤍';
+  } else if (inv.slug === 'velvet-voice') {
+    title = 'حفل زفاف يوسف وأميرة 🤍 | Velvet Voice — وِصال';
+    description = 'دعوة زفاف ملكية بظرف مخملي أحمر دافئ، ختم شمعي ثلاثي الأبعاد، تسجيل تهنئة صوتية تفاعلي، وبطاقات تنقل سلسة 🤍';
+    image = '/images/og/velvet-voice.jpg';
+    imageWidth = 640;
+    imageHeight = 1385;
+    imageAlt = 'حفل زفاف يوسف وأميرة 🤍 | Velvet Voice';
   } else if (inv.slug === 'lune') {
     title = 'حفل زفاف يوسف و ليلى 🌙 | وِصال';
     description = 'تحت نور القمر، ندعوكم لفرحنا — أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.';
@@ -396,6 +403,16 @@ const staticPages = [
     imageHeight: 630,
     imageAlt: 'حفل زفاف يوسف وأميرة 🤍',
     url: 'https://wisal.app/sage-garden'
+  },
+  {
+    path: 'velvet-voice',
+    title: 'حفل زفاف يوسف وأميرة 🤍 | Velvet Voice — وِصال',
+    description: 'دعوة زفاف ملكية بظرف مخملي أحمر دافئ، ختم شمعي ثلاثي الأبعاد، تسجيل تهنئة صوتية تفاعلي، وبطاقات تنقل سلسة 🤍',
+    image: '/images/og/velvet-voice.jpg',
+    imageWidth: 640,
+    imageHeight: 1385,
+    imageAlt: 'حفل زفاف يوسف وأميرة 🤍 | Velvet Voice',
+    url: 'https://wisal.app/velvet-voice'
   },
   {
     path: 'guests',
