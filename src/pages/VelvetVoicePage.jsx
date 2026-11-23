@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
+import { submitRsvp } from '../utils/api';
 import '../styles/velvet-voice.css';
 
 export default function VelvetVoicePage() {
@@ -21,12 +22,28 @@ export default function VelvetVoicePage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  // Active page index (0 to 5)
-  // 0: names, 1: verse, 2: countdown, 3: story, 4: location, 5: rsvp
+  // Active page index (0 to 6)
+  // 0: names, 1: verse, 2: countdown, 3: story, 4: location, 5: rsvp, 6: voice
   const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = 6;
+  const totalPages = 7;
+  const touchStartX = useRef(0);
   const touchStartY = useRef(0);
   const isNavigating = useRef(false);
+
+  // Responsive canvas scale (--k) for mobile screens
+  useEffect(() => {
+    const updateScale = () => {
+      const stage = document.getElementById('stage');
+      if (!stage) return;
+      const sw = stage.clientWidth || window.innerWidth;
+      const sh = stage.clientHeight || window.innerHeight;
+      const k = Math.min(sw / 705.75, sh / 1254, 1.0);
+      stage.style.setProperty('--k', String(k));
+    };
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   // Live Countdown (Friday, 15 January 2027 at 18:00 Cairo time UTC+2)
   const targetDate = useRef(new Date('2027-01-15T18:00:00+02:00').getTime());
@@ -199,18 +216,29 @@ export default function VelvetVoicePage() {
 
   // Handle Touch Swipe & Wheel
   const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e) => {
+    const diffX = touchStartX.current - e.changedTouches[0].clientX;
     const diffY = touchStartY.current - e.changedTouches[0].clientY;
     if (!isOpen) {
-      if (Math.abs(diffY) > 25) openInvitation();
+      if (Math.abs(diffY) > 25 || Math.abs(diffX) > 25) openInvitation();
       return;
     }
-    if (Math.abs(diffY) > 30) {
-      if (diffY > 0) nextPage();
-      else prevPage();
+    // Prefer the dominant gesture direction
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      if (Math.abs(diffX) > 30) {
+        // In RTL: swipe left (diffX > 0) goes forward, swipe right goes back
+        if (diffX > 0) nextPage();
+        else prevPage();
+      }
+    } else {
+      if (Math.abs(diffY) > 30) {
+        if (diffY > 0) nextPage();
+        else prevPage();
+      }
     }
   };
 
@@ -258,7 +286,7 @@ export default function VelvetVoicePage() {
   };
 
   // RSVP Form Submit
-  const handleRsvpSubmit = (e) => {
+  const handleRsvpSubmit = async (e) => {
     if (e) e.preventDefault();
     if (!guestName.trim()) {
       setRsvpError(isArabic ? 'يرجى كتابة الاسم الكريم' : 'Please enter your name');
@@ -273,6 +301,16 @@ export default function VelvetVoicePage() {
     setRsvpError('');
 
     try {
+      // 1. Submit to backend API
+      await submitRsvp({
+        invitationId: 'inv_velvet_voice',
+        name: guestName.trim(),
+        attending,
+        guests: 1,
+        message: message.trim()
+      });
+
+      // 2. Silent local storage backup
       const responseData = {
         name: guestName.trim(),
         attending: attending === 'yes',
@@ -280,14 +318,16 @@ export default function VelvetVoicePage() {
         submittedAt: new Date().toISOString()
       };
 
-      saveGuestResponse('inv_velvet_voice', responseData);
-      localStorage.setItem('mithaq_guest_name', guestName.trim());
-      localStorage.setItem('mithaq_rsvp_inv_velvet_voice', JSON.stringify(responseData));
+      try {
+        saveGuestResponse('inv_velvet_voice', responseData);
+        localStorage.setItem('mithaq_guest_name', guestName.trim());
+        localStorage.setItem('mithaq_rsvp_inv_velvet_voice', JSON.stringify(responseData));
+      } catch (localErr) {}
 
       setIsRsvpSent(true);
       showToast(isArabic ? 'تم تأكيد حضورك بنجاح 🤍' : 'Your RSVP has been saved 🤍');
     } catch (err) {
-      setRsvpError(isArabic ? 'حدث خطأ أثناء الإرسال، حاول مرة أخرى' : 'Failed to submit, please try again');
+      setRsvpError(err.message || (isArabic ? 'حدث خطأ أثناء الإرسال، حاول مرة أخرى' : 'Failed to submit, please try again'));
     } finally {
       setIsSubmitting(false);
     }
@@ -572,25 +612,25 @@ export default function VelvetVoicePage() {
             >
               <div className="pg p-loc">
                 <div className="pgi">
-                  <h2 className="ttl rv">{isArabic ? 'قاعة الاحتفال' : 'The Venue'}</h2>
-                  <p className="para hall rv" style={{ '--d': 0.6 }}>
-                    {isArabic ? 'قاعة روز جاردن' : 'Rose Garden Hall'}
-                  </p>
-                  <p className="para city rv" style={{ '--d': 0.9 }}>
-                    {isArabic ? 'القاهرة الجديدة، مصر' : 'New Cairo, Egypt'}
-                  </p>
-                  <div className="map rv z" style={{ '--d': 1.3 }}>
+                  <h2 className="ttl rv">{isArabic ? 'مكان وقاعة الحفل' : 'Wedding Venue'}</h2>
+                  <div className="hall-name rv" style={{ '--d': 0.5 }}>
+                    {isArabic ? 'قاعة روز جاردن الملكية' : 'Royal Rose Garden Hall'}
+                  </div>
+                  <div className="full-addr rv" style={{ '--d': 0.8 }}>
+                    {isArabic ? 'التجمع الخامس، القاهرة الجديدة، مصر' : 'Fifth Settlement, New Cairo, Egypt'}
+                  </div>
+                  <div className="map rv z" style={{ '--d': 1.2 }}>
                     <iframe
-                      src="https://www.google.com/maps?q=Cairo&hl=en&output=embed"
+                      src="https://maps.google.com/maps?q=Rose+Garden+Hall,+New+Cairo,+Egypt&t=&z=15&ie=UTF8&iwloc=B&output=embed"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       title="Wedding venue location"
                     />
                   </div>
-                  <div className="acts rv" style={{ '--d': 1.7 }}>
+                  <div className="acts rv" style={{ '--d': 1.6 }}>
                     <a
                       className="btn loc"
-                      href="https://www.google.com/maps/search/?api=1&query=Cairo"
+                      href="https://maps.google.com/?q=Rose+Garden+Hall,+New+Cairo,+Egypt"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -607,7 +647,7 @@ export default function VelvetVoicePage() {
 
             {/* 6 · تأكيد الحضور (Page 5) */}
             <section
-              className={`sec ${currentPage === 5 ? 'active in' : ''}`}
+              className={`sec ${currentPage === 5 ? 'active in' : ''} ${currentPage > 5 ? 'leave-up' : ''}`}
               id="vv-rsvp"
               data-wda-page="rsvp"
             >
@@ -699,13 +739,93 @@ export default function VelvetVoicePage() {
                     <p className="para sm">
                       {attending === 'yes'
                         ? (isArabic ? `شكرًا يا ${guestName} — مستنيينك تنوّر ليلتنا 🤍` : `Thank you, ${guestName} — we cannot wait to see you 🤍`)
-                        : (isArabic ? `شكرًا يا ${guestName} — كنت نتمنى وجودك وهتكون في قلوبنا يومها 🤍` : `Thank you, ${guestName} — you will be in our hearts 🤍`)}
+                        : (isArabic ? `شكرًا يا ${guestName} — كنا نتمنى وجودك وهتكون في قلوبنا يومها 🤍` : `Thank you, ${guestName} — you will be in our hearts 🤍`)}
                     </p>
                     <button className="btn ghost again" type="button" onClick={() => setIsRsvpSent(false)}>
                       <span>{isArabic ? 'تعديل الرد' : 'Change my reply'}</span>
                     </button>
                   </div>
                 )}
+              </div>
+            </section>
+
+            {/* 7 · التهنئة الصوتية للعروسين (Page 6) */}
+            <section
+              className={`sec ${currentPage === 6 ? 'active in' : ''}`}
+              id="vv-voice"
+              data-wda-page="voice"
+            >
+              <div className="pg p-voice">
+                <div className="pgi">
+                  <h2 className="ttl rv">{isArabic ? 'التهنئة الصوتية' : 'Voice Wishes'}</h2>
+                  <p className="para rv" style={{ '--d': 0.6 }}>
+                    {isArabic
+                      ? 'اترك بصوتك رسالة مباركة دافئة للعروسين لتبقى ذكرى جميلة تدوم في قلوبهما 🎙️🤍'
+                      : 'Leave a warm spoken wish for the couple to cherish forever 🎙️🤍'}
+                  </p>
+                  
+                  <div className="voice-box rv" style={{ '--d': 1.1 }}>
+                    {voiceState === 'recording' && (
+                      <canvas ref={canvasRef} id="vwave" width={220} height={40} style={{ borderRadius: 8 }} />
+                    )}
+
+                    <div className="voice-timer">
+                      {Math.floor(recordSeconds / 60)}:{String(recordSeconds % 60).padStart(2, '0')}
+                    </div>
+
+                    {voiceState !== 'review' ? (
+                      <button
+                        type="button"
+                        className={`vmic-btn ${voiceState === 'recording' ? 'recording' : ''}`}
+                        onClick={voiceState === 'recording' ? stopVoiceRecording : startVoiceRecording}
+                        aria-label={voiceState === 'recording' ? 'إيقاف التسجيل' : 'بدء التسجيل'}
+                      >
+                        {voiceState === 'recording' ? (
+                          <svg viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="6" y="6" width="12" height="12" rx="2" />
+                          </svg>
+                        ) : (
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="9" y="3" width="6" height="11" rx="3" />
+                            <path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8" />
+                          </svg>
+                        )}
+                      </button>
+                    ) : (
+                      <div className="review-area" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, width: '100%' }}>
+                        {audioUrl && <audio src={audioUrl} controls style={{ width: '100%', maxWidth: 280 }} />}
+                        <input
+                          type="text"
+                          value={voiceName}
+                          onChange={(e) => setVoiceName(e.target.value)}
+                          placeholder={isArabic ? 'اكتب اسمك للعروسين' : 'Your name for the couple'}
+                          style={{
+                            width: '100%',
+                            maxWidth: 280,
+                            height: 42,
+                            padding: '0 14px',
+                            borderRadius: 999,
+                            border: '1.5px solid var(--gold)',
+                            background: 'rgba(255,253,250,0.92)',
+                            color: '#2c0810',
+                            fontFamily: 'var(--f-body)',
+                            fontSize: 18,
+                            textAlign: isArabic ? 'right' : 'left',
+                            direction: isArabic ? 'rtl' : 'ltr'
+                          }}
+                        />
+                        <div className="voice-actions">
+                          <button type="button" className="voice-act-btn" onClick={resetVoiceRecording}>
+                            {isArabic ? 'إلغاء' : 'Delete'}
+                          </button>
+                          <button type="button" className="voice-act-btn send" onClick={sendVoiceNote}>
+                            {isArabic ? 'إرسال التهنئة' : 'Send Wish'}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </section>
           </div>
@@ -783,18 +903,53 @@ export default function VelvetVoicePage() {
           </div>
         )}
 
-        {/* Page navigation dots and arrows indicator */}
+        {/* Floating Side Navigation Arrows */}
+        {isOpen && currentPage > 0 && (
+          <button
+            type="button"
+            className="vv-nav-arrow prev"
+            onClick={prevPage}
+            aria-label={isArabic ? 'الصفحة السابقة' : 'Previous page'}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        )}
+        {isOpen && currentPage < totalPages - 1 && (
+          <button
+            type="button"
+            className="vv-nav-arrow next"
+            onClick={nextPage}
+            aria-label={isArabic ? 'الصفحة التالية' : 'Next page'}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        )}
+
+        {/* Modern Segmented Pagination Bar */}
         {isOpen && (
-          <div className="vv-page-dots">
+          <div className="vv-pagination-bar" role="tablist" aria-label="الصفحات">
             {Array.from({ length: totalPages }).map((_, idx) => (
               <button
                 key={idx}
                 type="button"
-                className={`dot ${currentPage === idx ? 'active' : ''}`}
+                role="tab"
+                aria-selected={currentPage === idx}
+                className={`vv-seg-pill ${currentPage === idx ? 'active' : ''}`}
                 onClick={() => goToPage(idx)}
-                aria-label={`Go to page ${idx + 1}`}
+                aria-label={`الانتقال إلى صفحة ${idx + 1}`}
               />
             ))}
+          </div>
+        )}
+
+        {/* Bottom Swipe Hint */}
+        {isOpen && (
+          <div className="vv-swipe-hint" aria-hidden="true">
+            <span>{isArabic ? '‹ اسحب للتنقل بين الصفحات ›' : '‹ Swipe to navigate pages ›'}</span>
           </div>
         )}
 
