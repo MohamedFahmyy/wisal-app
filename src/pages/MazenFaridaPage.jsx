@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
+import { submitRsvp } from '../utils/api';
 import '../styles/mazen-farida.css';
 
 // Converts standard western numbers to Eastern Arabic numerals (١، ٢، ٣...)
@@ -373,7 +374,7 @@ export default function MazenFaridaPage() {
   }, [isAutoScrolling]);
 
   // RSVP Submission Handler with Particle Burst
-  const handleRSVPSubmit = (e) => {
+  const handleRSVPSubmit = async (e) => {
     e.preventDefault();
     if (!rsvpName.trim()) {
       setRsvpError('يرجى كتابة اسمكم الكريم لتأكيد الرد');
@@ -382,15 +383,26 @@ export default function MazenFaridaPage() {
     setRsvpError('');
 
     try {
-      // Persist to local guest storage adapter with strict error handling
-      saveGuestResponse({
+      // 1. Submit to backend API
+      await submitRsvp({
+        invitationId: 'inv_mazen_farida',
         name: rsvpName.trim(),
         attending: attendance === 'attending' ? 'yes' : 'no',
-        guests: attendance === 'attending' ? guestCount : 0,
-        message: rsvpMsg.trim(),
-        invitationId: 'inv_mazen_farida',
-        slug: 'mazen-farida'
+        guests: attendance === 'attending' ? guestCount : 1,
+        message: rsvpMsg.trim()
       });
+
+      // 2. Silent local guest storage backup
+      try {
+        saveGuestResponse({
+          name: rsvpName.trim(),
+          attending: attendance === 'attending' ? 'yes' : 'no',
+          guests: attendance === 'attending' ? guestCount : 0,
+          message: rsvpMsg.trim(),
+          invitationId: 'inv_mazen_farida',
+          slug: 'mazen-farida'
+        });
+      } catch (localErr) {}
 
       // Trigger golden particles burst
       const bursts = [];
@@ -411,6 +423,7 @@ export default function MazenFaridaPage() {
       }, 600);
     } catch (err) {
       console.error('[RSVP MazenFarida] Failed to save response:', err);
+      setRsvpError(err.message || 'تعذر إرسال الرد، يرجى المحاولة مرة أخرى.');
     }
   };
 

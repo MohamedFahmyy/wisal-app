@@ -17,6 +17,7 @@ import PearlPage from './pages/PearlPage';
 import VeilPage from './pages/VeilPage';
 import SageGardenPage from './pages/SageGardenPage';
 import VelvetVoicePage from './pages/VelvetVoicePage';
+import ResponsesDashboardPage from './pages/ResponsesDashboardPage';
 import GuestDashboardPage from './pages/GuestDashboardPage';
 import LinkGeneratorPage from './pages/LinkGeneratorPage';
 import QRCardPage from './pages/QRCardPage';
@@ -48,6 +49,7 @@ function LayoutWrapper() {
   const location = useLocation();
   const isInvitationRoute =
     location.pathname.startsWith('/invite/') ||
+    location.pathname.startsWith('/responses/') ||
     location.pathname === '/mazen-farida' ||
     location.pathname === '/mohamed-salma' ||
     location.pathname === '/mohamed-salma-v2' ||
@@ -102,6 +104,7 @@ function LayoutWrapper() {
         <Route path="/velvet-voice" element={<VelvetVoicePage />} />
         <Route path="/invite/velvet-voice" element={<VelvetVoicePage />} />
         <Route path="/invite/:slug" element={<InvitationPage />} />
+        <Route path="/responses/:invitationId" element={<ResponsesDashboardPage />} />
         <Route path="/guests" element={<GuestDashboardPage />} />
         <Route path="/admin" element={<GuestDashboardPage />} />
         <Route path="/dashboard" element={<GuestDashboardPage />} />

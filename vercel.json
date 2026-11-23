@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "http://186.241.19.187:8585/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

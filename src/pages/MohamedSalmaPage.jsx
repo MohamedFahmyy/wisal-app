@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
+import { submitRsvp } from '../utils/api';
 import '../styles/mazen-farida.css';
 
 // Converts standard western numbers to Eastern Arabic numerals (١، ٢، ٣...)
@@ -503,19 +504,35 @@ export default function MohamedSalmaPage({ version: propVersion }) {
   }, [isAutoScrolling]);
 
   // RSVP Submission Handler with Particle Burst
-  const handleRSVPSubmit = (e) => {
+  const handleRSVPSubmit = async (e) => {
     e.preventDefault();
-    if (!rsvpName.trim()) return;
+    if (!rsvpName.trim()) {
+      setRsvpError('يرجى كتابة اسمكم الكريم لتأكيد الرد');
+      return;
+    }
+    setRsvpError('');
 
     try {
-      saveGuestResponse({
+      // 1. Submit to backend API
+      await submitRsvp({
+        invitationId: isPink ? 'inv_mohamed_salma_v2' : 'inv_mohamed_salma',
         name: rsvpName.trim(),
         attending: attendance === 'attending' ? 'yes' : 'no',
-        guests: attendance === 'attending' ? guestCount : 0,
-        message: rsvpMsg.trim(),
-        invitationId: 'inv_mohamed_salma',
-        slug: isPink ? 'mohamed-salma-v2' : 'mohamed-salma'
+        guests: attendance === 'attending' ? guestCount : 1,
+        message: rsvpMsg.trim()
       });
+
+      // 2. Silent local storage backup
+      try {
+        saveGuestResponse({
+          name: rsvpName.trim(),
+          attending: attendance === 'attending' ? 'yes' : 'no',
+          guests: attendance === 'attending' ? guestCount : 0,
+          message: rsvpMsg.trim(),
+          invitationId: 'inv_mohamed_salma',
+          slug: isPink ? 'mohamed-salma-v2' : 'mohamed-salma'
+        });
+      } catch (localErr) {}
 
       // Trigger sparkle particles burst around seal
       const bursts = [];
@@ -536,6 +553,7 @@ export default function MohamedSalmaPage({ version: propVersion }) {
       }, 600);
     } catch (err) {
       console.error('[RSVP MohamedSalma] Failed to save response:', err);
+      setRsvpError(err.message || 'تعذر إرسال الرد، يرجى المحاولة مرة أخرى.');
     }
   };
 

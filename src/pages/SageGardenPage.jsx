@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
+import { submitRsvp } from '../utils/api';
 import '../styles/sage-garden.css';
 
 export default function SageGardenPage() {
@@ -345,6 +346,16 @@ export default function SageGardenPage() {
     setRsvpError('');
 
     try {
+      // 1. Submit to backend API
+      await submitRsvp({
+        invitationId: 'inv_sage_garden',
+        name: guestName.trim(),
+        attending,
+        guests: attending === 'yes' ? 1 : 1,
+        message: note.trim()
+      });
+
+      // 2. Silent local storage backup
       const responseData = {
         name: guestName.trim(),
         attending: attending === 'yes',
@@ -352,14 +363,16 @@ export default function SageGardenPage() {
         submittedAt: new Date().toISOString()
       };
 
-      saveGuestResponse('inv_sage_garden', responseData);
-      localStorage.setItem('mithaq_guest_name', guestName.trim());
-      localStorage.setItem('mithaq_rsvp_inv_sage_garden', JSON.stringify(responseData));
+      try {
+        saveGuestResponse('inv_sage_garden', responseData);
+        localStorage.setItem('mithaq_guest_name', guestName.trim());
+        localStorage.setItem('mithaq_rsvp_inv_sage_garden', JSON.stringify(responseData));
+      } catch (localErr) {}
 
       setIsRsvpSent(true);
       showToast(isArabic ? 'تم تأكيد حضورك بنجاح 🤍' : 'Your RSVP has been received 🤍');
     } catch (err) {
-      setRsvpError(isArabic ? 'حدث خطأ أثناء الإرسال، يرجى المحاولة ثانية' : 'Submission failed, please try again');
+      setRsvpError(err.message || (isArabic ? 'حدث خطأ أثناء الإرسال، يرجى المحاولة ثانية' : 'Submission failed, please try again'));
     } finally {
       setIsSubmitting(false);
     }

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle2, Heart, ShieldCheck, Sparkles } from '../../utils/icons';
 import { saveGuestResponse } from '../../utils/guestStorage';
+import { submitRsvp } from '../../utils/api';
 
 export function RSVPSection({ guestName, t, language, slug = '' }) {
   const [name, setName] = useState(guestName || '');
   const [attending, setAttending] = useState('yes'); // 'yes' or 'no'
   const [guestCount, setGuestCount] = useState('2');
   const [note, setNote] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -17,7 +20,7 @@ export function RSVPSection({ guestName, t, language, slug = '' }) {
     }
   }, [guestName]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) {
@@ -25,33 +28,51 @@ export function RSVPSection({ guestName, t, language, slug = '' }) {
       return;
     }
     setErrorMsg('');
+    setIsSubmitting(true);
 
-    // Persist via clean guest storage adapter with strict error handling
+    const pathSlug = typeof window !== 'undefined'
+      ? window.location.pathname.replace(/^\/invite\//, '').replace(/\/$/, '')
+      : 'general';
+    const targetSlug = slug || pathSlug || 'general';
+    const resolvedGuests = attending === 'yes' ? parseInt(guestCount, 10) || 1 : 1;
+
     try {
-      const pathSlug = typeof window !== 'undefined'
-        ? window.location.pathname.replace(/^\/invite\//, '').replace(/\/$/, '')
-        : 'general';
-
-      const targetSlug = slug || pathSlug || 'general';
-
-      saveGuestResponse({
+      // 1. Send to real backend API via Vercel proxy
+      await submitRsvp({
+        invitationId: targetSlug.startsWith('inv_') ? targetSlug : `inv_${targetSlug}`,
         name: trimmed,
         attending,
-        guests: attending === 'yes' ? parseInt(guestCount, 10) : 0,
+        guests: resolvedGuests,
         message: note.trim(),
-        invitationId: targetSlug,
-        slug: targetSlug
+        honeypot
       });
 
-      // Only set submitted to true once successfully persisted
+      // 2. Silent local backup copy (so offline/local guest dashboard retains history)
+      try {
+        saveGuestResponse({
+          name: trimmed,
+          attending,
+          guests: attending === 'yes' ? resolvedGuests : 0,
+          message: note.trim(),
+          invitationId: targetSlug,
+          slug: targetSlug
+        });
+      } catch (localErr) {
+        // Silent catch for local backup
+      }
+
       setSubmitted(true);
     } catch (err) {
-      console.error('[RSVP] Failed to persist response:', err);
+      console.error('[RSVP Error]', err);
+      // Requirement 6: If failed or API unavailable, DO NOT show "submitted", display clear Arabic error
       setErrorMsg(
-        language === 'ar'
-          ? 'تعذر تسجيل الرد في ذاكرة المتصفح، يرجى المحاولة مرة أخرى.'
-          : 'Failed to record RSVP in browser storage, please try again.'
+        err.message ||
+        (language === 'ar'
+          ? 'تعذر إرسال الرد إلى الخادم، يرجى التأكد من اتصالك بالإنترنت والمحاولة مرة أخرى.'
+          : 'Failed to submit RSVP to the server. Please check your connection and try again.')
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -102,32 +123,40 @@ export function RSVPSection({ guestName, t, language, slug = '' }) {
 
           <div
             style={{
-              marginTop: '12px',
-              padding: '8px 12px',
+              marginTop: '14px',
+              padding: '10px 14px',
               background: '#eef6f0',
               border: '1px solid #cce5d4',
-              borderRadius: '8px',
-              fontSize: '12px',
+              borderRadius: '10px',
+              fontSize: '13px',
               color: '#24613b',
-              textAlign: 'center'
+              textAlign: 'center',
+              fontWeight: '500'
             }}
           >
             {language === 'ar'
-              ? '✓ تم حفظ الرد بنجاح في سجل ضيوف هذه الدعوة على هذا المتصفح'
-              : '✓ Response successfully saved locally for this invitation'}
+              ? '✓ تم تسجيل تأكيد حضوركم وإرساله للعروسين بنجاح 🤍'
+              : '✓ Your RSVP has been successfully sent to the couple! 🤍'}
           </div>
 
-          <button onClick={resetForm} className="btn-edit-rsvp" style={{ marginTop: '12px' }}>
-            {language === 'ar' ? 'تعديل الرد (تجربة أخرى)' : 'Edit Response (Demo)'}
+          <button onClick={resetForm} className="btn-edit-rsvp" style={{ marginTop: '14px' }}>
+            {language === 'ar' ? 'تعديل بيانات الحضور' : 'Edit Response'}
           </button>
-
-          <div className="rsvp-demo-disclaimer">
-            <ShieldCheck size={14} />
-            <span>{t.rsvpDemoNotice}</span>
-          </div>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="rsvp-form" noValidate>
+          {/* Honeypot field for bot protection */}
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            style={{ display: 'none' }}
+            tabIndex="-1"
+            autoComplete="off"
+            aria-hidden="true"
+          />
+
           <div className="form-group">
             <label className="form-label">{t.guestNameLabel} <span style={{ color: '#b57a72' }}>*</span></label>
             <input
@@ -142,7 +171,7 @@ export function RSVPSection({ guestName, t, language, slug = '' }) {
               className={`form-input ${errorMsg ? 'has-error' : ''}`}
             />
             {errorMsg && (
-              <span className="form-error-text" style={{ color: '#b57a72', fontSize: '12px' }}>
+              <span className="form-error-text" style={{ color: '#b57a72', fontSize: '12.5px', marginTop: '4px', display: 'block' }}>
                 {errorMsg}
               </span>
             )}
@@ -200,15 +229,10 @@ export function RSVPSection({ guestName, t, language, slug = '' }) {
             />
           </div>
 
-          <button type="submit" className="btn-submit-rsvp">
-            <span>{t.submitRSVP}</span>
+          <button type="submit" className="btn-submit-rsvp" disabled={isSubmitting}>
+            <span>{isSubmitting ? (language === 'ar' ? 'جارٍ الإرسال...' : 'Submitting...') : t.submitRSVP}</span>
             <Sparkles size={16} />
           </button>
-
-          <div className="rsvp-demo-disclaimer">
-            <ShieldCheck size={14} />
-            <span>{t.rsvpDemoNotice}</span>
-          </div>
         </form>
       )}
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useParams, useLocation, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
+import { submitRsvp } from '../utils/api';
 import { startAutoScroll } from '../utils/autoScroll';
 import { getInvitationBySlug } from '../data/invitations';
 import '../styles/lune.css';
@@ -235,7 +236,7 @@ export default function LunePage({ invitation: propInvitation }) {
   };
 
   // RSVP Form Submission Handler
-  const handleRsvpSubmit = (e) => {
+  const handleRsvpSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim()) {
       setFormError(isArabic ? 'يرجى كتابة الاسم الكريم' : 'Please enter your name');
@@ -243,29 +244,49 @@ export default function LunePage({ invitation: propInvitation }) {
     }
     setFormError('');
 
+    setIsSubmitting(true);
     const isYes = formData.attending === 'yes';
     const guestName = formData.name.trim();
-    const guestCount = isYes ? Number(formData.guestCount) : 0;
+    const guestCount = isYes ? Number(formData.guestCount) : 1;
 
-    saveGuestResponse({
-      name: guestName,
-      attending: isYes ? 'yes' : 'no',
-      guests: guestCount,
-      message: formData.message.trim(),
-      invitationId,
-      slug: invitationSlug
-    });
+    try {
+      // 1. Submit to real backend API
+      await submitRsvp({
+        invitationId,
+        name: guestName,
+        attending: isYes ? 'yes' : 'no',
+        guests: isYes ? Number(formData.guestCount) : 1,
+        message: formData.message.trim()
+      });
 
-    const msg = isArabic
-      ? isYes
-        ? `${guestName}، مستنيينك يوم ٢١ أغسطس. اتسجل حضور ${guestCount} فرد 🤍.`
-        : `${guestName}، هتوحشنا، وشكرًا على كلامك الحلو 🤍.`
-      : isYes
-        ? `${guestName}, see you on 21 August. Party of ${guestCount} 🤍.`
-        : `${guestName}, you will be missed. Thank you for your kind words 🤍.`;
+      // 2. Silent local storage backup
+      try {
+        saveGuestResponse({
+          name: guestName,
+          attending: isYes ? 'yes' : 'no',
+          guests: isYes ? Number(formData.guestCount) : 0,
+          message: formData.message.trim(),
+          invitationId,
+          slug: invitationSlug
+        });
+      } catch (localErr) {}
 
-    setThanksMsg(msg);
-    setIsSubmitted(true);
+      const msg = isArabic
+        ? isYes
+          ? `${guestName}، مستنيينك يوم ٢١ أغسطس. اتسجل حضور ${Number(formData.guestCount)} فرد 🤍.`
+          : `${guestName}، هتوحشنا، وشكرًا على كلامك الحلو 🤍.`
+        : isYes
+          ? `${guestName}, see you on 21 August. Party of ${Number(formData.guestCount)} 🤍.`
+          : `${guestName}, you will be missed. Thank you for your kind words 🤍.`;
+
+      setThanksMsg(msg);
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error('[RSVP Lune] Error:', err);
+      setFormError(err.message || (isArabic ? 'تعذر إرسال الرد، يرجى المحاولة مرة أخرى.' : 'Submission failed, please try again.'));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
