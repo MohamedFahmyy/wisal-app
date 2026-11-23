@@ -357,10 +357,14 @@
   pointer-events: none;
 }
 
+body.sg-locked {
+  overflow: hidden !important;
+}
+
 .sage-garden-wrapper .burst {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 50.2%;
+  top: 62.6%;
   width: 0;
   height: 0;
   pointer-events: none;
@@ -1876,6 +1880,7 @@
 }
 
 /* Floating Drifting Petals */
+.petal,
 .sage-garden-wrapper .petal {
   position: fixed;
   top: -20px;
@@ -1899,6 +1904,7 @@
     opacity: 1;
     transform: none;
   }
+  .petal,
   .sage-garden-wrapper .petal {
     display: none;
   }

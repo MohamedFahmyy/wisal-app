@@ -11,10 +11,11 @@ export default function SageGardenPage() {
   const [lang, setLang] = useState(initialLang);
   const isArabic = lang === 'ar';
 
-  // Cover & Opening Animation
-  const [isOpen, setIsOpen] = useState(false);
+  // Cover & Opening Animation States (faithfully reproduced from Mithaq)
+  const [isOpening, setIsOpening] = useState(false);
+  const [isCoverFading, setIsCoverFading] = useState(false);
+  const [isCoverRemoved, setIsCoverRemoved] = useState(false);
   const [isCollagePlaying, setIsCollagePlaying] = useState(false);
-  const [isCoverGone, setIsCoverGone] = useState(false);
   const [burstParticles, setBurstParticles] = useState([]);
 
   // Audio State
@@ -192,9 +193,21 @@ export default function SageGardenPage() {
     svg.innerHTML = out;
   }, []);
 
+  // Lock body scroll while cover is visible
+  useEffect(() => {
+    if (!isCoverFading) {
+      document.body.classList.add('sg-locked');
+    } else {
+      document.body.classList.remove('sg-locked');
+    }
+    return () => {
+      document.body.classList.remove('sg-locked');
+    };
+  }, [isCoverFading]);
+
   // IntersectionObserver for scroll reveal
   useEffect(() => {
-    if (!isCoverGone) return;
+    if (!isCoverRemoved) return;
     const elements = document.querySelectorAll('.sage-garden-wrapper .reveal, .sage-garden-wrapper .sprig');
     const observer = new IntersectionObserver(
       (entries) => {
@@ -209,7 +222,7 @@ export default function SageGardenPage() {
     );
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, [isCoverGone]);
+  }, [isCoverRemoved]);
 
   // Floating Petals Generator
   const spawnPetals = useCallback(() => {
@@ -247,12 +260,12 @@ export default function SageGardenPage() {
     }
   }, [isPlaying]);
 
-  // Open Invitation
-  const openInvitation = () => {
-    if (isOpen) return;
-    setIsOpen(true);
+  // Open Invitation - Faithfully matching Mithaq entrance timing and sequence
+  const openInvitation = useCallback(() => {
+    if (isOpening || isCoverRemoved) return;
+    setIsOpening(true);
 
-    // Burst Particles
+    // 16 burst particles matching Mithaq leaf particles
     const particles = Array.from({ length: 16 }, (_, i) => {
       const a = (i / 16) * Math.PI * 2;
       const r = 90 + Math.random() * 90;
@@ -272,17 +285,22 @@ export default function SageGardenPage() {
         .catch(() => {});
     }
 
-    // Schedule Collage Assembly
+    // Step 1 (1300ms): Cover starts fading out with .gone, petals begin drifting
     setTimeout(() => {
-      setIsCollagePlaying(true);
-    }, 400);
-
-    // Fade and Remove Cover
-    setTimeout(() => {
-      setIsCoverGone(true);
+      setIsCoverFading(true);
       spawnPetals();
     }, 1300);
-  };
+
+    // Step 2 (1350ms): Right as cover clears, collage pieces fly into place!
+    setTimeout(() => {
+      setIsCollagePlaying(true);
+    }, 1350);
+
+    // Step 3 (2000ms): Completely unmount cover after smooth 0.5s fade finishes
+    setTimeout(() => {
+      setIsCoverRemoved(true);
+    }, 2000);
+  }, [isOpening, isCoverRemoved, spawnPetals]);
 
   // Cover swipe/wheel to open handlers
   const coverTouchY = useRef(0);
@@ -290,14 +308,14 @@ export default function SageGardenPage() {
     coverTouchY.current = e.touches[0].clientY;
   };
   const handleCoverTouchEnd = (e) => {
-    if (isOpen || isCoverGone) return;
+    if (isOpening || isCoverRemoved) return;
     const diffY = coverTouchY.current - e.changedTouches[0].clientY;
     if (Math.abs(diffY) > 25) {
       openInvitation();
     }
   };
   const handleCoverWheel = (e) => {
-    if (isOpen || isCoverGone) return;
+    if (isOpening || isCoverRemoved) return;
     if (Math.abs(e.deltaY) > 15) {
       openInvitation();
     }
@@ -470,9 +488,9 @@ export default function SageGardenPage() {
       </header>
 
       {/* ============ غلاف الظرف الافتتاحي ============ */}
-      {!isCoverGone && (
+      {!isCoverRemoved && (
         <div 
-          className={`cover ${isOpen ? 'opening' : ''}`} 
+          className={`cover ${isOpening ? 'opening' : ''} ${isCoverFading ? 'gone' : ''}`} 
           id="coverScreen"
           onTouchStart={handleCoverTouchStart}
           onTouchEnd={handleCoverTouchEnd}
@@ -498,7 +516,10 @@ export default function SageGardenPage() {
                 role="button"
                 tabIndex={0}
                 aria-label="Open"
-                onClick={openInvitation}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openInvitation();
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -513,9 +534,9 @@ export default function SageGardenPage() {
                   <span
                     key={idx}
                     style={{
-                      '--x': `${p.x}px`,
-                      '--y': `${p.y}px`,
-                      '--r': `${p.rot}deg`,
+                      '--x': `${p.x.toFixed(1)}px`,
+                      '--y': `${p.y.toFixed(1)}px`,
+                      '--r': `${p.rot.toFixed(1)}deg`,
                       background: p.bg
                     }}
                   />
@@ -1244,7 +1265,7 @@ export default function SageGardenPage() {
       </main>
 
       {/* Floating Audio Play / Pause Button */}
-      {isCoverGone && (
+      {isCoverFading && (
         <div
           className={`fab on ${isPlaying ? 'playing' : ''}`}
           id="audioBtn"
