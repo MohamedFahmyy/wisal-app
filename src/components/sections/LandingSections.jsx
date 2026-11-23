@@ -137,7 +137,7 @@ export function HeroSection() {
 
           <div className="hero-floating-pill pill-bottom">
             <Sparkles size={14} color="#a7835d" />
-            <span>12 تجربة فتح فريدة</span>
+            <span>{invitations.length} تجربة فتح فريدة</span>
           </div>
         </div>
       </div>
@@ -190,7 +190,7 @@ export function FeaturedDesignsSection() {
         </div>
 
         <Link to="/demos" className="btn-view-all-demos">
-          <span>شاهد كل التصميمات (12 قالب)</span>
+          <span>شاهد كل التصميمات ({invitations.length} قالب)</span>
           <ArrowUpLeft size={17} />
         </Link>
       </div>
@@ -412,16 +412,19 @@ export function TestimonialsSection() {
     <section className="testimonials-section">
       <div className="testimonials-container">
         <div className="section-center-head">
-          <span className="section-eyebrow">LOVE STORIES & EXPERIENCES</span>
-          <h2 className="section-heading-title">قالوا عن تجربة وِصال</h2>
+          <span className="section-eyebrow">ILLUSTRATIVE EXAMPLES • نماذج استرشادية وتوضيحية</span>
+          <h2 className="section-heading-title">نماذج توضيحية لتجارب وانطباعات الضيوف</h2>
           <p className="section-lead-subtitle">
-            آراء وتجارب نموذجية لعرائس وعرسان شاركوا أحبابهم فرحة البدايات من خلال منصتنا.
+            (قسم استرشادي توضيحي): نماذج افتراضية تحاكي انطباعات العرسان والمعازيم وتجسد التأثير المتوقع لتجربة دعوات وِصال التفاعلية، تم تصنيفها كأمثلة توضيحية التزاماً بالشفافية والمصداقية.
           </p>
         </div>
 
         <div className="testimonials-cards-grid">
           {testimonials.map((t) => (
             <article className="testimonial-card" key={t.id}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11px', background: '#f6ede0', color: '#8a6229', padding: '2px 8px', borderRadius: '6px', marginBottom: '10px', fontWeight: 600 }}>
+                <span>نموذج استرشادي</span>
+              </div>
               <div className="testimonial-stars">★★★★★</div>
               <p className="testimonial-quote">«{t.quote}»</p>
               <div className="testimonial-author">
@@ -434,7 +437,7 @@ export function TestimonialsSection() {
 
         <div className="testimonials-disclaimer">
           <ShieldCheck size={14} />
-          <span>ملاحظة: الآراء المعروضة أعلاه نماذج استرشادية توضح جودة التجربة والتأثير المتوقع على ضيوفكم.</span>
+          <span>شفافية المحتوى: الآراء المعروضة أعلاه نماذج استرشادية توضيحية تحاكي تفاعل الضيوف ولا تُمثل شهادات عملاء حية دون إذن رسمي مسبق.</span>
         </div>
       </div>
     </section>

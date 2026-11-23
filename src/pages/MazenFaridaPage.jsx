@@ -158,6 +158,7 @@ export default function MazenFaridaPage() {
   const [searchParams] = useSearchParams();
   const guestName = searchParams.get('to');
   const wishDirect = searchParams.get('wish') === '1';
+  const isDemo = searchParams.get('demo') === '1' || searchParams.get('demo') === 'true' || searchParams.get('preview') === 'true';
 
   // Intro & Audio State
   const [isIntroOpening, setIsIntroOpening] = useState(false);
@@ -180,6 +181,7 @@ export default function MazenFaridaPage() {
   const [rsvpName, setRsvpName] = useState(guestName || '');
   const [rsvpMsg, setRsvpMsg] = useState('');
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
+  const [rsvpError, setRsvpError] = useState('');
   const [sealBursts, setSealBursts] = useState([]);
 
   useEffect(() => {
@@ -373,7 +375,11 @@ export default function MazenFaridaPage() {
   // RSVP Submission Handler with Particle Burst
   const handleRSVPSubmit = (e) => {
     e.preventDefault();
-    if (!rsvpName.trim()) return;
+    if (!rsvpName.trim()) {
+      setRsvpError('يرجى كتابة اسمكم الكريم لتأكيد الرد');
+      return;
+    }
+    setRsvpError('');
 
     try {
       // Persist to local guest storage adapter with strict error handling
@@ -436,20 +442,39 @@ export default function MazenFaridaPage() {
 
       {/* 2. Main Invitation Stage */}
       <main className="mf-stage">
-        {/* Quick link banner to Mohamed & Salma */}
-        <div style={{
-          textAlign: 'center',
-          padding: '8px 16px',
-          background: 'rgba(255, 248, 235, 0.95)',
-          borderBottom: '1px solid #ebcfab',
-          fontSize: '13px',
-          zIndex: 50,
-          position: 'relative'
-        }}>
-          <Link to="/mohamed-salma" style={{ color: '#8a6229', textDecoration: 'none', fontWeight: 'bold' }}>
-            💍 دعوة خطوبة محمد & سلمى (30 نوفمبر 2026) — اضغط هنا للعرض ⟵
-          </Link>
-        </div>
+        {/* Demo Mode Badge Bar — Only visible when ?demo=true */}
+        {isDemo && (
+          <div className="mf-demo-banner" style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '8px 16px',
+            background: 'rgba(255, 248, 235, 0.96)',
+            backdropFilter: 'blur(8px)',
+            borderBottom: '1px solid #ebcfab',
+            fontSize: '13px',
+            color: '#8a6229',
+            zIndex: 50,
+            position: 'relative'
+          }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
+              <span style={{
+                background: '#8a6229',
+                color: '#fff',
+                fontSize: '10px',
+                padding: '2px 8px',
+                borderRadius: '999px',
+                letterSpacing: '0.5px'
+              }}>
+                DEMO • نموذج تجريبي
+              </span>
+              <span>معاينة تجريبية لتصميم الدعوة</span>
+            </span>
+            <Link to="/demos" style={{ color: '#8a6229', textDecoration: 'underline', fontSize: '12px' }}>
+              معرض التصميمات ⟵
+            </Link>
+          </div>
+        )}
 
         {/* Hero Video & Typography */}
         <section className="mf-hero-video-wrap">
@@ -674,8 +699,44 @@ export default function MazenFaridaPage() {
             <p className="mf-rsvp-sub">يسعدنا تأكيد حضوركم قبل الموعد بأسبوع</p>
 
             {rsvpSubmitted ? (
-              <div className="mf-rsvp-success">
-                شكراً لكم — تم تسجيل ردكم بكل سرور 🤍
+              <div className="mf-rsvp-success" style={{
+                padding: '28px 20px',
+                background: 'rgba(247, 243, 233, 0.95)',
+                border: '1px solid #d4af37',
+                borderRadius: '16px',
+                textAlign: 'center',
+                boxShadow: '0 8px 24px rgba(181, 138, 74, 0.15)'
+              }}>
+                <div style={{ fontSize: '32px', marginBottom: '8px' }}>✨ 🤍 ✨</div>
+                <h3 style={{ fontSize: '20px', color: '#684a1d', margin: '0 0 8px 0' }}>
+                  شكراً لكم، {rsvpName.trim()}
+                </h3>
+                <p style={{ margin: 0, color: '#8a6229', fontSize: '15px', lineHeight: 1.6 }}>
+                  {attendance === 'attending' 
+                    ? `تم تأكيد حضوركم (${guestCount} ${guestCount === 1 ? 'فرد' : 'أفراد'}) بنجاح 🤍. ننتظركم بكل حب وشوق في ليلتنا المميزة!`
+                    : 'نشكركم على إخبارنا ومشاعركم الطيبة، وسنفتقد حضوركم بالتأكيد.'}
+                </p>
+                {rsvpMsg.trim() && (
+                  <p style={{ marginTop: '12px', fontSize: '13px', color: '#a6804a', fontStyle: 'italic' }}>
+                    «{rsvpMsg.trim()}»
+                  </p>
+                )}
+                <div style={{ marginTop: '16px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setRsvpSubmitted(false)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#8a6229',
+                      textDecoration: 'underline',
+                      fontSize: '13px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    تعديل بيانات الحضور
+                  </button>
+                </div>
               </div>
             ) : (
               <form className="mf-rsvp-form" onSubmit={handleRSVPSubmit}>
@@ -684,11 +745,19 @@ export default function MazenFaridaPage() {
                     type="text"
                     required
                     maxLength={100}
-                    placeholder="اسمك الكريم"
+                    placeholder="اسمك الكريم *"
                     value={rsvpName}
-                    onChange={(e) => setRsvpName(e.target.value)}
+                    onChange={(e) => {
+                      setRsvpName(e.target.value);
+                      if (rsvpError) setRsvpError('');
+                    }}
                   />
                 </label>
+                {rsvpError && (
+                  <div style={{ color: '#b91c1c', fontSize: '13px', marginTop: '4px', textAlign: 'center' }}>
+                    {rsvpError}
+                  </div>
+                )}
 
                 <div className="mf-choice-grid">
                   <label

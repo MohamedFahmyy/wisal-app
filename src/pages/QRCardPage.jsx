@@ -37,7 +37,7 @@ export default function QRCardPage() {
     }
   }, [selectedSlug]);
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://wisal.vercel.app';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://wisal-app-six.vercel.app';
   const inviteUrl = useMemo(() => {
     if (selectedSlug === 'mazen-farida') return `${origin}/mazen-farida`;
     return `${origin}/invite/${selectedSlug}`;

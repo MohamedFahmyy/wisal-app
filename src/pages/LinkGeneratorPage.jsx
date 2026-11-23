@@ -35,7 +35,7 @@ export default function LinkGeneratorPage() {
     if (selectedSlug === 'custom') {
       return customBaseUrl.trim() || window.location.origin;
     }
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://wisal.vercel.app';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://wisal-app-six.vercel.app';
     if (selectedSlug === 'mazen-farida') {
       return `${origin}/mazen-farida`;
     }

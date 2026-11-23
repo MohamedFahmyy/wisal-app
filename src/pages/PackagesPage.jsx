@@ -8,6 +8,7 @@ import {
   Heart
 } from '../utils/icons';
 import { packages } from '../data/packages';
+import { invitations } from '../data/invitations';
 
 export default function PackagesPage() {
   useEffect(() => {
@@ -142,7 +143,7 @@ export default function PackagesPage() {
               </thead>
               <tbody>
                 <tr>
-                  <td>اختيار قالب من معرض الـ 12 تصميماً</td>
+                  <td>اختيار قالب من معرض الـ {invitations.length} تصميماً</td>
                   <td>✓</td>
                   <td className="td-highlight">✓</td>
                   <td>✓ (أو فكرة جديدة كلياً)</td>

@@ -35,7 +35,7 @@ const { invitations } = await import('../src/data/invitations.js');
 
 console.log(`[Prerender] Generating static HTML with bespoke Open Graph metadata for ${invitations.length} invitations...`);
 
-function toAbsoluteUrl(urlOrPath, base = 'https://wisal.app') {
+function toAbsoluteUrl(urlOrPath, base = 'https://wisal-app-six.vercel.app') {
   if (!urlOrPath) return `${base}/images/og/mohamed-salma-engagement.png`;
   if (urlOrPath.startsWith('http://') || urlOrPath.startsWith('https://')) {
     return urlOrPath;
@@ -283,7 +283,7 @@ for (const inv of invitations) {
     imageAlt = title;
   }
 
-  const url = `https://wisal.app/invite/${inv.slug}`;
+  const url = `https://wisal-app-six.vercel.app/invite/${inv.slug}`;
 
   const invHtml = injectMetadata(baseHtml, {
     title,
@@ -309,35 +309,35 @@ const staticPages = [
     title: `معرض التصميمات (${invitations.length} قالب استثنائي) — وِصال`,
     description: 'استكشفوا مجموعة تصميمات وِصال الحصرية. كل تصميم يقدم تجربة فتح بصرية مستقلة لمناسباتكم السعيدة.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    url: 'https://wisal.app/demos'
+    url: 'https://wisal-app-six.vercel.app/demos'
   },
   {
     path: 'features',
     title: 'مميزات منصة وِصال — تفاصيل استثنائية تصنع الفرق',
     description: 'تعرفوا على مميزات دعوات وِصال: حركات فتح ثلاثية الأبعاد، عداد تنازلي دقيق، تكامل خرائط Google، ومشغل موسيقى رومانسي.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    url: 'https://wisal.app/features'
+    url: 'https://wisal-app-six.vercel.app/features'
   },
   {
     path: 'packages',
     title: 'باقات وأسعار الدعوات الإلكترونية — وِصال',
     description: 'باقات مصممة لتناسب مختلف التطلعات: Essential و Signature و Bespoke مع تفاصيل شفافة ودعم متكامل.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    url: 'https://wisal.app/packages'
+    url: 'https://wisal-app-six.vercel.app/packages'
   },
   {
     path: 'faq',
     title: 'الأسئلة الشائعة — منصة وِصال للدعوات',
     description: 'إجابات واضحة وشاملة حول كيفية عمل الدعوات، خطوات التخصيص، التوافق مع الهواتف الذكية، والمشاركة عبر واتساب.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    url: 'https://wisal.app/faq'
+    url: 'https://wisal-app-six.vercel.app/faq'
   },
   {
     path: 'mazen-farida',
     title: 'عقد قران و حفل زفاف مازن & فريدة | وِصال',
     description: 'اضغط على الختم وافتح الدعوة 🤍 — 14 يناير 2027 بقاعة الياسمين على كورنيش النيل.',
     image: '/farha/mf-intro-poster.jpg',
-    url: 'https://wisal.app/mazen-farida'
+    url: 'https://wisal-app-six.vercel.app/mazen-farida'
   },
   {
     path: 'mohamed-salma',
@@ -347,7 +347,7 @@ const staticPages = [
     imageWidth: 1024,
     imageHeight: 576,
     imageAlt: 'حفل خطوبه محمد وسلمى.',
-    url: 'https://wisal.app/mohamed-salma'
+    url: 'https://wisal-app-six.vercel.app/mohamed-salma'
   },
   {
     path: 'mohamed-salma-v2',
@@ -357,7 +357,7 @@ const staticPages = [
     imageWidth: 1024,
     imageHeight: 576,
     imageAlt: 'حفل خطوبه محمد وسلمى.',
-    url: 'https://wisal.app/mohamed-salma-v2'
+    url: 'https://wisal-app-six.vercel.app/mohamed-salma-v2'
   },
   {
     path: 'velvet',
@@ -367,7 +367,7 @@ const staticPages = [
     imageWidth: 1200,
     imageHeight: 630,
     imageAlt: 'خطوبة عبدالرحمن و آية 💍',
-    url: 'https://wisal.app/velvet'
+    url: 'https://wisal-app-six.vercel.app/velvet'
   },
   {
     path: 'rosearch',
@@ -377,7 +377,7 @@ const staticPages = [
     imageWidth: 1200,
     imageHeight: 630,
     imageAlt: 'حفل زفاف يحيى و ليلى 🌹',
-    url: 'https://wisal.app/rosearch'
+    url: 'https://wisal-app-six.vercel.app/rosearch'
   },
   {
     path: 'lune',
@@ -387,7 +387,7 @@ const staticPages = [
     imageWidth: 1200,
     imageHeight: 630,
     imageAlt: 'حفل زفاف يوسف و ليلى 🌙',
-    url: 'https://wisal.app/lune'
+    url: 'https://wisal-app-six.vercel.app/lune'
   },
   {
     path: 'pearl',
@@ -397,7 +397,7 @@ const staticPages = [
     imageWidth: 1200,
     imageHeight: 630,
     imageAlt: 'عقد قران وحفل زفاف يوسف وليلى 🤍',
-    url: 'https://wisal.app/pearl'
+    url: 'https://wisal-app-six.vercel.app/pearl'
   },
   {
     path: 'veil',
@@ -407,7 +407,7 @@ const staticPages = [
     imageWidth: 1200,
     imageHeight: 630,
     imageAlt: 'عقد قران وحفل زفاف عبدالرحمن وآية 🤍',
-    url: 'https://wisal.app/veil'
+    url: 'https://wisal-app-six.vercel.app/veil'
   },
   {
     path: 'sage-garden',
@@ -417,7 +417,7 @@ const staticPages = [
     imageWidth: 1200,
     imageHeight: 630,
     imageAlt: 'حفل زفاف يوسف وأميرة 🤍',
-    url: 'https://wisal.app/sage-garden'
+    url: 'https://wisal-app-six.vercel.app/sage-garden'
   },
   {
     path: 'velvet-voice',
@@ -427,28 +427,28 @@ const staticPages = [
     imageWidth: 640,
     imageHeight: 1385,
     imageAlt: 'حفل زفاف يوسف وأميرة 🤍 | Velvet Voice',
-    url: 'https://wisal.app/velvet-voice'
+    url: 'https://wisal-app-six.vercel.app/velvet-voice'
   },
   {
     path: 'guests',
     title: 'لوحة إدارة قائمة الضيوف وتأكيد الحضور — وِصال',
     description: 'متابعة حية لتأكيدات الحضور واعتذارات المعازيم، إجمالي الأفراد، ورسائل التهاني مع إمكانية مشاركتها ستوري وتصدير ملف Excel.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    url: 'https://wisal.app/guests'
+    url: 'https://wisal-app-six.vercel.app/guests'
   },
   {
     path: 'links',
     title: 'صانع روابط المعازيم المخصصة عبر واتساب — وِصال',
     description: 'أداة مجانية لتوليد روابط دعوات شخصية باسم كل ضيف مع رسالة جاهزة للإرسال المباشر على واتساب بنقرة واحدة.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    url: 'https://wisal.app/links'
+    url: 'https://wisal-app-six.vercel.app/links'
   },
   {
     path: 'card',
     title: 'كروت QR المطبوعة للترابيزات والدعوات (A6) — وِصال',
     description: 'كارت للدعوة وكارت للترابيزات بنفس هوية وألوان دعوتكم: يمسح الضيف الكود لفتح الدعوة أو كتابة تهنئة تصلكم في لوحة التحكم.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    url: 'https://wisal.app/card'
+    url: 'https://wisal-app-six.vercel.app/card'
   }
 ];
 

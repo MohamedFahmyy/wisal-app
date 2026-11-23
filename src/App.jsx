@@ -29,6 +29,21 @@ function ScrollToTop() {
   return null;
 }
 
+function CanonicalManager() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    const cleanPath = pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
+    canonical.setAttribute('href', `https://wisal-app-six.vercel.app${cleanPath}`);
+  }, [pathname]);
+  return null;
+}
+
 function LayoutWrapper() {
   const location = useLocation();
   const isInvitationRoute =
@@ -51,6 +66,7 @@ function LayoutWrapper() {
   return (
     <div className="app-layout-container">
       <ScrollToTop />
+      <CanonicalManager />
       {!isInvitationRoute && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />

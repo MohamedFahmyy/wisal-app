@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, InstagramIcon, WhatsAppIcon, Sparkles } from '../../utils/icons';
 import { BrandLogo } from '../common/BrandLogo';
+import { invitations } from '../../data/invitations';
 
 export function Footer() {
   return (
@@ -43,7 +44,7 @@ export function Footer() {
             <h4 className="footer-col-title">استكشف وِصال</h4>
             <ul>
               <li>
-                <Link to="/demos">معرض التصميمات (13 قالب مميز)</Link>
+                <Link to="/demos">معرض التصميمات ({invitations.length} قالب مميز)</Link>
               </li>
               <li>
                 <Link to="/card">كروت QR المطبوعة للترابيزات</Link>
