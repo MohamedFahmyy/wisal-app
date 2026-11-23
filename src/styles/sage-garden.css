@@ -232,11 +232,16 @@
 
 .sage-garden-wrapper .env-wrap {
   position: relative;
+  width: 100%;
   filter: drop-shadow(0 26px 34px rgba(60, 55, 40, 0.28));
 }
 
 .sage-garden-wrapper .env {
+  display: block;
   width: 100%;
+  height: auto;
+  position: static;
+  max-width: 100%;
   border-radius: 4px;
 }
 
@@ -245,6 +250,7 @@
   left: 50.2%;
   top: 62.6%;
   width: 23%;
+  height: auto;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;

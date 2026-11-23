@@ -472,20 +472,22 @@ export default function SageGardenPage() {
         playsInline
       />
 
-      {/* Top Floating Bar for Language Toggle & Home link */}
-      <header className="sg-topbar">
-        <Link to="/" className="sg-brand" aria-label="Wisal Home">
-          <span>وصال</span>
-        </Link>
-        <button
-          type="button"
-          onClick={toggleLanguage}
-          className="sg-lang-btn"
-          aria-label="Switch Language"
-        >
-          {isArabic ? 'English' : 'عربي'}
-        </button>
-      </header>
+      {/* Top Floating Bar for Language Toggle & Home link (displayed once inside invitation) */}
+      {isCoverFading && (
+        <header className="sg-topbar">
+          <Link to="/" className="sg-brand" aria-label="Wisal Home">
+            <span>وصال</span>
+          </Link>
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="sg-lang-btn"
+            aria-label="Switch Language"
+          >
+            {isArabic ? 'English' : 'عربي'}
+          </button>
+        </header>
+      )}
 
       {/* ============ غلاف الظرف الافتتاحي ============ */}
       {!isCoverRemoved && (
