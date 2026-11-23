@@ -1332,6 +1332,100 @@ export const invitations = [
     }
   },
   {
+    id: 'inv_ahmed_nancy',
+    slug: 'ahmed-nancy',
+    aliases: ['ahmed-adel-nancy-ajram', 'ahmed-nancy-ajram'],
+    template: 'lune',
+    category: 'wedding',
+    categoryLabel: 'زفاف',
+    categoryLabelEn: 'Wedding',
+    language: 'ar',
+    tag: 'تجربة ليلة القمر الرومانسية',
+    tagEn: 'Under The Moonlight Experience',
+    titleAr: 'حفل زفاف أحمد عادل و نانسي عجرم 🌙',
+    titleEn: 'Ahmed Adel & Nancy Ajram Wedding Invitation | Wisal',
+    description: 'تحت نور القمر، ندعوكم لفرحنا — حفل زفاف أحمد عادل ونانسي عجرم. أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.',
+    descriptionEn: 'Under the moonlight, join us as we wed — Ahmed Adel & Nancy Ajram. 3D opening doors, full moon terrace above the sea, live countdown, timeline, and RSVP.',
+
+    people: {
+      firstPerson: 'أحمد عادل',
+      secondPerson: 'نانسي عجرم',
+      firstPersonEn: 'Ahmed Adel',
+      secondPersonEn: 'Nancy Ajram',
+      firstPersonTitle: 'العريس',
+      secondPersonTitle: 'العروس',
+      firstPersonTitleEn: 'The Groom',
+      secondPersonTitleEn: 'The Bride',
+      parentsAr: 'تتشرف عائلتا أحمد عادل ونانسي عجرم بدعوتكم',
+      parentsEn: 'Together with their families, Ahmed Adel & Nancy Ajram'
+    },
+
+    event: {
+      type: 'wedding',
+      title: 'حفل زفاف أحمد عادل و نانسي عجرم',
+      titleEn: 'Ahmed Adel & Nancy Ajram Wedding',
+      date: '2027-08-21',
+      time: '20:00',
+      timeFormatted: '٨:٠٠ مساءً',
+      timeFormattedEn: '8:00 PM',
+      dateFormatted: 'السبت، ٢١ أغسطس ٢٠٢٧',
+      dateFormattedEn: 'Saturday, 21 August 2027',
+      hijriDate: '١٨ صفر ١٤٤٩ هـ',
+      hijriDateEn: '18 Safar 1449 AH',
+      epochMs: 1818867600000,
+      description: 'على تراس فوق البحر وتحت ضوء القمر، هنرقص أول رقصة في حياتنا سوا. وجودكم هيكمّل الليلة.'
+    },
+
+    venue: {
+      name: 'تراس القمر',
+      nameEn: 'Moonlight Terrace',
+      hall: 'التراس المفتوح',
+      hallEn: 'Open Sea Terrace',
+      city: 'العلمين الجديدة',
+      cityEn: 'New Alamein',
+      address: 'العلمين الجديدة، الساحل الشمالي',
+      addressEn: 'New Alamein, North Coast',
+      mapEmbedUrl: 'https://maps.google.com/maps?q=New%20Alamein&z=14&output=embed',
+      mapUrl: 'https://maps.google.com/?q=New+Alamein',
+      coordinates: '30.8358, 28.9536'
+    },
+
+    media: {
+      coverImage: '/img/lune/gate.jpg',
+      ogImage: '/images/og/lune.jpg',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: 'حفل زفاف أحمد عادل و نانسي عجرم 🌙',
+      gallery: [
+        '/img/lune/gate.jpg',
+        '/img/lune/scene-couple.jpg'
+      ],
+      music: '/audio/veil.mp3'
+    },
+
+    closing: {
+      dua: 'بارك الله لكما، وبارك عليكما، وجمع بينكما في خير.',
+      duaEn: 'May Allah bless you and unite you in goodness.',
+      signoff: 'وجودكم معانا هو اللي هيكمل فرحتنا',
+      signoffEn: 'Your presence is the greatest gift of all'
+    },
+
+    settings: {
+      showCountdown: true,
+      showLocation: true,
+      showRSVP: true,
+      showMusic: true,
+      showCalendar: true,
+      enableAnimations: true
+    },
+
+    theme: {
+      primaryAccent: '#d9c08a',
+      secondaryAccent: '#1c2642',
+      bgMuted: '#0e1424'
+    }
+  },
+  {
     id: 'inv_pearl',
     slug: 'pearl',
     template: 'pearl',
@@ -1712,15 +1806,15 @@ export const invitations = [
 ];
 
 export function getInvitationBySlug(slug) {
-  return invitations.find((inv) => inv.slug === slug || inv.id === slug);
+  return invitations.find((inv) => inv.slug === slug || inv.id === slug || (inv.aliases && inv.aliases.includes(slug)));
 }
 
 export function getInvitationById(id) {
-  return invitations.find((inv) => inv.id === id || inv.slug === id);
+  return invitations.find((inv) => inv.id === id || inv.slug === id || (inv.aliases && inv.aliases.includes(id)));
 }
 
 export function resolveInvitationId(slugOrId) {
   if (!slugOrId) return 'inv_general';
-  const found = invitations.find((inv) => inv.id === slugOrId || inv.slug === slugOrId);
+  const found = invitations.find((inv) => inv.id === slugOrId || inv.slug === slugOrId || (inv.aliases && inv.aliases.includes(slugOrId)));
   return found ? found.id : ('inv_' + String(slugOrId).replace(/[^a-zA-Z0-9_]/g, '_'));
 }

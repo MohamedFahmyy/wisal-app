@@ -56,11 +56,11 @@ console.log('===============================================================\n')
 // 1. DATA MODEL & INVITATION ID AUDIT
 // -------------------------------------------------------------
 console.log('Test Group 1: Invitation Registry & ID Verification');
-testAssert('All 21 invitations are registered', invitations.length === 21);
+testAssert('All 22 invitations are registered', invitations.length === 22);
 
 const allIds = invitations.map(i => i.id);
 const uniqueIds = new Set(allIds);
-testAssert('Every invitation has a unique, non-null ID', uniqueIds.size === 21 && !uniqueIds.has(undefined));
+testAssert('Every invitation has a unique, non-null ID', uniqueIds.size === 22 && !uniqueIds.has(undefined));
 
 testAssert('Mohamed & Salma has inv_mohamed_salma', resolveInvitationId('mohamed-salma') === 'inv_mohamed_salma');
 testAssert('Mazen & Farida has inv_mazen_farida', resolveInvitationId('mazen-farida') === 'inv_mazen_farida');
@@ -72,6 +72,8 @@ testAssert('Veil has inv_veil', resolveInvitationId('veil') === 'inv_veil');
 testAssert('Sage Garden has inv_sage_garden', resolveInvitationId('sage-garden') === 'inv_sage_garden');
 testAssert('Velvet Voice has inv_velvet_voice', resolveInvitationId('velvet-voice') === 'inv_velvet_voice');
 testAssert('Adam & Jana has inv_adam_jana', resolveInvitationId('adam-jana') === 'inv_adam_jana');
+testAssert('Ahmed & Nancy has inv_ahmed_nancy', resolveInvitationId('ahmed-nancy') === 'inv_ahmed_nancy');
+testAssert('Ahmed & Nancy alias resolves correctly', resolveInvitationId('ahmed-adel-nancy-ajram') === 'inv_ahmed_nancy');
 testAssert('Lookup by ID works', getInvitationById('inv_karim_hagar')?.slug === 'karim-hagar');
 
 // -------------------------------------------------------------

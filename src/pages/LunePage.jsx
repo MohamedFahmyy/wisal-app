@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, useParams, useLocation, Link } from 'react-router-dom';
 import { saveGuestResponse } from '../utils/guestStorage';
 import { startAutoScroll } from '../utils/autoScroll';
+import { getInvitationBySlug } from '../data/invitations';
 import '../styles/lune.css';
 
 // Converts standard western numbers to Eastern Arabic numerals
@@ -10,10 +11,27 @@ function toArabicDigits(num) {
   return String(num).replace(/[0-9]/g, (w) => arabicDigits[+w]);
 }
 
-export default function LunePage() {
+export default function LunePage({ invitation: propInvitation }) {
   const [searchParams] = useSearchParams();
+  const { slug: paramSlug } = useParams();
+  const location = useLocation();
+
+  // Resolve active invitation
+  const pathSlug = location.pathname.split('/').filter(Boolean).pop();
+  const effectiveSlug = paramSlug || pathSlug;
+  const invitation = propInvitation || (effectiveSlug ? getInvitationBySlug(effectiveSlug) : null) || getInvitationBySlug('lune');
+
   const guestNameParam = searchParams.get('to') || searchParams.get('name') || '';
   const initialLang = searchParams.get('lang') === 'en' ? 'en' : 'ar';
+
+  const groomAr = invitation?.people?.firstPerson || 'يوسف';
+  const brideAr = invitation?.people?.secondPerson || 'ليلى';
+  const groomEn = invitation?.people?.firstPersonEn || 'Youssef';
+  const brideEn = invitation?.people?.secondPersonEn || 'Laila';
+  const groomInit = (groomEn?.[0] || 'Y').toUpperCase();
+  const brideInit = (brideEn?.[0] || 'L').toUpperCase();
+  const invitationId = invitation?.id || 'inv_lune';
+  const invitationSlug = invitation?.slug || 'lune';
 
   // Language & Direction State
   const [lang, setLang] = useState(initialLang);
@@ -48,9 +66,9 @@ export default function LunePage() {
   // Dynamic Document Title
   useEffect(() => {
     document.title = isArabic
-      ? 'يوسف وليلى — تحت نور القمر، ندعوكم لفرحنا | وِصال'
-      : 'Youssef & Laila — Under the Moonlight | Wisal';
-  }, [isArabic]);
+      ? `${groomAr} و${brideAr} — تحت نور القمر، ندعوكم لفرحنا | وِصال`
+      : `${groomEn} & ${brideEn} — Under the Moonlight | Wisal`;
+  }, [isArabic, groomAr, brideAr, groomEn, brideEn]);
 
   // Live Countdown Timer
   useEffect(() => {
@@ -233,8 +251,8 @@ export default function LunePage() {
       attending: isYes ? 'yes' : 'no',
       guests: guestCount,
       message: formData.message.trim(),
-      invitationId: 'inv_lune',
-      slug: 'lune'
+      invitationId,
+      slug: invitationSlug
     });
 
     const msg = isArabic
@@ -340,15 +358,15 @@ export default function LunePage() {
             <h1 className="lune-names">
               {isArabic ? (
                 <>
-                  <span className="ar">يوسف</span>
+                  <span className="ar">{groomAr}</span>
                   <i>&amp;</i>
-                  <span className="ar">ليلى</span>
+                  <span className="ar">{brideAr}</span>
                 </>
               ) : (
                 <>
-                  <span className="en">Youssef</span>
+                  <span className="en">{groomEn}</span>
                   <i>&amp;</i>
-                  <span className="en">Laila</span>
+                  <span className="en">{brideEn}</span>
                 </>
               )}
             </h1>
@@ -439,7 +457,7 @@ export default function LunePage() {
 
               <a
                 className="lune-btn"
-                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Youssef%20%26%20Laila%20%C2%B7%20Wedding&dates=20270821T170000Z%2F20270821T220000Z&location=Moonlight%20Terrace%2C%20New%20Alamein%2C%20North%20Coast"
+                href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`${groomEn} & ${brideEn} · Wedding`)}&dates=20270821T170000Z%2F20270821T220000Z&location=${encodeURIComponent(isArabic ? 'تراس القمر، العلمين الجديدة، الساحل الشمالي' : 'Moonlight Terrace, New Alamein, North Coast')}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -569,14 +587,14 @@ export default function LunePage() {
         {/* Closing Section & Monogram */}
         <section className="lune-wrap lune-closing lune-tint lune-reveal lune-out">
           <div className="lune-mono">
-            Y<span style={{ fontSize: '24px', margin: '0 2px', color: 'var(--lune-accent)' }}>&amp;</span>L
+            {groomInit}<span style={{ fontSize: '24px', margin: '0 2px', color: 'var(--lune-accent)' }}>&amp;</span>{brideInit}
           </div>
           <p>
             {isArabic
               ? 'وجودكم معانا هو اللي هيكمل فرحتنا.'
               : 'Your presence is the greatest gift of all.'}
           </p>
-          <div className="lune-sig">{isArabic ? 'يوسف وليلى' : 'Youssef & Laila'}</div>
+          <div className="lune-sig">{isArabic ? `${groomAr} و${brideAr}` : `${groomEn} & ${brideEn}`}</div>
         </section>
 
         {/* Footer Brand Credit */}

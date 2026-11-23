@@ -39,6 +39,8 @@ function LayoutWrapper() {
     location.pathname === '/velvet' ||
     location.pathname === '/rosearch' ||
     location.pathname === '/lune' ||
+    location.pathname === '/ahmed-nancy' ||
+    location.pathname === '/ahmed-adel-nancy-ajram' ||
     location.pathname === '/pearl' ||
     location.pathname === '/veil' ||
     location.pathname === '/sage-garden' ||
@@ -65,6 +67,10 @@ function LayoutWrapper() {
         <Route path="/invite/rosearch" element={<RoseArchPage />} />
         <Route path="/lune" element={<LunePage />} />
         <Route path="/invite/lune" element={<LunePage />} />
+        <Route path="/ahmed-nancy" element={<LunePage />} />
+        <Route path="/invite/ahmed-nancy" element={<LunePage />} />
+        <Route path="/ahmed-adel-nancy-ajram" element={<LunePage />} />
+        <Route path="/invite/ahmed-adel-nancy-ajram" element={<LunePage />} />
         <Route path="/pearl" element={<PearlPage />} />
         <Route path="/invite/pearl" element={<PearlPage />} />
         <Route path="/veil" element={<VeilPage />} />
