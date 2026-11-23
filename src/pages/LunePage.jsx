@@ -32,6 +32,7 @@ export default function LunePage({ invitation: propInvitation }) {
   const brideInit = (brideEn?.[0] || 'L').toUpperCase();
   const invitationId = invitation?.id || 'inv_lune';
   const invitationSlug = invitation?.slug || 'lune';
+  const audioSrc = invitation?.media?.music || '/audio/veil.mp3';
 
   // Language & Direction State
   const [lang, setLang] = useState(initialLang);
@@ -270,7 +271,7 @@ export default function LunePage({ invitation: propInvitation }) {
   return (
     <div className="lune-container" dir={isArabic ? 'rtl' : 'ltr'}>
       {/* Background Audio */}
-      <audio ref={audioRef} src="/audio/veil.mp3" loop preload="auto" playsInline />
+      <audio ref={audioRef} src={audioSrc} loop preload="auto" playsInline />
 
       {/* Floating Action Dock (Music & Language Toggle) */}
       <aside className="lune-dock" aria-label="Controls">

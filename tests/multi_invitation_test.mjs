@@ -72,8 +72,9 @@ testAssert('Veil has inv_veil', resolveInvitationId('veil') === 'inv_veil');
 testAssert('Sage Garden has inv_sage_garden', resolveInvitationId('sage-garden') === 'inv_sage_garden');
 testAssert('Velvet Voice has inv_velvet_voice', resolveInvitationId('velvet-voice') === 'inv_velvet_voice');
 testAssert('Adam & Jana has inv_adam_jana', resolveInvitationId('adam-jana') === 'inv_adam_jana');
-testAssert('Ahmed & Nancy has inv_ahmed_nancy', resolveInvitationId('ahmed-nancy') === 'inv_ahmed_nancy');
-testAssert('Ahmed & Nancy alias resolves correctly', resolveInvitationId('ahmed-adel-nancy-ajram') === 'inv_ahmed_nancy');
+testAssert('Ahmed & Mia has inv_ahmed_mia', resolveInvitationId('ahmed-mia') === 'inv_ahmed_mia');
+testAssert('Ahmed & Mia alias resolves correctly', resolveInvitationId('ahmed-adel-mia-khalifa') === 'inv_ahmed_mia');
+testAssert('Previous Nancy alias also resolves to inv_ahmed_mia', resolveInvitationId('ahmed-nancy') === 'inv_ahmed_mia');
 testAssert('Lookup by ID works', getInvitationById('inv_karim_hagar')?.slug === 'karim-hagar');
 
 // -------------------------------------------------------------

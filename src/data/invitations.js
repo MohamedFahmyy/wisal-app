@@ -1332,9 +1332,9 @@ export const invitations = [
     }
   },
   {
-    id: 'inv_ahmed_nancy',
-    slug: 'ahmed-nancy',
-    aliases: ['ahmed-adel-nancy-ajram', 'ahmed-nancy-ajram'],
+    id: 'inv_ahmed_mia',
+    slug: 'ahmed-mia',
+    aliases: ['ahmed-adel-mia-khalifa', 'ahmed-mia-khalifa', 'ahmed-nancy', 'ahmed-adel-nancy-ajram'],
     template: 'lune',
     category: 'wedding',
     categoryLabel: 'زفاف',
@@ -1342,35 +1342,35 @@ export const invitations = [
     language: 'ar',
     tag: 'تجربة ليلة القمر الرومانسية',
     tagEn: 'Under The Moonlight Experience',
-    titleAr: 'حفل زفاف أحمد عادل و نانسي عجرم 🌙',
-    titleEn: 'Ahmed Adel & Nancy Ajram Wedding Invitation | Wisal',
-    description: 'تحت نور القمر، ندعوكم لفرحنا — حفل زفاف أحمد عادل ونانسي عجرم. أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.',
-    descriptionEn: 'Under the moonlight, join us as we wed — Ahmed Adel & Nancy Ajram. 3D opening doors, full moon terrace above the sea, live countdown, timeline, and RSVP.',
+    titleAr: 'حفل زفاف أحمد عادل و ميا خليفه 🌙',
+    titleEn: 'Ahmed Adel & Mia Khalifa Wedding Invitation | Wisal',
+    description: 'تحت نور القمر، ندعوكم لفرحنا — حفل زفاف أحمد عادل وميا خليفه. أبواب ثلاثية الأبعاد تنفتح على ليلة البدر فوق البحر، عد تنازلي، خط زمني، وتأكيد حضور.',
+    descriptionEn: 'Under the moonlight, join us as we wed — Ahmed Adel & Mia Khalifa. 3D opening doors, full moon terrace above the sea, live countdown, timeline, and RSVP.',
 
     people: {
       firstPerson: 'أحمد عادل',
-      secondPerson: 'نانسي عجرم',
+      secondPerson: 'ميا خليفه',
       firstPersonEn: 'Ahmed Adel',
-      secondPersonEn: 'Nancy Ajram',
+      secondPersonEn: 'Mia Khalifa',
       firstPersonTitle: 'العريس',
       secondPersonTitle: 'العروس',
       firstPersonTitleEn: 'The Groom',
       secondPersonTitleEn: 'The Bride',
-      parentsAr: 'تتشرف عائلتا أحمد عادل ونانسي عجرم بدعوتكم',
-      parentsEn: 'Together with their families, Ahmed Adel & Nancy Ajram'
+      parentsAr: 'تتشرف عائلتا أحمد عادل وميا خليفه بدعوتكم',
+      parentsEn: 'Together with their families, Ahmed Adel & Mia Khalifa'
     },
 
     event: {
       type: 'wedding',
-      title: 'حفل زفاف أحمد عادل و نانسي عجرم',
-      titleEn: 'Ahmed Adel & Nancy Ajram Wedding',
+      title: 'حفل زفاف أحمد عادل و ميا خليفه',
+      titleEn: 'Ahmed Adel & Mia Khalifa Wedding',
       date: '2027-08-21',
       time: '20:00',
       timeFormatted: '٨:٠٠ مساءً',
       timeFormattedEn: '8:00 PM',
       dateFormatted: 'السبت، ٢١ أغسطس ٢٠٢٧',
       dateFormattedEn: 'Saturday, 21 August 2027',
-      hijriDate: '١٨ صفر ١٤٤٩ هـ',
+      hijriDate: '١٨ صفر ١٤٩ هـ',
       hijriDateEn: '18 Safar 1449 AH',
       epochMs: 1818867600000,
       description: 'على تراس فوق البحر وتحت ضوء القمر، هنرقص أول رقصة في حياتنا سوا. وجودكم هيكمّل الليلة.'
@@ -1395,12 +1395,12 @@ export const invitations = [
       ogImage: '/images/og/lune.jpg',
       ogImageWidth: 1200,
       ogImageHeight: 630,
-      ogImageAlt: 'حفل زفاف أحمد عادل و نانسي عجرم 🌙',
+      ogImageAlt: 'حفل زفاف أحمد عادل و ميا خليفه 🌙',
       gallery: [
         '/img/lune/gate.jpg',
         '/img/lune/scene-couple.jpg'
       ],
-      music: '/audio/veil.mp3'
+      music: '/audio/farhy.m4a'
     },
 
     closing: {
