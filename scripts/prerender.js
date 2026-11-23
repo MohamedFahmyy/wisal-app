@@ -15,6 +15,21 @@ if (!fs.existsSync(indexHtmlPath)) {
 
 const baseHtml = fs.readFileSync(indexHtmlPath, 'utf8');
 
+function safeWriteFileSync(filePath, content) {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      fs.writeFileSync(filePath, content, 'utf8');
+      return;
+    } catch (err) {
+      if ((err.code === 'EPERM' || err.code === 'EBUSY') && attempt < 4) {
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 80 * (attempt + 1));
+        continue;
+      }
+      throw err;
+    }
+  }
+}
+
 // Import invitations data
 const { invitations } = await import('../src/data/invitations.js');
 
@@ -282,9 +297,9 @@ for (const inv of invitations) {
 
   const targetDir = path.resolve(distDir, 'invite', inv.slug);
   fs.mkdirSync(targetDir, { recursive: true });
-  fs.writeFileSync(path.resolve(targetDir, 'index.html'), invHtml, 'utf8');
+  safeWriteFileSync(path.resolve(targetDir, 'index.html'), invHtml);
   // Also write slug.html for direct clean-URL resolution on static hosts
-  fs.writeFileSync(path.resolve(distDir, 'invite', `${inv.slug}.html`), invHtml, 'utf8');
+  safeWriteFileSync(path.resolve(distDir, 'invite', `${inv.slug}.html`), invHtml);
 }
 
 // 2. Generate static HTML files for all marketing & tool pages
@@ -441,8 +456,8 @@ for (const page of staticPages) {
   const pageHtml = injectMetadata(baseHtml, page);
   const targetDir = path.resolve(distDir, page.path);
   fs.mkdirSync(targetDir, { recursive: true });
-  fs.writeFileSync(path.resolve(targetDir, 'index.html'), pageHtml, 'utf8');
-  fs.writeFileSync(path.resolve(distDir, `${page.path}.html`), pageHtml, 'utf8');
+  safeWriteFileSync(path.resolve(targetDir, 'index.html'), pageHtml);
+  safeWriteFileSync(path.resolve(distDir, `${page.path}.html`), pageHtml);
 }
 
 console.log(`[Prerender] Successfully generated static entrypoints for ${invitations.length} invitations and ${staticPages.length} pages!`);

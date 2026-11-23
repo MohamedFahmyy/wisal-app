@@ -6,7 +6,7 @@ import '../styles/sage-garden.css';
 export default function SageGardenPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const guestParam = searchParams.get('to') || searchParams.get('name') || '';
-  const initialLang = searchParams.get('lang') === 'en' ? 'en' : 'ar';
+  const initialLang = searchParams.get('lang') === 'ar' ? 'ar' : 'en';
 
   const [lang, setLang] = useState(initialLang);
   const isArabic = lang === 'ar';

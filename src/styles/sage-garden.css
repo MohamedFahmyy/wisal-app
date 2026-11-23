@@ -136,19 +136,19 @@
     background: radial-gradient(1200px 600px at 50% -10%, rgba(255, 255, 255, 0.18), transparent 60%),
                 linear-gradient(180deg, #7c8a6a, #66734f);
     background-attachment: fixed;
-    padding: 36px 16px 54px;
+    padding: 0;
   }
 
   .sage-garden-wrapper .stage {
     max-width: 480px;
     margin: 0 auto;
-    border-radius: 28px;
-    box-shadow: 0 30px 90px rgba(30, 38, 20, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.22);
-    min-height: calc(100vh - 90px);
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: 0 0 80px rgba(30, 38, 20, 0.35);
   }
 
   .sage-garden-wrapper .sg-topbar {
-    top: 24px;
+    top: 20px;
     max-width: 480px;
   }
 
@@ -199,7 +199,9 @@
 }
 
 .sage-garden-wrapper .cover-names {
-  font-family: var(--script);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
   font-size: 46px;
   line-height: 1.15;
   color: var(--sage-dd);
@@ -208,8 +210,11 @@
 }
 
 .sage-garden-wrapper[dir="rtl"] .cover-names {
-  font-size: 40px;
-  line-height: 1.6;
+  font-family: 'Amiri', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.5;
 }
 
 .sage-garden-wrapper .cover-names span {
