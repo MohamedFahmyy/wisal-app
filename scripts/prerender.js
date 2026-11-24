@@ -449,8 +449,29 @@ const staticPages = [
     description: 'كارت للدعوة وكارت للترابيزات بنفس هوية وألوان دعوتكم: يمسح الضيف الكود لفتح الدعوة أو كتابة تهنئة تصلكم في لوحة التحكم.',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
     url: 'https://wisal-app-six.vercel.app/card'
+  },
+  {
+    path: 'responses/demo',
+    title: 'لوحة تأكيد الحضور — العرض التجريبي | وِصال',
+    description: 'لوحة تحكم خاصة ومحمية لمتابعة تأكيدات الحضور والتهاني للعروسين.',
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+    url: 'https://wisal-app-six.vercel.app/responses/demo'
   }
 ];
+
+// Pre-render responses pages for each registered invitation ID so static hosting never 404s
+for (const inv of invitations) {
+  const respDir = path.resolve(distDir, 'responses', inv.id);
+  fs.mkdirSync(respDir, { recursive: true });
+  safeWriteFileSync(path.resolve(respDir, 'index.html'), baseHtml);
+  safeWriteFileSync(path.resolve(distDir, 'responses', `${inv.id}.html`), baseHtml);
+
+  // Also pre-render by slug for friendly URLs
+  const respSlugDir = path.resolve(distDir, 'responses', inv.slug);
+  fs.mkdirSync(respSlugDir, { recursive: true });
+  safeWriteFileSync(path.resolve(respSlugDir, 'index.html'), baseHtml);
+  safeWriteFileSync(path.resolve(distDir, 'responses', `${inv.slug}.html`), baseHtml);
+}
 
 for (const page of staticPages) {
   const pageHtml = injectMetadata(baseHtml, page);

@@ -6,6 +6,10 @@
       "destination": "http://186.241.19.187:8585/api/:path*"
     },
     {
+      "source": "/responses/:path*",
+      "destination": "/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
