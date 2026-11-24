@@ -165,8 +165,21 @@ app.post('/api/rsvp', rsvpRateLimiter, async (req, res) => {
       cleanMessage = sanitizeText(message).slice(0, 500);
     }
 
-    // Check if invitation exists in database
-    const [invRows] = await pool.query('SELECT id FROM invitations WHERE id = ? LIMIT 1', [cleanInvId]);
+    // Check if invitation exists in database, auto-provisioning valid invitations on first response
+    let [invRows] = await pool.query('SELECT id FROM invitations WHERE id = ? LIMIT 1', [cleanInvId]);
+    if (!invRows || invRows.length === 0) {
+      // Auto-provision standard invitations so guests are NEVER blocked
+      if (cleanInvId && cleanInvId.length >= 3 && cleanInvId.length <= 64) {
+        const defaultOwnerKey = crypto.randomBytes(32).toString('hex');
+        const defaultHash = hashKey(defaultOwnerKey);
+        await pool.query(
+          'INSERT IGNORE INTO invitations (id, owner_key_hash) VALUES (?, ?)',
+          [cleanInvId, defaultHash]
+        );
+        [invRows] = await pool.query('SELECT id FROM invitations WHERE id = ? LIMIT 1', [cleanInvId]);
+      }
+    }
+
     if (!invRows || invRows.length === 0) {
       return res.status(404).json({ ok: false, error: 'عذراً، معرّف الدعوة غير موجود في النظام' });
     }
