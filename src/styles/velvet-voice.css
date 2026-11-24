@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap');
 
 /* ==========================================================================
-   VELVET VOICE — Luxury Deep Burgundy & Voice Wedding Invitation
+   VELVET VOICE — Royal Seal Luxury Burgundy Wedding Invitation
+   Built with original royal-seal vector assets
    ========================================================================== */
 
 .velvet-voice-wrapper {
@@ -10,7 +11,7 @@
   width: 100vw;
   height: 100dvh;
   overflow: hidden;
-  background: #300c12;
+  background: #3d1018;
   font-family: 'Amiri', serif;
   color: #5b2229;
   direction: rtl;
@@ -30,10 +31,10 @@
 /* Background blur on sides for desktop */
 .velvet-voice-wrapper .vv-backdrop {
   position: fixed;
-  inset: -30px;
-  background: radial-gradient(circle at 50% 30%, #5b2229 0%, #300c12 70%, #1c050a 100%);
-  filter: blur(24px) brightness(0.65);
-  opacity: 0.9;
+  inset: -40px;
+  background: radial-gradient(ellipse at 50% 40%, #702b3b, #3d1018 76%);
+  filter: blur(28px) brightness(0.65);
+  opacity: 0.95;
   z-index: 1;
 }
 
@@ -45,22 +46,12 @@
   height: 100dvh;
   margin: 0 auto;
   overflow: hidden;
-  background: #4a1b21;
-  box-shadow: 0 0 70px rgba(0, 0, 0, 0.7);
+  background: radial-gradient(ellipse at 50% 40%, #702b3b, #3d1018 76%);
+  box-shadow: 0 0 75px rgba(0, 0, 0, 0.75);
+  perspective: 1200px;
   z-index: 10;
   display: flex;
   flex-direction: column;
-}
-
-/* Lace floral decorative texture */
-.velvet-voice-wrapper .vv-texture {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(circle at 50% 15%, rgba(214, 180, 130, 0.08) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(74, 27, 33, 0.95), rgba(48, 12, 18, 0.98));
-  pointer-events: none;
-  z-index: 2;
 }
 
 /* ==========================================================================
@@ -69,8 +60,8 @@
 .velvet-voice-wrapper .vv-header {
   position: absolute;
   top: max(16px, env(safe-area-inset-top));
-  left: 18px;
-  right: 18px;
+  left: 20px;
+  right: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,8 +78,8 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(176, 138, 78, 0.6);
-  background: rgba(246, 239, 230, 0.92);
+  border: 1px solid rgba(201, 162, 94, 0.6);
+  background: rgba(246, 239, 230, 0.95);
   backdrop-filter: blur(6px);
   color: #5b2229;
   display: grid;
@@ -112,7 +103,7 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 1.5px solid #b08a4e;
+  border: 1.5px solid #c9a25e;
   background: radial-gradient(circle at 35% 28%, #fffaf4, #ede1d5 75%);
   box-shadow: 0 0 0 3px rgba(246, 239, 230, 0.2), 0 6px 18px rgba(20, 4, 8, 0.4);
   color: #5b2229;
@@ -135,7 +126,7 @@
     box-shadow: 0 0 0 3px rgba(246, 239, 230, 0.2), 0 6px 18px rgba(20, 4, 8, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(176, 138, 78, 0.25), 0 8px 24px rgba(20, 4, 8, 0.55);
+    box-shadow: 0 0 0 8px rgba(201, 162, 94, 0.25), 0 8px 24px rgba(20, 4, 8, 0.55);
   }
 }
 
@@ -165,9 +156,9 @@
 }
 
 /* ==========================================================================
-   Opening Screen: Envelope & Gold Wax Seal
+   Opening Scene: Royal Seal Envelope (1000/760 ratio)
    ========================================================================== */
-.velvet-voice-wrapper .vv-intro {
+.velvet-voice-wrapper .vv-intro-screen {
   position: absolute;
   inset: 0;
   z-index: 50;
@@ -175,153 +166,105 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #3a0d14;
-  cursor: pointer;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.6s ease 1.2s;
 }
 
-.velvet-voice-wrapper .vv-intro.opened {
+.velvet-voice-wrapper .vv-intro-screen.opening {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.velvet-voice-wrapper .vv-intro-screen.opened {
   opacity: 0;
   pointer-events: none;
 }
 
-.velvet-voice-wrapper .vv-intro-env-wrap {
-  position: relative;
-  width: min(350px, calc(100% - 40px));
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  perspective: 1200px;
-}
-
-/* Envelope Body */
-.velvet-voice-wrapper .vv-env-body {
-  position: relative;
-  width: 100%;
-  height: 230px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, #5b1d26, #411219);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(176, 138, 78, 0.4);
-  overflow: visible;
-}
-
-/* Flap at top (Rotates 180deg on open) */
-.velvet-voice-wrapper .vv-env-flap {
+.velvet-voice-wrapper .vv-env-box {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 140px;
-  transform-origin: top center;
-  transition: transform 900ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 90%;
+  max-width: 360px;
+  aspect-ratio: 1000 / 760;
+  left: 50%;
+  top: 36%;
+  transform: translate(-50%, -50%);
   transform-style: preserve-3d;
-  z-index: 10;
 }
 
-.velvet-voice-wrapper .vv-intro.opening .vv-env-flap {
-  transform: rotateX(180deg);
-}
-
-.velvet-voice-wrapper .vv-env-flap svg {
+/* Envelope Layers */
+.velvet-voice-wrapper .vv-env-layer {
+  position: absolute;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
-}
-
-/* Lower Front Pocket */
-.velvet-voice-wrapper .vv-env-pocket {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 170px;
-  z-index: 8;
+  inset: 0;
   pointer-events: none;
 }
 
-.velvet-voice-wrapper .vv-env-pocket svg {
-  width: 100%;
-  height: 100%;
+.velvet-voice-wrapper .vv-env-back {
+  z-index: 1;
+  filter: drop-shadow(0 15px 22px rgba(24, 3, 11, 0.55));
 }
 
-/* Gold Wax Seal in center */
+.velvet-voice-wrapper .vv-env-front {
+  z-index: 3;
+}
+
+/* Flap with 3D rotateX and transform-origin at 50% 15.79% */
+.velvet-voice-wrapper .vv-env-flap {
+  z-index: 4;
+  transform-origin: 50% 15.79%;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.44s;
+  backface-visibility: visible;
+}
+
+.velvet-voice-wrapper .vv-intro-screen.opening .vv-env-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+/* The Gold Wax Seal (width: 24%; left: 38%; top: 46%) */
 .velvet-voice-wrapper .vv-seal-btn {
   position: absolute;
-  left: 50%;
-  top: 130px;
-  transform: translate(-50%, -50%);
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
+  width: 24%;
+  left: 38%;
+  top: 46%;
+  z-index: 5;
   border: 0;
-  background: radial-gradient(circle at 35% 30%, #f7dc9f 0%, #d4aa5c 50%, #8c672b 100%);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35), 0 8px 24px rgba(20, 4, 8, 0.6);
+  padding: 0;
+  background: none;
   cursor: pointer;
-  z-index: 15;
-  display: grid;
-  place-items: center;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.3, 1.4, 0.5, 1);
 }
 
-.velvet-voice-wrapper .vv-seal-btn::before {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(214, 180, 130, 0.65);
-  animation: vvSealHalo 2.4s infinite ease-out;
-}
-
-@keyframes vvSealHalo {
-  0% { transform: scale(0.9); opacity: 0.9; }
-  100% { transform: scale(1.4); opacity: 0; }
-}
-
-.velvet-voice-wrapper .vv-intro.opening .vv-seal-btn {
-  transform: translate(-50%, -50%) scale(1.25) rotate(-10deg);
-  opacity: 0;
-}
-
-.velvet-voice-wrapper .vv-seal-heart {
-  width: 40px;
-  height: 40px;
-  fill: rgba(74, 27, 33, 0.85);
-  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.4));
-}
-
-/* Cream Tap-to-open pill */
-.velvet-voice-wrapper .vv-tap-pill {
-  margin-top: 36px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 46px;
-  padding: 0 24px;
-  border-radius: 999px;
-  background: #f6efe6;
-  border: 1.5px solid #b08a4e;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 #fff;
-  color: #5b2229;
-  font-family: 'Amiri', serif;
-  font-size: 19px;
-  font-weight: 700;
-  animation: vvPillPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes vvPillPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
-}
-
-.velvet-voice-wrapper .vv-tap-pill i {
+.velvet-voice-wrapper .vv-seal-btn img {
+  width: 100%;
   display: block;
-  width: 6px;
-  height: 6px;
-  transform: rotate(45deg);
-  background: #b08a4e;
+  filter: drop-shadow(0 6px 12px rgba(20, 4, 8, 0.45));
+}
+
+.velvet-voice-wrapper .vv-intro-screen.opening .vv-seal-btn {
+  opacity: 0;
+  transform: scale(1.18);
+  pointer-events: none;
+}
+
+/* "اضغط على الختم" Hint Text below Envelope */
+.velvet-voice-wrapper .vv-env-hint {
+  position: absolute;
+  bottom: 14%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #f1e9db;
+  font-family: 'Amiri', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease;
+}
+
+.velvet-voice-wrapper .vv-intro-screen.opening .vv-env-hint {
+  opacity: 0;
 }
 
 /* Golden Particles & Falling Petals */
@@ -341,30 +284,8 @@
   100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
 }
 
-/* Lower third envelope frame that stays across all sections */
-.velvet-voice-wrapper .vv-bottom-frame {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  z-index: 25;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent 0%, rgba(48, 12, 18, 0.85) 60%, #300c12 100%);
-}
-
-.velvet-voice-wrapper .vv-bottom-frame-svg {
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 90px;
-  opacity: 0.95;
-}
-
 /* ==========================================================================
-   The Paper Card (الورقة) — #F6EFE6
+   The Paper Card (الورقة) — width: calc(100% - 64px), top: ~118px
    ========================================================================== */
 .velvet-voice-wrapper .vv-sections-viewport {
   position: relative;
@@ -377,16 +298,84 @@
 
 .velvet-voice-wrapper .vv-card-container {
   position: absolute;
-  top: 96px;
-  bottom: 64px;
-  left: 20px;
-  right: 20px;
+  top: 112px;
+  bottom: 68px;
+  left: 32px;
+  right: 32px;
+  width: calc(100% - 64px);
   background: #f6efe6;
-  border-radius: 22px;
+  border-radius: 20px;
   box-shadow: 0 16px 42px rgba(18, 3, 7, 0.45);
   border: 1px solid rgba(176, 138, 78, 0.4);
   overflow: hidden;
   z-index: 22;
+  transition: transform 1.2s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.8s ease;
+}
+
+.velvet-voice-wrapper .vv-stage:not(.open):not(.opening) .vv-card-container {
+  transform: translateY(140px) scale(0.92);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.velvet-voice-wrapper .vv-stage.opening .vv-card-container {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition: transform 1.2s cubic-bezier(0.33, 1, 0.68, 1) 0.55s, opacity 0.6s ease 0.55s;
+}
+
+.velvet-voice-wrapper .vv-stage.open .vv-card-container {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.velvet-voice-wrapper .vv-stage:not(.open):not(.opening) .vv-bottom-frame {
+  opacity: 0;
+}
+
+.velvet-voice-wrapper .vv-stage.opening .vv-bottom-frame {
+  opacity: 1;
+  transition: opacity 0.6s ease 0.6s;
+}
+
+.velvet-voice-wrapper .vv-stage.open .vv-bottom-frame {
+  opacity: 1;
+}
+
+/* Background texture for the ivory card */
+.velvet-voice-wrapper .vv-card-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.45;
+}
+
+/* Wheat corner decoration */
+.velvet-voice-wrapper .vv-card-wheat {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 38%;
+  width: auto;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 1;
+}
+
+/* Oval Gold Frame (Accent on Hero) */
+.velvet-voice-wrapper .vv-card-oval-frame {
+  position: absolute;
+  inset: 12px 14px;
+  width: calc(100% - 28px);
+  height: calc(100% - 24px);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.85;
 }
 
 /* Individual Full Section inside the Card */
@@ -397,7 +386,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding: 20px 18px;
+  padding: 24px 20px;
   text-align: center;
   opacity: 0;
   pointer-events: none;
@@ -405,6 +394,7 @@
   transition: opacity 500ms ease, transform 500ms ease;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  z-index: 5;
 }
 
 .velvet-voice-wrapper .vv-sec.active {
@@ -420,8 +410,8 @@
   justify-content: center;
   gap: 10px;
   width: 100%;
-  max-width: 200px;
-  margin: 6px 0;
+  max-width: 190px;
+  margin: 4px 0;
   color: #b08a4e;
 }
 
@@ -438,14 +428,14 @@
 }
 
 .velvet-voice-wrapper .vv-orn-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #b08a4e;
 }
 
 /* ==========================================================================
-   Section 0: الهيرو (Groom & Bride, Date & Time)
+   Section 0: الهيرو (Hero - Aref Ruqaa Names & DateTime)
    ========================================================================== */
 .velvet-voice-wrapper .vv-hero-names {
   display: flex;
@@ -457,7 +447,7 @@
 
 .velvet-voice-wrapper .vv-name {
   font-family: 'Aref Ruqaa', serif;
-  font-size: clamp(60px, 17vw, 84px);
+  font-size: clamp(56px, 16vw, 76px);
   line-height: 1.15;
   color: #5b2229;
   font-weight: 700;
@@ -467,10 +457,10 @@
 
 .velvet-voice-wrapper .vv-amp {
   font-family: 'Aref Ruqaa', serif;
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1;
   color: #b08a4e;
-  margin: -6px 0 -4px;
+  margin: -4px 0 -2px;
 }
 
 /* 3-column Date & Time Row */
@@ -479,8 +469,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 320px;
-  margin-top: 8px;
+  max-width: 290px;
+  margin-top: 6px;
 }
 
 .velvet-voice-wrapper .vv-dt-col {
@@ -491,12 +481,12 @@
   justify-content: center;
   font-family: 'Amiri', serif;
   color: #8f5b5e;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .velvet-voice-wrapper .vv-dt-col.center {
   border-inline: 1px solid rgba(176, 138, 78, 0.45);
-  padding: 0 14px;
+  padding: 0 12px;
 }
 
 .velvet-voice-wrapper .vv-dt-daynum {
@@ -508,7 +498,7 @@
 }
 
 .velvet-voice-wrapper .vv-dt-sub {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.2;
   color: #8f5b5e;
 }
@@ -534,7 +524,7 @@
   color: #7b3540;
   text-align: center;
   padding: 0 14px;
-  max-width: 340px;
+  max-width: 330px;
 }
 
 .velvet-voice-wrapper .vv-ayah-end {
@@ -559,12 +549,13 @@
   line-height: 1.3;
 }
 
+.velvet-voice-wrapper .vv-body-text,
 .velvet-voice-wrapper .vv-story-para {
   font-family: 'Amiri', serif;
   font-size: 18px;
   line-height: 1.7;
   color: #8f5b5e;
-  max-width: 330px;
+  max-width: 320px;
 }
 
 .velvet-voice-wrapper .vv-fams-sub {
@@ -574,6 +565,7 @@
   font-weight: 700;
 }
 
+.velvet-voice-wrapper .vv-families-line,
 .velvet-voice-wrapper .vv-fams-line {
   font-family: 'Amiri', serif;
   font-size: 20px;
@@ -581,22 +573,26 @@
   color: #5b2229;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
+.velvet-voice-wrapper .vv-families-line .vv-f-dot,
 .velvet-voice-wrapper .vv-fams-line span.dot {
   color: #b08a4e;
   font-size: 14px;
 }
 
+.velvet-voice-wrapper .vv-parents-grid,
 .velvet-voice-wrapper .vv-fathers-cards {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  max-width: 320px;
+  max-width: 310px;
   margin-top: 4px;
 }
 
+.velvet-voice-wrapper .vv-parent-card,
 .velvet-voice-wrapper .vv-father-card {
   flex: 1;
   display: flex;
@@ -605,23 +601,25 @@
   padding: 10px 8px;
   border-radius: 14px;
   border: 1px solid rgba(176, 138, 78, 0.4);
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.5);
 }
 
+.velvet-voice-wrapper .vv-parent-role,
 .velvet-voice-wrapper .vv-father-card small {
   font-size: 14px;
   color: #8f5b5e;
 }
 
+.velvet-voice-wrapper .vv-parent-name,
 .velvet-voice-wrapper .vv-father-card b {
-  font-size: 19px;
+  font-size: 18px;
   color: #5b2229;
   font-weight: 700;
   margin-top: 2px;
 }
 
 .velvet-voice-wrapper .vv-closing-line {
-  font-size: 16px;
+  font-size: 15px;
   color: #8f5b5e;
 }
 
@@ -635,7 +633,7 @@
 
 .velvet-voice-wrapper .vv-map-box {
   width: 100%;
-  max-width: 320px;
+  max-width: 310px;
   height: 150px;
   border-radius: 16px;
   border: 1px solid rgba(176, 138, 78, 0.4);
@@ -657,11 +655,13 @@
   line-height: 1.3;
 }
 
+.velvet-voice-wrapper .vv-venue-address,
 .velvet-voice-wrapper .vv-venue-addr {
   font-size: 16px;
   color: #8f5b5e;
 }
 
+.velvet-voice-wrapper .vv-map-action-btn,
 .velvet-voice-wrapper .vv-btn-pill {
   display: inline-flex;
   align-items: center;
@@ -673,7 +673,7 @@
   background: linear-gradient(180deg, #7a2a37, #531823);
   color: #fbefe6;
   font-family: 'Amiri', serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   text-decoration: none;
   border: 0;
@@ -682,13 +682,15 @@
   transition: transform 0.2s ease;
 }
 
+.velvet-voice-wrapper .vv-map-action-btn:active,
 .velvet-voice-wrapper .vv-btn-pill:active {
   transform: scale(0.96);
 }
 
+.velvet-voice-wrapper .vv-map-action-btn svg,
 .velvet-voice-wrapper .vv-btn-pill svg {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
 }
 
 /* ==========================================================================
@@ -696,7 +698,7 @@
    ========================================================================== */
 .velvet-voice-wrapper .vv-rsvp-box {
   width: 100%;
-  max-width: 320px;
+  max-width: 310px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -723,7 +725,7 @@
 }
 
 .velvet-voice-wrapper .vv-field textarea {
-  height: 54px;
+  height: 52px;
   padding-top: 8px;
   resize: none;
 }
@@ -739,11 +741,13 @@
   box-shadow: 0 0 0 2px rgba(91, 34, 41, 0.15);
 }
 
+.velvet-voice-wrapper .vv-pills-row,
 .velvet-voice-wrapper .vv-attendance-pills {
   display: flex;
   gap: 8px;
 }
 
+.velvet-voice-wrapper .vv-pill,
 .velvet-voice-wrapper .vv-attend-btn {
   flex: 1;
   height: 40px;
@@ -762,6 +766,13 @@
   transition: all 0.2s ease;
 }
 
+.velvet-voice-wrapper .vv-pill svg,
+.velvet-voice-wrapper .vv-attend-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.velvet-voice-wrapper .vv-pill.selected,
 .velvet-voice-wrapper .vv-attend-btn.selected {
   background: linear-gradient(180deg, #7a2a37, #531823);
   color: #fbefe6;
@@ -789,6 +800,7 @@
   cursor: not-allowed;
 }
 
+.velvet-voice-wrapper .vv-form-error,
 .velvet-voice-wrapper .vv-rsvp-err {
   font-size: 14px;
   color: #b0283c;
@@ -804,8 +816,8 @@
 }
 
 .velvet-voice-wrapper .vv-rsvp-success .ok-icon {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   fill: none;
   stroke: #b08a4e;
   stroke-width: 2.2;
@@ -831,7 +843,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 320px;
+  max-width: 310px;
   padding-top: 6px;
   border-top: 1px solid rgba(176, 138, 78, 0.3);
 }
@@ -908,6 +920,27 @@
 }
 
 /* ==========================================================================
+   Lower Third Envelope Frame (stays across all sections)
+   ========================================================================== */
+.velvet-voice-wrapper .vv-bottom-frame {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 360px;
+  aspect-ratio: 1000 / 760;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.velvet-voice-wrapper .vv-bottom-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
    Bottom Navigation Pill ("مرّر للأسفل ⌄")
    ========================================================================== */
 .velvet-voice-wrapper .vv-scroll-pill {
@@ -941,7 +974,6 @@
 .velvet-voice-wrapper .vv-scroll-pill svg {
   width: 14px;
   height: 14px;
-  transition: transform 0.3s ease;
 }
 
 /* Toast Notification */
@@ -971,18 +1003,19 @@
 }
 
 /* ==========================================================================
-   Compact Mobile Responsive Tuning (<= 380px)
+   Responsive Tuning for Smaller Screens (<= 380px)
    ========================================================================== */
 @media (max-width: 380px) {
   .velvet-voice-wrapper .vv-card-container {
-    left: 12px;
-    right: 12px;
-    top: 86px;
-    bottom: 56px;
+    left: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+    top: 96px;
+    bottom: 58px;
   }
 
   .velvet-voice-wrapper .vv-sec {
-    padding: 14px 10px;
+    padding: 16px 14px;
   }
 
   .velvet-voice-wrapper .vv-name {
@@ -990,13 +1023,13 @@
   }
 
   .velvet-voice-wrapper .vv-ayah {
-    font-size: 19px;
+    font-size: 20px;
     line-height: 1.95;
-    padding: 0 6px;
+    padding: 0 8px;
   }
 
   .velvet-voice-wrapper .vv-bsm {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .velvet-voice-wrapper .vv-sec-title {
@@ -1012,3 +1045,9 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .velvet-voice-wrapper * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

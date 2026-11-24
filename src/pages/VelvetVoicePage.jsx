@@ -82,9 +82,24 @@ export default function VelvetVoicePage() {
     }
   };
 
-  // Open Invitation Sequence
+  // Open Invitation Sequence with royal-seal timing
   const openInvitation = () => {
     if (isOpening || isOpen) return;
+
+    // Check reduced motion
+    const prefersReducedMotion = typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      setIsOpen(true);
+      setIsOpening(false);
+      if (audioRef.current) {
+        audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      }
+      return;
+    }
+
     setIsOpening(true);
 
     // Play Audio
@@ -96,28 +111,25 @@ export default function VelvetVoicePage() {
     }
 
     // Spawn 24 floating petals and gold particles if motion allowed
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReducedMotion) {
-      const parts = Array.from({ length: 24 }, (_, i) => ({
-        id: i,
-        left: `${(Math.random() * 90 + 5).toFixed(1)}%`,
-        top: `${(Math.random() * 40 + 20).toFixed(1)}%`,
-        dx: `${(Math.random() * 140 - 70).toFixed(0)}px`,
-        dy: `${(Math.random() * 320 + 120).toFixed(0)}px`,
-        rot: `${(Math.random() * 540).toFixed(0)}deg`,
-        size: `${(Math.random() * 8 + 6).toFixed(0)}px`,
-        color: i % 2 === 0 ? '#b08a4e' : '#f7dc9f',
-        duration: `${(Math.random() * 2 + 1.8).toFixed(1)}s`,
-        delay: `${(Math.random() * 0.4).toFixed(2)}s`
-      }));
-      setParticles(parts);
-    }
+    const parts = Array.from({ length: 24 }, (_, i) => ({
+      id: i,
+      left: `${(Math.random() * 80 + 10).toFixed(1)}%`,
+      top: `${(Math.random() * 35 + 25).toFixed(1)}%`,
+      dx: `${(Math.random() * 140 - 70).toFixed(0)}px`,
+      dy: `${(Math.random() * 320 + 120).toFixed(0)}px`,
+      rot: `${(Math.random() * 540).toFixed(0)}deg`,
+      size: `${(Math.random() * 8 + 6).toFixed(0)}px`,
+      color: i % 2 === 0 ? '#c9a25e' : '#f1dbac',
+      duration: `${(Math.random() * 2 + 1.8).toFixed(1)}s`,
+      delay: `${(Math.random() * 0.4).toFixed(2)}s`
+    }));
+    setParticles(parts);
 
-    // Transition to opened state after flap rotate finishes
+    // Transition to opened state after flap rotate (900ms) + card slide up (1200ms after 550ms delay = 1750ms)
     setTimeout(() => {
       setIsOpen(true);
       setIsOpening(false);
-    }, 950);
+    }, 1800);
   };
 
   // Section Navigation Handlers
@@ -346,10 +358,7 @@ export default function VelvetVoicePage() {
       <div className="vv-backdrop" aria-hidden="true" />
 
       {/* Main Centered Stage (max-width: 405px) */}
-      <main className="vv-stage" id="stage">
-        {/* Subtle decorative texture */}
-        <div className="vv-texture" aria-hidden="true" />
-
+      <main className={`vv-stage ${isOpen ? 'open' : ''} ${isOpening ? 'opening' : ''}`} id="stage">
         {/* Fixed Header Chrome: Share (Left) & Music (Right) */}
         <header className="vv-header" aria-label="أدوات الدعوة">
           <button
@@ -386,15 +395,39 @@ export default function VelvetVoicePage() {
           <span>{toastMsg}</span>
         </div>
 
-        {/* Sections Viewport inside the Card */}
+        {/* Sections Viewport inside the Ivory Card */}
         <div className="vv-sections-viewport">
           <div className="vv-card-container">
+            {/* Background texture from royal-seal ivory-paper.svg */}
+            <img
+              className="vv-card-bg-img"
+              src="/images/royal-seal/ivory-paper.svg"
+              alt=""
+              aria-hidden="true"
+            />
+
+            {/* Corner wheat ornament */}
+            <img
+              className="vv-card-wheat"
+              src="/images/royal-seal/wheat-corner.svg"
+              alt=""
+              aria-hidden="true"
+            />
+
             {/* Section 0: الهيرو */}
             <section
               className={`vv-sec ${activeSection === 0 ? 'active' : ''}`}
               id="vv-hero"
               aria-label="العروسان وموعد الزفاف"
             >
+              {/* Optional Oval Gold Frame for Hero */}
+              <img
+                className="vv-card-oval-frame"
+                src="/images/royal-seal/oval-gold-frame.svg"
+                alt=""
+                aria-hidden="true"
+              />
+
               <div className="vv-hero-names">
                 <h1 className="vv-name">يوسف</h1>
                 <span className="vv-amp">و</span>
@@ -674,12 +707,9 @@ export default function VelvetVoicePage() {
           </div>
         </div>
 
-        {/* Lower third envelope frame across all sections */}
+        {/* Lower third envelope body frame across all sections */}
         <div className="vv-bottom-frame" aria-hidden="true">
-          <svg className="vv-bottom-frame-svg" viewBox="0 0 405 90" preserveAspectRatio="none">
-            <path d="M0,45 L202.5,0 L405,45 L405,90 L0,90 Z" fill="#3a0d14" />
-            <path d="M0,45 L202.5,0 L405,45" fill="none" stroke="rgba(176,138,78,0.35)" strokeWidth="1.2" />
-          </svg>
+          <img src="/images/royal-seal/envelope-body.svg" alt="" />
         </div>
 
         {/* Bottom Navigation Pill ("مرّر للأسفل ⌄") */}
@@ -707,10 +737,10 @@ export default function VelvetVoicePage() {
           </button>
         )}
 
-        {/* Opening Screen (Envelope & Gold Wax Seal) */}
+        {/* Opening Screen: Royal Seal Envelope (1000/760 ratio) */}
         {!isOpen && (
           <div
-            className={`vv-intro ${isOpening ? 'opening' : ''}`}
+            className={`vv-intro-screen ${isOpening ? 'opening' : ''}`}
             onClick={openInvitation}
             role="button"
             tabIndex={0}
@@ -722,42 +752,49 @@ export default function VelvetVoicePage() {
               }
             }}
           >
-            <div className="vv-intro-env-wrap">
-              {/* Envelope Body */}
-              <div className="vv-env-body">
-                {/* Flap that rotates open */}
-                <div className="vv-env-flap">
-                  <svg viewBox="0 0 350 140" preserveAspectRatio="none">
-                    <polygon points="0,0 350,0 175,140" fill="#5b1d26" />
-                    <polygon points="0,0 350,0 175,140" fill="none" stroke="rgba(176, 138, 78, 0.4)" strokeWidth="1.2" />
-                  </svg>
-                </div>
+            <div className="vv-env-box">
+              {/* Layer 1: Envelope Back */}
+              <img
+                className="vv-env-layer vv-env-back"
+                src="/images/royal-seal/envelope-back.svg"
+                alt=""
+              />
 
-                {/* Pocket Front */}
-                <div className="vv-env-pocket">
-                  <svg viewBox="0 0 350 170" preserveAspectRatio="none">
-                    <polygon points="0,170 350,170 350,60 175,140 0,60" fill="#4a151e" />
-                    <polygon points="0,60 175,140 350,60" fill="none" stroke="rgba(176, 138, 78, 0.3)" strokeWidth="1" />
-                  </svg>
-                </div>
+              {/* Layer 3: Envelope Body (Pocket Front) */}
+              <img
+                className="vv-env-layer vv-env-front"
+                src="/images/royal-seal/envelope-body.svg"
+                alt=""
+              />
 
-                {/* Gold Wax Seal */}
-                <div className="vv-seal-btn" aria-hidden="true">
-                  <svg className="vv-seal-heart" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                  </svg>
-                </div>
-              </div>
+              {/* Layer 4: Envelope Flap (Triangular flap that opens with 3D rotateX) */}
+              <img
+                className="vv-env-layer vv-env-flap"
+                src="/images/royal-seal/envelope-flap.svg"
+                alt=""
+              />
 
-              {/* Tap the seal capsule */}
-              <div className="vv-tap-pill">
-                <i />
-                <span>اضغط على الختم</span>
-                <i />
-              </div>
+              {/* Layer 5: Wax Seal Button */}
+              <button
+                type="button"
+                className="vv-seal-btn"
+                aria-label="اضغط على الختم لفتح الدعوة"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openInvitation();
+                }}
+              >
+                <img
+                  src="/images/royal-seal/wax-seal-ab.svg"
+                  alt="ختم شمع ذهبي"
+                />
+              </button>
             </div>
 
-            {/* Falling Particles */}
+            {/* "اضغط على الختم" Hint Text below Envelope */}
+            <div className="vv-env-hint">اضغط على الختم</div>
+
+            {/* Falling Particles on opening */}
             {particles.map((p) => (
               <span
                 key={p.id}
