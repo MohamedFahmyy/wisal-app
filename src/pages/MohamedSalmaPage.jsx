@@ -257,6 +257,8 @@ export default function MohamedSalmaPage({ version: propVersion }) {
   const [rsvpName, setRsvpName] = useState(guestName || '');
   const [rsvpMsg, setRsvpMsg] = useState('');
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
+  const [rsvpError, setRsvpError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [sealBursts, setSealBursts] = useState([]);
 
   useEffect(() => {
@@ -507,10 +509,16 @@ export default function MohamedSalmaPage({ version: propVersion }) {
   const handleRSVPSubmit = async (e) => {
     e.preventDefault();
     if (!rsvpName.trim()) {
-      setRsvpError('يرجى كتابة اسمكم الكريم لتأكيد الرد');
+      setRsvpError('يرجى كتابة اسمكم الكريم أولاً لتأكيد الرد');
+      const nameInput = document.querySelector('.mf-input-line input');
+      if (nameInput) {
+        nameInput.focus();
+        nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       return;
     }
     setRsvpError('');
+    setIsSubmitting(true);
 
     try {
       // 1. Submit to backend API
@@ -554,6 +562,8 @@ export default function MohamedSalmaPage({ version: propVersion }) {
     } catch (err) {
       console.error('[RSVP MohamedSalma] Failed to save response:', err);
       setRsvpError(err.message || 'تعذر إرسال الرد، يرجى المحاولة مرة أخرى.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -919,8 +929,33 @@ export default function MohamedSalmaPage({ version: propVersion }) {
                   />
                 </label>
 
+                {rsvpError && (
+                  <p
+                    className="mf-rsvp-error"
+                    style={{
+                      color: isPink ? '#ad5d73' : '#b0283c',
+                      margin: '10px auto',
+                      fontSize: '14px',
+                      fontWeight: '700',
+                      textAlign: 'center',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      padding: '8px 16px',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(176, 40, 60, 0.3)',
+                      maxWidth: '320px'
+                    }}
+                  >
+                    {rsvpError}
+                  </p>
+                )}
+
                 <div className="mf-seal-submit-wrap">
-                  <button type="submit" className="mf-seal-btn" title="اضغط لتأكيد الرد بالختم الملكي">
+                  <button
+                    type="submit"
+                    className="mf-seal-btn"
+                    disabled={isSubmitting}
+                    title="اضغط لتأكيد الرد بالختم الملكي"
+                  >
                     <svg className="mf-seal-svg" viewBox="0 0 100 100">
                       <defs>
                         <radialGradient id={isPink ? 'mfG_ms_pink' : 'mfG_ms_gold'} cx="38%" cy="32%" r="75%">
@@ -945,7 +980,9 @@ export default function MohamedSalmaPage({ version: propVersion }) {
                       />
                       <circle cx="50" cy="50" r="31" fill="none" stroke={isPink ? '#ffe5ec' : '#fbe9bf'} strokeOpacity="0.55" strokeWidth="1.3" />
                     </svg>
-                    <span className="mf-seal-text">تأكيد الرد</span>
+                    <span className="mf-seal-text">
+                      {isSubmitting ? 'جارِ الإرسال...' : 'تأكيد الرد'}
+                    </span>
                   </button>
 
                   {/* Spark Particles Burst */}

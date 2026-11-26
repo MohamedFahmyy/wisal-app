@@ -1,7 +1,7 @@
 /**
  * Wisal Privacy-First Analytics Tracker
  * 
- * Inspired by Ma3zoom's track.js:
+ * Inspired by Wisal's track.js:
  * - Zero cookies, zero personal IP addresses or invasive fingerprinting.
  * - Captures page path, guest query (?to=), UTM attribution (?from=, ?utm_source=),
  *   referrer origin, and device classification (mobile, tablet, desktop, in-app browser).

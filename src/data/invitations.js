@@ -12,7 +12,7 @@ export const invitations = [
     categoryLabel: 'زفاف',
     categoryLabelEn: 'Wedding',
     language: 'ar',
-    tag: 'تجربة معزوم التفاعلية',
+    tag: 'تجربة وِصال التفاعلية',
     tagEn: 'Interactive Experience',
     description: 'تجربة زفاف مازن وفريدة الاستثنائية: افتتاحية فيديو الختم الشمعي، بطاقات مسح التاريخ التفاعلية، الجدول الزمني المتحرك بزهرة اللوتس، ونموذج الحضور الملكي.',
     descriptionEn: 'The authentic interactive experience of Mazen & Farida: wax seal video intro, scratch-to-reveal date cards, scroll-bound flower timeline, and ceremonial RSVP arch.',
