@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import { encodeQrMatrix } from './qrEngine';
 
 /**
- * 100% Offline, Zero-Dependency Crisp Vector SVG QR Code Component
+ * 100% Offline, Standards-Compliant Crisp Vector SVG QR Code Component
+ * Compatible with all iOS Camera, Android / Google Lens, and QR code scanners.
  */
 export function QRCodeSvg({
   value,
@@ -15,7 +16,7 @@ export function QRCodeSvg({
     try {
       return encodeQrMatrix(value);
     } catch (err) {
-      console.warn('[QRCode] Failed to generate offline QR matrix:', err);
+      console.warn('[QRCode] Failed to generate QR matrix:', err);
       return [];
     }
   }, [value]);
@@ -40,11 +41,11 @@ export function QRCodeSvg({
   }
 
   const N = matrix.length;
-  // 4 modules quiet zone margin as per QR standard
-  const margin = 2;
+  // Standard 4-module quiet zone margin as per ISO/IEC 18004
+  const margin = 4;
   const viewBoxSize = N + margin * 2;
 
-  // Build combined path for maximum rendering performance
+  // Build combined path for maximum rendering performance and crisp edges
   let pathD = '';
   for (let r = 0; r < N; r++) {
     for (let c = 0; c < N; c++) {

@@ -23,6 +23,14 @@ export default function QRCardPage() {
   const [eventDate, setEventDate] = useState('الخميس، 14 يناير 2027');
   const [venueName, setVenueName] = useState('قاعة الياسمين الملكية — القاهرة');
 
+  const defaultDomain = 'https://wisal-app-six.vercel.app';
+  const initialDomain = typeof window !== 'undefined' && window.location.origin && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1')
+    ? window.location.origin
+    : defaultDomain;
+
+  const [baseUrl, setBaseUrl] = useState(initialDomain);
+  const [copiedType, setCopiedType] = useState('');
+
   useEffect(() => {
     trackPageView('/card');
   }, []);
@@ -37,15 +45,24 @@ export default function QRCardPage() {
     }
   }, [selectedSlug]);
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://wisal-app-six.vercel.app';
+  const cleanBase = (baseUrl || defaultDomain).trim().replace(/\/+$/, '');
+
   const inviteUrl = useMemo(() => {
-    if (selectedSlug === 'mazen-farida') return `${origin}/mazen-farida`;
-    return `${origin}/invite/${selectedSlug}`;
-  }, [selectedSlug, origin]);
+    if (selectedSlug === 'mazen-farida') return `${cleanBase}/mazen-farida`;
+    return `${cleanBase}/invite/${selectedSlug}`;
+  }, [selectedSlug, cleanBase]);
 
   const tableWishUrl = useMemo(() => {
     return `${inviteUrl}?wish=1#rsvp`;
   }, [inviteUrl]);
+
+  const handleCopy = (url, type) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url);
+      setCopiedType(type);
+      setTimeout(() => setCopiedType(''), 2500);
+    }
+  };
 
   // Color theme definitions for A6 cards
   const themeStyles = {
@@ -211,6 +228,32 @@ export default function QRCardPage() {
               </select>
             </div>
 
+            {/* Base Domain Input */}
+            <div style={{ flex: '1 1 240px' }}>
+              <label style={{ display: 'block', fontWeight: 700, fontSize: '13.5px', marginBottom: '6px' }}>
+                رابط النطاق (Base Domain)
+              </label>
+              <input
+                type="text"
+                value={baseUrl}
+                onChange={(e) => setBaseUrl(e.target.value)}
+                placeholder="https://wisal-app-six.vercel.app"
+                style={{
+                  width: '100%',
+                  padding: '9px 12px',
+                  borderRadius: '10px',
+                  border: '1px solid #eedec7',
+                  background: '#fff',
+                  fontFamily: 'monospace',
+                  direction: 'ltr',
+                  fontSize: '13px'
+                }}
+              />
+              <span style={{ fontSize: '11px', color: '#888', display: 'block', marginTop: '4px' }}>
+                الرابط الحي المضمن داخل كود الـ QR لمسحه بكاميرا الهاتف
+              </span>
+            </div>
+
             {/* Theme switcher tabs */}
             <div style={{ flex: '1 1 300px' }}>
               <label style={{ display: 'block', fontWeight: 700, fontSize: '13.5px', marginBottom: '6px' }}>
@@ -250,186 +293,342 @@ export default function QRCardPage() {
             justifyContent: 'center'
           }}
         >
-          {/* Card 1: Official Invitation Card */}
-          <div
-            className="a6-card"
-            style={{
-              background: currentTheme.cardBg,
-              color: currentTheme.primaryText,
-              border: `2px solid ${currentTheme.borderColor}`,
-              borderRadius: '16px',
-              padding: '32px 24px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              textAlign: 'center',
-              boxShadow: '0 20px 45px -15px rgba(58, 42, 29, 0.25)',
-              position: 'relative',
-              minHeight: '520px',
-              justifyContent: 'space-between'
-            }}
-          >
-            {/* Top Ornamental Frame */}
-            <div>
-              <div
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  background: currentTheme.sealColor,
-                  color: '#fff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 12px',
-                  fontFamily: 'Playfair Display, serif',
-                  fontWeight: 700,
-                  fontSize: '18px'
-                }}
-              >
-                وِ
+          {/* Card 1 Column */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {/* Card 1: Official Invitation Card */}
+            <div
+              className="a6-card"
+              style={{
+                background: currentTheme.cardBg,
+                color: currentTheme.primaryText,
+                border: `2px solid ${currentTheme.borderColor}`,
+                borderRadius: '16px',
+                padding: '32px 24px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+                boxShadow: '0 20px 45px -15px rgba(58, 42, 29, 0.25)',
+                position: 'relative',
+                minHeight: '520px',
+                justifyContent: 'space-between'
+              }}
+            >
+              {/* Top Ornamental Frame */}
+              <div>
+                <div
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '50%',
+                    background: currentTheme.sealColor,
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 12px',
+                    fontFamily: 'Playfair Display, serif',
+                    fontWeight: 700,
+                    fontSize: '18px'
+                  }}
+                >
+                  وِ
+                </div>
+                <span
+                  style={{
+                    fontFamily: 'Cairo, sans-serif',
+                    fontSize: '13px',
+                    letterSpacing: '0.04em',
+                    color: currentTheme.accentColor,
+                    fontWeight: 600
+                  }}
+                >
+                  بِسمِ اللهِ الرَّحمٰنِ الرَّحيم
+                </span>
+                <h2
+                  style={{
+                    fontFamily: 'Aref Ruqaa, Amiri, serif',
+                    fontSize: '36px',
+                    margin: '6px 0 2px',
+                    color: currentTheme.accentColor,
+                    lineHeight: 1.2
+                  }}
+                >
+                  {coupleNames}
+                </h2>
+                <p style={{ margin: '4px 0 16px', fontSize: '13.5px', opacity: 0.9 }}>
+                  يسعدنا ويشرفنا حضوركم ومشاركتنا فرحة العمر
+                </p>
               </div>
-              <span
-                style={{
-                  fontFamily: 'Cairo, sans-serif',
-                  fontSize: '13px',
-                  letterSpacing: '0.04em',
-                  color: currentTheme.accentColor,
-                  fontWeight: 600
-                }}
-              >
-                بِسمِ اللهِ الرَّحمٰنِ الرَّحيم
-              </span>
-              <h2
-                style={{
-                  fontFamily: 'Aref Ruqaa, Amiri, serif',
-                  fontSize: '36px',
-                  margin: '6px 0 2px',
-                  color: currentTheme.accentColor,
-                  lineHeight: 1.2
-                }}
-              >
-                {coupleNames}
-              </h2>
-              <p style={{ margin: '4px 0 16px', fontSize: '13.5px', opacity: 0.9 }}>
-                يسعدنا ويشرفنا حضوركم ومشاركتنا فرحة العمر
-              </p>
+
+              {/* QR Code */}
+              <div style={{ margin: '12px 0' }}>
+                <QRCodeSvg value={inviteUrl} size={150} color={currentTheme.primaryText} />
+              </div>
+
+              {/* Bottom Details */}
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 600, color: currentTheme.accentColor }}>
+                  {eventDate}
+                </div>
+                <div style={{ fontSize: '12.5px', opacity: 0.85, marginTop: '2px' }}>{venueName}</div>
+                <div
+                  style={{
+                    fontSize: '11.5px',
+                    marginTop: '12px',
+                    paddingTop: '8px',
+                    borderTop: `1px solid ${currentTheme.borderColor}40`,
+                    opacity: 0.8
+                  }}
+                >
+                  امسح الـ QR بكاميرا هاتفك لفتح الدعوة التفاعلية وخريطة القاعة
+                </div>
+              </div>
             </div>
 
-            {/* QR Code */}
-            <div style={{ margin: '12px 0' }}>
-              <QRCodeSvg value={inviteUrl} size={150} color={currentTheme.primaryText} />
-            </div>
-
-            {/* Bottom Details */}
-            <div>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: currentTheme.accentColor }}>
-                {eventDate}
+            {/* Actions & Target URL Preview (Screen only) */}
+            <div
+              className="no-print"
+              style={{
+                marginTop: '12px',
+                background: '#fffdfa',
+                border: '1px solid #eedec7',
+                borderRadius: '12px',
+                padding: '12px 14px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px'
+              }}
+            >
+              <div style={{ fontSize: '12px', color: '#5a3d1c', fontWeight: 700 }}>
+                رابط كارت الدعوة (المضمن في الـ QR):
               </div>
-              <div style={{ fontSize: '12.5px', opacity: 0.85, marginTop: '2px' }}>{venueName}</div>
               <div
                 style={{
                   fontSize: '11.5px',
-                  marginTop: '12px',
-                  paddingTop: '8px',
-                  borderTop: `1px solid ${currentTheme.borderColor}40`,
-                  opacity: 0.8
+                  color: '#7a6857',
+                  wordBreak: 'break-all',
+                  direction: 'ltr',
+                  textAlign: 'left',
+                  background: '#fcfaf6',
+                  padding: '6px 10px',
+                  borderRadius: '6px',
+                  border: '1px solid #e8dbcb',
+                  fontFamily: 'monospace'
                 }}
               >
-                امسح الـ QR بكاميرا هاتفك لفتح الدعوة التفاعلية وخريطة القاعة
+                {inviteUrl}
+              </div>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <a
+                  href={inviteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    flex: '1',
+                    background: '#87602d',
+                    color: '#fff',
+                    textDecoration: 'none',
+                    fontSize: '12.5px',
+                    fontWeight: 600,
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '4px'
+                  }}
+                >
+                  فتح الرابط للتجربة ↗
+                </a>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(inviteUrl, 'invite')}
+                  style={{
+                    flex: '1',
+                    background: copiedType === 'invite' ? '#2e7d32' : '#f4ebd9',
+                    color: copiedType === 'invite' ? '#fff' : '#5a3d1c',
+                    border: '1px solid #eedec7',
+                    fontSize: '12.5px',
+                    fontWeight: 600,
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {copiedType === 'invite' ? '✓ تم النسخ' : 'نسخ الرابط'}
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Card 2: Table Greetings & Guestbook Card */}
-          <div
-            className="a6-card"
-            style={{
-              background: currentTheme.cardBg,
-              color: currentTheme.primaryText,
-              border: `2px solid ${currentTheme.borderColor}`,
-              borderRadius: '16px',
-              padding: '32px 24px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              textAlign: 'center',
-              boxShadow: '0 20px 45px -15px rgba(58, 42, 29, 0.25)',
-              position: 'relative',
-              minHeight: '520px',
-              justifyContent: 'space-between'
-            }}
-          >
-            {/* Top Ornamental Frame */}
-            <div>
-              <div
-                style={{
-                  color: currentTheme.accentColor,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  marginBottom: '10px'
-                }}
-              >
-                <Heart size={28} fill={currentTheme.accentColor} />
+          {/* Card 2 Column */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {/* Card 2: Table Greetings & Guestbook Card */}
+            <div
+              className="a6-card"
+              style={{
+                background: currentTheme.cardBg,
+                color: currentTheme.primaryText,
+                border: `2px solid ${currentTheme.borderColor}`,
+                borderRadius: '16px',
+                padding: '32px 24px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+                boxShadow: '0 20px 45px -15px rgba(58, 42, 29, 0.25)',
+                position: 'relative',
+                minHeight: '520px',
+                justifyContent: 'space-between'
+              }}
+            >
+              {/* Top Ornamental Frame */}
+              <div>
+                <div
+                  style={{
+                    color: currentTheme.accentColor,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: '10px'
+                  }}
+                >
+                  <Heart size={28} fill={currentTheme.accentColor} />
+                </div>
+
+                <span
+                  style={{
+                    fontFamily: 'Cairo, sans-serif',
+                    fontSize: '13px',
+                    letterSpacing: '0.04em',
+                    color: currentTheme.accentColor,
+                    fontWeight: 600
+                  }}
+                >
+                  نورتوا فرحتنا الغالية
+                </span>
+                <h2
+                  style={{
+                    fontFamily: 'Aref Ruqaa, Amiri, serif',
+                    fontSize: '34px',
+                    margin: '6px 0 2px',
+                    color: currentTheme.accentColor,
+                    lineHeight: 1.2
+                  }}
+                >
+                  دفتر تهاني {coupleNames}
+                </h2>
+                <p style={{ margin: '4px 0 16px', fontSize: '13.5px', opacity: 0.9 }}>
+                  كلماتكم الطيبة ودعواتكم الصادقة تسعد قلوبنا وتخلّد ذكريات اليوم
+                </p>
               </div>
 
-              <span
-                style={{
-                  fontFamily: 'Cairo, sans-serif',
-                  fontSize: '13px',
-                  letterSpacing: '0.04em',
-                  color: currentTheme.accentColor,
-                  fontWeight: 600
-                }}
-              >
-                نورتوا فرحتنا الغالية
-              </span>
-              <h2
-                style={{
-                  fontFamily: 'Aref Ruqaa, Amiri, serif',
-                  fontSize: '34px',
-                  margin: '6px 0 2px',
-                  color: currentTheme.accentColor,
-                  lineHeight: 1.2
-                }}
-              >
-                دفتر تهاني {coupleNames}
-              </h2>
-              <p style={{ margin: '4px 0 16px', fontSize: '13.5px', opacity: 0.9 }}>
-                كلماتكم الطيبة ودعواتكم الصادقة تسعد قلوبنا وتخلّد ذكريات اليوم
-              </p>
+              {/* QR Code */}
+              <div style={{ margin: '12px 0' }}>
+                <QRCodeSvg value={tableWishUrl} size={150} color={currentTheme.primaryText} />
+              </div>
+
+              {/* Bottom Details */}
+              <div>
+                <div
+                  style={{
+                    background: `${currentTheme.borderColor}15`,
+                    borderRadius: '10px',
+                    padding: '8px 14px',
+                    fontSize: '12.5px',
+                    fontWeight: 600,
+                    color: currentTheme.accentColor,
+                    display: 'inline-block',
+                    marginBottom: '8px'
+                  }}
+                >
+                  كارت الترابيزات المخصص
+                </div>
+                <div
+                  style={{
+                    fontSize: '11.5px',
+                    paddingTop: '8px',
+                    borderTop: `1px solid ${currentTheme.borderColor}40`,
+                    opacity: 0.8
+                  }}
+                >
+                  امسح الـ QR لكتابة رسالة تهنئة تصل فوراً إلى العرسان
+                </div>
+              </div>
             </div>
 
-            {/* QR Code */}
-            <div style={{ margin: '12px 0' }}>
-              <QRCodeSvg value={tableWishUrl} size={150} color={currentTheme.primaryText} />
-            </div>
-
-            {/* Bottom Details */}
-            <div>
-              <div
-                style={{
-                  background: `${currentTheme.borderColor}15`,
-                  borderRadius: '10px',
-                  padding: '8px 14px',
-                  fontSize: '12.5px',
-                  fontWeight: 600,
-                  color: currentTheme.accentColor,
-                  display: 'inline-block',
-                  marginBottom: '8px'
-                }}
-              >
-                كارت الترابيزات المخصص
+            {/* Actions & Target URL Preview (Screen only) */}
+            <div
+              className="no-print"
+              style={{
+                marginTop: '12px',
+                background: '#fffdfa',
+                border: '1px solid #eedec7',
+                borderRadius: '12px',
+                padding: '12px 14px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px'
+              }}
+            >
+              <div style={{ fontSize: '12px', color: '#5a3d1c', fontWeight: 700 }}>
+                رابط كارت الترابيزات (المضمن في الـ QR):
               </div>
               <div
                 style={{
                   fontSize: '11.5px',
-                  paddingTop: '8px',
-                  borderTop: `1px solid ${currentTheme.borderColor}40`,
-                  opacity: 0.8
+                  color: '#7a6857',
+                  wordBreak: 'break-all',
+                  direction: 'ltr',
+                  textAlign: 'left',
+                  background: '#fcfaf6',
+                  padding: '6px 10px',
+                  borderRadius: '6px',
+                  border: '1px solid #e8dbcb',
+                  fontFamily: 'monospace'
                 }}
               >
-                امسح الـ QR لكتابة رسالة تهنئة تصل فوراً إلى العرسان
+                {tableWishUrl}
+              </div>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <a
+                  href={tableWishUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    flex: '1',
+                    background: '#87602d',
+                    color: '#fff',
+                    textDecoration: 'none',
+                    fontSize: '12.5px',
+                    fontWeight: 600,
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '4px'
+                  }}
+                >
+                  فتح الرابط للتجربة ↗
+                </a>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(tableWishUrl, 'table')}
+                  style={{
+                    flex: '1',
+                    background: copiedType === 'table' ? '#2e7d32' : '#f4ebd9',
+                    color: copiedType === 'table' ? '#fff' : '#5a3d1c',
+                    border: '1px solid #eedec7',
+                    fontSize: '12.5px',
+                    fontWeight: 600,
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {copiedType === 'table' ? '✓ تم النسخ' : 'نسخ الرابط'}
+                </button>
               </div>
             </div>
           </div>
